@@ -1,448 +1,445 @@
 <!doctype html>
-  <html lang="es">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FRANCO IA — Soluciones de IA que conectan tu negocio</title>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRANCO IA — Soluciones de IA que conectan tu negocio</title>
 <meta name="description" content="FRANCO IA crea asistentes de WhatsApp con inteligencia artificial que responden, venden y agendan citas por ti, las 24 horas. Ideal para emprendedores, spas y barberías.">
 <link rel="icon" href="data:,">
-  <style>
-    :root{
-      --bg: #0a0a0a;
-    --bg-soft: #111214;
-    --panel: #16171a;
-    --border: rgba(255,255,255,0.08);
-    --text: #f2f3f2;
-          --text-dim: #a3a6a3;
-          --green-1: #25d366;
-    --green-2: #128c5e;
-    --green-glow: rgba(37,211,102,0.35);
+<style>
+:root{
+--bg: #0a0a0a;
+--bg-soft: #111214;
+--panel: #16171a;
+--border: rgba(255,255,255,0.08);
+--text: #f2f3f2;
+--text-dim: #a3a6a3;
+--green-1: #25d366;
+--green-2: #128c5e;
+--green-glow: rgba(37,211,102,0.35);
 }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-        background:var(--bg);
-    color:var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+background:var(--bg);
+color:var(--text);
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+line-height:1.55;
+-webkit-font-smoothing:antialiased;
+overflow-x:hidden;
 }
-  a{color:inherit; text-decoration:none;}
-  img,svg{display:block; max-width:100%;}
-  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
-  section{position:relative;}
+a{color:inherit; text-decoration:none;}
+img,svg{display:block; max-width:100%;}
+.wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+section{position:relative;}
 
-  /* Background ambience */
-  .glow{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:
-          radial-gradient(600px 400px at 15% 0%, rgba(37,211,102,0.10), transparent 60%),
-            radial-gradient(500px 500px at 100% 30%, rgba(18,140,94,0.12), transparent 60%);
-  }
-
-  /* Header */
-  header{
-        position:sticky; top:0; z-index:50;
-    background:rgba(10,10,10,0.72);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-}
-  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
-  .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.02em; font-size:18px;}
-  .brand-mark{width:34px; height:34px; flex-shrink:0;}
-  .nav-links{display:flex; gap:32px; font-size:14.5px; color:var(--text-dim);}
-  .nav-links a:hover{color:var(--text);}
-  .nav-cta{
-        display:inline-flex; align-items:center; gap:8px;
-    background:linear-gradient(135deg, var(--green-1), var(--green-2));
-    color:#06170f; font-weight:700; font-size:14px;
-    padding:10px 18px; border-radius:999px;
-    box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset;
-    transition:transform .15s ease, box-shadow .15s ease;
-}
-  .nav-cta:hover{transform:translateY(-1px); box-shadow:0 6px 20px var(--green-glow);}
-  .menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--text); width:40px; height:40px; border-radius:8px; font-size:18px;}
-
-  /* Hero */
-  .hero{padding:96px 0 80px; text-align:center;}
-  .eyebrow{
-        display:inline-flex; align-items:center; gap:8px;
-    font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
-    color:var(--green-1); border:1px solid rgba(37,211,102,0.35);
-    padding:6px 14px; border-radius:999px; margin-bottom:28px;
-    background:rgba(37,211,102,0.06);
-}
-  .dot{width:6px; height:6px; border-radius:50%; background:var(--green-1); box-shadow:0 0 8px var(--green-1);}
-  h1{
-        font-size:clamp(34px, 6vw, 60px);
-    font-weight:800; letter-spacing:-0.02em; line-height:1.08;
-    max-width:900px; margin:0 auto 22px;
-}
-  h1 .accent{
-    background:linear-gradient(135deg, var(--green-1), #7ee8a8);
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero p.lead{
-    font-size:clamp(16px, 2vw, 19px); color:var(--text-dim);
-    max-width:620px; margin:0 auto 40px;
-  }
-  .hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:64px;}
-  .btn{
-        display:inline-flex; align-items:center; gap:10px;
-    padding:14px 26px; border-radius:999px; font-weight:700; font-size:15px;
-    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-  }
-  .btn-primary{
-        background:linear-gradient(135deg, var(--green-1), var(--green-2));
-    color:#06170f;
-}
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px var(--green-glow);}
-  .btn-ghost{
-        background:transparent; color:var(--text); border:1px solid var(--border);
-}
-  .btn-ghost:hover{border-color:rgba(255,255,255,0.25); background:rgba(255,255,255,0.03);}
-
-  .hero-visual{max-width:520px; margin:0 auto;}
-
-  /* Sections shared */
-  .section{padding:88px 0;}
-  .section-head{max-width:640px; margin:0 auto 56px; text-align:center;}
-  .kicker{color:var(--green-1); font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px;}
-  h2{font-size:clamp(26px, 4vw, 38px); font-weight:800; letter-spacing:-0.01em; margin-bottom:14px;}
-  .section-head p{color:var(--text-dim); font-size:16px;}
-
-  /* Problem strip */
-  .strip{
-        border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-    background:var(--bg-soft);
-}
-  .strip .wrap{padding:56px 24px; display:grid; grid-template-columns:repeat(3,1fr); gap:32px; text-align:center;}
-  .strip .stat{font-size:clamp(28px,4vw,40px); font-weight:800; color:var(--green-1);}
-  .strip .stat-label{color:var(--text-dim); font-size:14px; margin-top:6px;}
-
-  /* Feature grid */
-  .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
-  .card{
-        background:var(--panel); border:1px solid var(--border); border-radius:16px;
-    padding:28px; opacity:0;
-    animation:cardIn .6s ease forwards;
-}
-  .card:nth-child(1){animation-delay:.05s;}
-  .card:nth-child(2){animation-delay:.12s;}
-  .card:nth-child(3){animation-delay:.19s;}
-  .card:nth-child(4){animation-delay:.26s;}
-  .card:nth-child(5){animation-delay:.33s;}
-  .card:nth-child(6){animation-delay:.40s;}
-  @keyframes cardIn{
-        from{opacity:0; transform:translateY(16px);}
-    to{opacity:1; transform:translateY(0);}
-}
-  .card-icon{
-        width:44px; height:44px; border-radius:12px; margin-bottom:18px;
-    display:flex; align-items:center; justify-content:center;
-    background:linear-gradient(135deg, rgba(37,211,102,0.18), rgba(18,140,94,0.08));
-    border:1px solid rgba(37,211,102,0.25);
-}
-  .card h3{font-size:17px; font-weight:700; margin-bottom:8px;}
-  .card p{color:var(--text-dim); font-size:14.5px;}
-
-  /* Steps */
-  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; counter-reset:step;}
-  .step{position:relative; padding:32px 24px 24px; border:1px solid var(--border); border-radius:16px; background:var(--bg-soft);}
-  .step::before{
-        counter-increment:step; content:counter(step);
-    position:absolute; top:-18px; left:24px;
-    width:36px; height:36px; border-radius:50%;
-    background:linear-gradient(135deg, var(--green-1), var(--green-2));
-    color:#06170f; font-weight:800; font-size:15px;
-    display:flex; align-items:center; justify-content:center;
-}
-  .step h3{font-size:16.5px; font-weight:700; margin:10px 0 8px;}
-  .step p{color:var(--text-dim); font-size:14.5px;}
-
-  /* Audience */
-  .chips{display:flex; flex-wrap:wrap; gap:14px; justify-content:center;}
-  .chip{
-        border:1px solid var(--border); border-radius:999px; padding:12px 22px;
-    font-size:14.5px; color:var(--text-dim); background:var(--panel);
-    display:flex; align-items:center; gap:10px;
-  }
-  .chip .dot{background:var(--green-1);}
-
-  /* Pricing */
-  .price-card{
-        max-width:440px; margin:0 auto; text-align:center;
-    background:linear-gradient(180deg, var(--panel), var(--bg-soft));
-    border:1px solid rgba(37,211,102,0.25); border-radius:20px; padding:44px 36px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.35);
-}
-  .price-card .plan-name{color:var(--green-1); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; font-size:13px; margin-bottom:14px;}
-  .price-card .amount{font-size:44px; font-weight:800; letter-spacing:-0.02em;}
-  .price-card .amount span{font-size:16px; font-weight:600; color:var(--text-dim);}
-  .price-card ul{list-style:none; margin:28px 0 32px; text-align:left; display:flex; flex-direction:column; gap:12px;}
-  .price-card li{display:flex; gap:10px; font-size:14.5px; color:var(--text-dim);}
-  .check{color:var(--green-1); flex-shrink:0;}
-
-  /* CTA / contact */
-  .cta-section{
-        background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-    text-align:center; padding:88px 0;
-}
-  .contact-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:30px;}
-  .contact-item{color:var(--text-dim); font-size:14.5px;}
-
-  footer{padding:40px 24px; text-align:center; color:var(--text-dim); font-size:13.5px;}
-  footer .brand{justify-content:center; margin-bottom:10px; font-size:15px;}
-
-  @media (max-width:860px){
-    .nav-links{display:none;}
-    .menu-btn{display:block;}
-    .grid, .steps{grid-template-columns:1fr;}
-    .strip .wrap{grid-template-columns:1fr; gap:20px;}
+/* Background ambience */
+.glow{
+position:fixed; inset:0; z-index:0; pointer-events:none;
+background:
+radial-gradient(600px 400px at 15% 0%, rgba(37,211,102,0.10), transparent 60%),
+radial-gradient(500px 500px at 100% 30%, rgba(18,140,94,0.12), transparent 60%);
 }
 
-  @media (prefers-reduced-motion: reduce){
-        html{scroll-behavior:auto;}
-    .card{animation:none; opacity:1; transform:none;}
+/* Header */
+header{
+position:sticky; top:0; z-index:50;
+background:rgba(10,10,10,0.72);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--border);
+}
+.nav{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
+.brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.02em; font-size:18px;}
+.brand-mark{width:34px; height:34px; flex-shrink:0;}
+.nav-links{display:flex; gap:32px; font-size:14.5px; color:var(--text-dim);}
+.nav-links a:hover{color:var(--text);}
+.nav-cta{
+display:inline-flex; align-items:center; gap:8px;
+background:linear-gradient(135deg, var(--green-1), var(--green-2));
+color:#06170f; font-weight:700; font-size:14px;
+padding:10px 18px; border-radius:999px;
+box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset;
+transition:transform .15s ease, box-shadow .15s ease;
+}
+.nav-cta:hover{transform:translateY(-1px); box-shadow:0 6px 20px var(--green-glow);}
+.menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--text); width:40px; height:40px; border-radius:8px; font-size:18px;}
+
+/* Hero */
+.hero{padding:96px 0 80px; text-align:center;}
+.eyebrow{
+display:inline-flex; align-items:center; gap:8px;
+font-size:13px; letter-spacing:0.06em; text-transform:uppercase;
+color:var(--green-1); border:1px solid rgba(37,211,102,0.35);
+padding:6px 14px; border-radius:999px; margin-bottom:28px;
+background:rgba(37,211,102,0.06);
+}
+.dot{width:6px; height:6px; border-radius:50%; background:var(--green-1); box-shadow:0 0 8px var(--green-1);}
+h1{
+font-size:clamp(34px, 6vw, 60px);
+font-weight:800; letter-spacing:-0.02em; line-height:1.08;
+max-width:900px; margin:0 auto 22px;
+}
+h1 .accent{
+background:linear-gradient(135deg, var(--green-1), #7ee8a8);
+-webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero p.lead{
+font-size:clamp(16px, 2vw, 19px); color:var(--text-dim);
+max-width:620px; margin:0 auto 40px;
+}
+.hero-ctas{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:64px;}
+.btn{
+display:inline-flex; align-items:center; gap:10px;
+padding:14px 26px; border-radius:999px; font-weight:700; font-size:15px;
+transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn-primary{
+background:linear-gradient(135deg, var(--green-1), var(--green-2));
+color:#06170f;
+}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 28px var(--green-glow);}
+.btn-ghost{
+background:transparent; color:var(--text); border:1px solid var(--border);
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.25); background:rgba(255,255,255,0.03);}
+
+.hero-visual{max-width:520px; margin:0 auto;}
+
+/* Sections shared */
+.section{padding:88px 0;}
+.section-head{max-width:640px; margin:0 auto 56px; text-align:center;}
+.kicker{color:var(--green-1); font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px;}
+h2{font-size:clamp(26px, 4vw, 38px); font-weight:800; letter-spacing:-0.01em; margin-bottom:14px;}
+.section-head p{color:var(--text-dim); font-size:16px;}
+
+/* Problem strip */
+.strip{
+border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+background:var(--bg-soft);
+}
+.strip .wrap{padding:56px 24px; display:grid; grid-template-columns:repeat(3,1fr); gap:32px; text-align:center;}
+.strip .stat{font-size:clamp(28px,4vw,40px); font-weight:800; color:var(--green-1);}
+.strip .stat-label{color:var(--text-dim); font-size:14px; margin-top:6px;}
+
+/* Feature grid */
+.grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;}
+.card{
+background:var(--panel); border:1px solid var(--border); border-radius:16px;
+padding:28px; opacity:0;
+animation:cardIn .6s ease forwards;
+}
+.card:nth-child(1){animation-delay:.05s;}
+.card:nth-child(2){animation-delay:.12s;}
+.card:nth-child(3){animation-delay:.19s;}
+.card:nth-child(4){animation-delay:.26s;}
+.card:nth-child(5){animation-delay:.33s;}
+.card:nth-child(6){animation-delay:.40s;}
+@keyframes cardIn{
+from{opacity:0; transform:translateY(16px);}
+to{opacity:1; transform:translateY(0);}
+}
+.card-icon{
+width:44px; height:44px; border-radius:12px; margin-bottom:18px;
+display:flex; align-items:center; justify-content:center;
+background:linear-gradient(135deg, rgba(37,211,102,0.18), rgba(18,140,94,0.08));
+border:1px solid rgba(37,211,102,0.25);
+}
+.card h3{font-size:17px; font-weight:700; margin-bottom:8px;}
+.card p{color:var(--text-dim); font-size:14.5px;}
+
+/* Steps */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; counter-reset:step;}
+.step{position:relative; padding:32px 24px 24px; border:1px solid var(--border); border-radius:16px; background:var(--bg-soft);}
+.step::before{
+counter-increment:step; content:counter(step);
+position:absolute; top:-18px; left:24px;
+width:36px; height:36px; border-radius:50%;
+background:linear-gradient(135deg, var(--green-1), var(--green-2));
+color:#06170f; font-weight:800; font-size:15px;
+display:flex; align-items:center; justify-content:center;
+}
+.step h3{font-size:16.5px; font-weight:700; margin:10px 0 8px;}
+.step p{color:var(--text-dim); font-size:14.5px;}
+
+/* Audience */
+.chips{display:flex; flex-wrap:wrap; gap:14px; justify-content:center;}
+.chip{
+border:1px solid var(--border); border-radius:999px; padding:12px 22px;
+font-size:14.5px; color:var(--text-dim); background:var(--panel);
+display:flex; align-items:center; gap:10px;
+}
+.chip .dot{background:var(--green-1);}
+
+/* Pricing */
+.price-card{
+max-width:440px; margin:0 auto; text-align:center;
+background:linear-gradient(180deg, var(--panel), var(--bg-soft));
+border:1px solid rgba(37,211,102,0.25); border-radius:20px; padding:44px 36px;
+box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+.price-card .plan-name{color:var(--green-1); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; font-size:13px; margin-bottom:14px;}
+.price-card .amount{font-size:44px; font-weight:800; letter-spacing:-0.02em;}
+.price-card .amount span{font-size:16px; font-weight:600; color:var(--text-dim);}
+.price-card ul{list-style:none; margin:28px 0 32px; text-align:left; display:flex; flex-direction:column; gap:12px;}
+.price-card li{display:flex; gap:10px; font-size:14.5px; color:var(--text-dim);}
+.check{color:var(--green-1); flex-shrink:0;}
+
+/* CTA / contact */
+.cta-section{
+background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+text-align:center; padding:88px 0;
+}
+.contact-links{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:30px;}
+.contact-item{color:var(--text-dim); font-size:14.5px;}
+
+footer{padding:40px 24px; text-align:center; color:var(--text-dim); font-size:13.5px;}
+footer .brand{justify-content:center; margin-bottom:10px; font-size:15px;}
+
+@media (max-width:860px){
+.nav-links{display:none;}
+.menu-btn{display:block;}
+.grid, .steps{grid-template-columns:1fr;}
+.strip .wrap{grid-template-columns:1fr; gap:20px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+html{scroll-behavior:auto;}
+.card{animation:none; opacity:1; transform:none;}
 }
 </style>
-  </head>
-  <body>
+</head>
+<body>
 
-  <div class="glow"></div>
+<div class="glow"></div>
 
-  <header>
-    <div class="nav wrap">
-      <div class="brand">
-        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="46" height="46" rx="13" fill="#0a0a0a" stroke="url(#g1)" stroke-width="2"/>
-          <path d="M24 12c-6.6 0-12 4.9-12 11 0 3 1.3 5.7 3.5 7.7-.2 1.6-.9 3.1-2 4.3 2.1-.2 4.1-1 5.7-2.2 1.5.5 3.1.7 4.8.7 6.6 0 12-4.9 12-11s-5.4-11-12-11Z" fill="#f2f3f2"/>
-          <circle cx="19.5" cy="23" r="2" fill="#0a0a0a"/>
-          <circle cx="28.5" cy="23" r="2" fill="#0a0a0a"/>
-          <defs>
-            <linearGradient id="g1" x1="1" y1="1" x2="47" y2="47" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#25d366"/>
-              <stop offset="1" stop-color="#128c5e"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        FRANCO IA
-      </div>
-      <nav class="nav-links">
-        <a href="#servicio">Servicio</a>
-        <a href="#como-funciona">Cómo funciona</a>
-      <a href="#precio">Precio</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-      <a class="nav-cta" href="https://wa.me/573004835833" target="_blank" rel="noopener">Habla con Erick</a>
-  </div>
+<header>
+<div class="nav wrap">
+<div class="brand">
+<svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1" y="1" width="46" height="46" rx="13" fill="#0a0a0a" stroke="url(#g1)" stroke-width="2"/>
+<path d="M24 12c-6.6 0-12 4.9-12 11 0 3 1.3 5.7 3.5 7.7-.2 1.6-.9 3.1-2 4.3 2.1-.2 4.1-1 5.7-2.2 1.5.5 3.1.7 4.8.7 6.6 0 12-4.9 12-11s-5.4-11-12-11Z" fill="#f2f3f2"/>
+<circle cx="19.5" cy="23" r="2" fill="#0a0a0a"/>
+<circle cx="28.5" cy="23" r="2" fill="#0a0a0a"/>
+<defs>
+<linearGradient id="g1" x1="1" y1="1" x2="47" y2="47" gradientUnits="userSpaceOnUse">
+<stop stop-color="#25d366"/>
+<stop offset="1" stop-color="#128c5e"/>
+</linearGradient>
+</defs>
+</svg>
+FRANCO IA
+</div>
+<nav class="nav-links">
+<a href="#servicio">Servicio</a>
+<a href="#como-funciona">Cómo funciona</a>
+<a href="#precio">Precio</a>
+<a href="#contacto">Contacto</a>
+</nav>
+<a class="nav-cta" href="https://wa.me/573004835833?text=%C2%A1Hola%21%20Estoy%20interesado%20en%20el%20bot%20de%20FRANCO%20IA%20para%20llevar%20mi%20negocio%20al%20siguiente%20nivel." target="_blank" rel="noopener">Hablar con un asesor</a>
+</div>
 </header>
 
 <main>
-  <section class="hero wrap">
-    <span class="eyebrow"><span class="dot"></span> Soluciones de IA que conectan tu negocio</span>
-    <h1>Tu negocio, atendido <span class="accent">24/7 por IA</span> en WhatsApp</h1>
-    <p class="lead">FRANCO IA crea asistentes de WhatsApp que responden, asesoran y agendan citas por ti — con voz humana, sin turnos perdidos y sin que tengas que estar pegado al celular.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://wa.me/573004835833" target="_blank" rel="noopener">Habla con Erick por WhatsApp</a>
-      <a class="btn btn-ghost" href="#como-funciona">Ver cómo funciona</a>
-    </div>
+<section class="hero wrap">
+<span class="eyebrow"><span class="dot"></span> Soluciones de IA que conectan tu negocio</span>
+<h1>Tu negocio, atendido <span class="accent">24/7 por IA</span> en WhatsApp</h1>
+<p class="lead">FRANCO IA crea asistentes de WhatsApp que responden, asesoran y agendan citas por ti — con voz humana, sin turnos perdidos y sin que tengas que estar pegado al celular.</p>
+<div class="hero-ctas">
+<a class="btn btn-primary" href="https://wa.me/573004835833?text=%C2%A1Hola%21%20Estoy%20interesado%20en%20el%20bot%20de%20FRANCO%20IA%20para%20llevar%20mi%20negocio%20al%20siguiente%20nivel." target="_blank" rel="noopener">Quiero mi propio bot por WhatsApp</a>
+<a class="btn btn-ghost" href="#como-funciona">Ver cómo funciona</a>
+</div>
+<div class="hero-visual">
+<svg viewBox="0 0 520 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="260" cy="290" rx="180" ry="18" fill="#25d366" opacity="0.08"/>
+<rect x="180" y="20" width="160" height="280" rx="28" fill="#111214" stroke="#242625" stroke-width="2"/>
+<rect x="196" y="52" width="128" height="200" rx="10" fill="#0a0a0a"/>
+<rect x="206" y="64" width="90" height="14" rx="7" fill="#1c1e1c"/>
+<rect x="206" y="88" width="70" height="34" rx="12" fill="#16171a"/>
+<rect x="230" y="130" width="84" height="34" rx="12" fill="url(#g2)"/>
+<rect x="206" y="172" width="60" height="34" rx="12" fill="#16171a"/>
+<circle cx="260" cy="286" r="10" fill="#242625"/>
+<g opacity="0.9">
+<circle cx="90" cy="110" r="46" fill="url(#g2)" opacity="0.14"/>
+<circle cx="430" cy="70" r="30" fill="url(#g2)" opacity="0.16"/>
+<circle cx="450" cy="230" r="40" fill="url(#g2)" opacity="0.12"/>
+</g>
+<defs>
+<linearGradient id="g2" x1="180" y1="20" x2="340" y2="300" gradientUnits="userSpaceOnUse">
+<stop stop-color="#25d366"/>
+<stop offset="1" stop-color="#128c5e"/>
+</linearGradient>
+</defs>
+</svg>
+</div>
+</section>
 
-    <div class="hero-visual">
-      <svg viewBox="0 0 520 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="260" cy="290" rx="180" ry="18" fill="#25d366" opacity="0.08"/>
-          <rect x="180" y="20" width="160" height="280" rx="28" fill="#111214" stroke="#242625" stroke-width="2"/>
-          <rect x="196" y="52" width="128" height="200" rx="10" fill="#0a0a0a"/>
-          <rect x="206" y="64" width="90" height="14" rx="7" fill="#1c1e1c"/>
-          <rect x="206" y="88" width="70" height="34" rx="12" fill="#16171a"/>
-          <rect x="230" y="130" width="84" height="34" rx="12" fill="url(#g2)"/>
-          <rect x="206" y="172" width="60" height="34" rx="12" fill="#16171a"/>
-          <circle cx="260" cy="286" r="10" fill="#242625"/>
-          <g opacity="0.9">
-            <circle cx="90" cy="110" r="46" fill="url(#g2)" opacity="0.14"/>
-            <circle cx="430" cy="70" r="30" fill="url(#g2)" opacity="0.16"/>
-            <circle cx="450" cy="230" r="40" fill="url(#g2)" opacity="0.12"/>
-          </g>
-          <defs>
-            <linearGradient id="g2" x1="180" y1="20" x2="340" y2="300" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#25d366"/>
-              <stop offset="1" stop-color="#128c5e"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </section>
+<div class="strip">
+<div class="wrap">
+<div>
+<div class="stat">24/7</div>
+<div class="stat-label">Atención sin descanso</div>
+</div>
+<div>
+<div class="stat">&lt;30 s</div>
+<div class="stat-label">Tiempo de respuesta</div>
+</div>
+<div>
+<div class="stat">100%</div>
+<div class="stat-label">Citas agendadas solas</div>
+</div>
+</div>
+</div>
 
-    <div class="strip">
-      <div class="wrap">
-        <div>
-          <div class="stat">24/7</div>
-          <div class="stat-label">Atención sin descanso</div>
-      </div>
-      <div>
-        <div class="stat">&lt;30 s</div>
-          <div class="stat-label">Tiempo de respuesta</div>
-      </div>
-      <div>
-        <div class="stat">100%</div>
-        <div class="stat-label">Citas agendadas solas</div>
-      </div>
-    </div>
-  </div>
+<section class="section" id="servicio">
+<div class="wrap">
+<div class="section-head">
+<div class="kicker">Qué hace por ti</div>
+<h2>Un asistente que suena humano y trabaja sin parar</h2>
+<p>Tu bot aprende tu negocio, tu tono y tus horarios — y se encarga de lo repetitivo para que tú te enfoques en atender bien a quien ya llegó.</p>
+</div>
+<div class="grid">
+<div class="card">
+<div class="card-icon">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
+</div>
+<h3>Responde texto y audio</h3>
+<p>Entiende notas de voz y mensajes escritos, y contesta con naturalidad, como lo haría alguien de tu equipo.</p>
+</div>
+<div class="card">
+<div class="card-icon">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2" stroke="#25d366" stroke-width="1.8"/><path d="M4 9h16M8 3v4M16 3v4" stroke="#25d366" stroke-width="1.8" stroke-linecap="round"/></svg>
+</div>
+<h3>Agenda citas solo</h3>
+<p>Conectado a tu Google Calendar, propone horarios disponibles y confirma la cita sin que muevas un dedo.</p>
+</div>
+<div class="card">
+<div class="card-icon">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="#25d366" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="#25d366" stroke-width="1.8"/></svg>
+</div>
+<h3>Aprende tu negocio</h3>
+<p>Le cuentas cómo trabajas una vez, y lo aplica en cada conversación: precios, servicios, horarios y tono.</p>
+</div>
+<div class="card">
+<div class="card-icon">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="#25d366" stroke-width="1.8"/><path d="M3 9h18" stroke="#25d366" stroke-width="1.8"/><circle cx="7" cy="6.5" r="0.8" fill="#25d366"/></svg>
+</div>
+<h3>Panel simple</h3>
+<p>Desde un panel de control puedes ver conversaciones, bloquear fechas y ajustar tu agenda cuando quieras.</p>
+</div>
+<div class="card">
+<div class="card-icon">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
+</div>
+<h3>Vive en WhatsApp</h3>
+<p>Nada de apps nuevas para tus clientes: todo pasa por el WhatsApp que ya usan a diario.</p>
+</div>
+<div class="card">
+<div class="card-icon">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7l10 5 10-5-10-5Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
+</div>
+<h3>Crece contigo</h3>
+<p>Empiezas simple y vas sumando funciones a medida que tu negocio lo necesita.</p>
+</div>
+</div>
+</div>
+</section>
 
-  <section class="section" id="servicio">
-    <div class="wrap">
-      <div class="section-head">
-        <div class="kicker">Qué hace por ti</div>
-        <h2>Un asistente que suena humano y trabaja sin parar</h2>
-        <p>Tu bot aprende tu negocio, tu tono y tus horarios — y se encarga de lo repetitivo para que tú te enfoques en atender bien a quien ya llegó.</p>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <h3>Responde texto y audio</h3>
-            <p>Entiende notas de voz y mensajes escritos, y contesta con naturalidad, como lo haría alguien de tu equipo.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2" stroke="#25d366" stroke-width="1.8"/><path d="M4 9h16M8 3v4M16 3v4" stroke="#25d366" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </div>
-            <h3>Agenda citas solo</h3>
-          <p>Conectado a tu Google Calendar, propone horarios disponibles y confirma la cita sin que muevas un dedo.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="#25d366" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="#25d366" stroke-width="1.8"/></svg>
-            </div>
-            <h3>Aprende tu negocio</h3>
-          <p>Le cuentas cómo trabajas una vez, y lo aplica en cada conversación: precios, servicios, horarios y tono.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="#25d366" stroke-width="1.8"/><path d="M3 9h18" stroke="#25d366" stroke-width="1.8"/><circle cx="7" cy="6.5" r="0.8" fill="#25d366"/></svg>
-            </div>
-            <h3>Panel simple</h3>
-            <p>Desde un panel de control puedes ver conversaciones, bloquear fechas y ajustar tu agenda cuando quieras.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <h3>Vive en WhatsApp</h3>
-          <p>Nada de apps nuevas para tus clientes: todo pasa por el WhatsApp que ya usan a diario.</p>
-          </div>
-          <div class="card">
-            <div class="card-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7l10 5 10-5-10-5Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            </div>
-            <h3>Crece contigo</h3>
-            <p>Empiezas simple y vas sumando funciones a medida que tu negocio lo necesita.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<section class="section" id="como-funciona" style="background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+<div class="wrap">
+<div class="section-head">
+<div class="kicker">Cómo funciona</div>
+<h2>De cero a atendiendo clientes en tres pasos</h2>
+</div>
+<div class="steps">
+<div class="step">
+<h3>Configuramos tu bot</h3>
+<p>Nos cuentas cómo es tu negocio: servicios, precios, horarios y tono de atención.</p>
+</div>
+<div class="step">
+<h3>Se conecta a tu WhatsApp</h3>
+<p>Lo integramos a tu número de WhatsApp Business, listo para recibir mensajes.</p>
+</div>
+<div class="step">
+<h3>Empieza a atender solo</h3>
+<p>Responde, asesora y agenda citas automáticamente, mientras tú sigues con lo tuyo.</p>
+</div>
+</div>
+</div>
+</section>
 
-    <section class="section" id="como-funciona" style="background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="kicker">Cómo funciona</div>
-        <h2>De cero a atendiendo clientes en tres pasos</h2>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <h3>Configuramos tu bot</h3>
-          <p>Nos cuentas cómo es tu negocio: servicios, precios, horarios y tono de atención.</p>
-          </div>
-          <div class="step">
-            <h3>Se conecta a tu WhatsApp</h3>
-          <p>Lo integramos a tu número de WhatsApp Business, listo para recibir mensajes.</p>
-          </div>
-          <div class="step">
-            <h3>Empieza a atender solo</h3>
-            <p>Responde, asesora y agenda citas automáticamente, mientras tú sigues con lo tuyo.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<section class="section">
+<div class="wrap">
+<div class="section-head">
+<div class="kicker">Para quién es</div>
+<h2>Pensado para negocios que viven de la atención al cliente</h2>
+</div>
+<div class="chips">
+<span class="chip"><span class="dot"></span> Emprendedores</span>
+<span class="chip"><span class="dot"></span> Spas</span>
+<span class="chip"><span class="dot"></span> Barberías</span>
+<span class="chip"><span class="dot"></span> Salones de belleza</span>
+<span class="chip"><span class="dot"></span> Consultorios</span>
+<span class="chip"><span class="dot"></span> Negocios locales con citas</span>
+</div>
+</div>
+</section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="kicker">Para quién es</div>
-        <h2>Pensado para negocios que viven de la atención al cliente</h2>
-      </div>
-      <div class="chips">
-        <span class="chip"><span class="dot"></span> Emprendedores</span>
-          <span class="chip"><span class="dot"></span> Spas</span>
-          <span class="chip"><span class="dot"></span> Barberías</span>
-          <span class="chip"><span class="dot"></span> Salones de belleza</span>
-          <span class="chip"><span class="dot"></span> Consultorios</span>
-          <span class="chip"><span class="dot"></span> Negocios locales con citas</span>
-        </div>
-      </div>
-    </section>
+<section class="section" id="precio">
+<div class="wrap">
+<div class="section-head">
+<div class="kicker">Precio</div>
+<h2>Un solo plan, sin letra pequeña</h2>
+<p>Todo lo que necesitas para automatizar tu atención por WhatsApp, en un solo precio mensual.</p>
+</div>
+<div class="price-card">
+<div class="plan-name">Plan FRANCO IA</div>
+<div class="amount">$50.000 <span>COP / mes</span></div>
+<ul>
+<li><span class="check">✓</span> Bot de WhatsApp con IA, texto y audio</li>
+<li><span class="check">✓</span> Agenda automática con Google Calendar</li>
+<li><span class="check">✓</span> Panel de control para bloquear y reprogramar citas</li>
+<li><span class="check">✓</span> Configurado con la información de tu negocio</li>
+<li><span class="check">✓</span> Soporte directo por WhatsApp</li>
+</ul>
+<a class="btn btn-primary" style="width:100%; justify-content:center;" href="#contacto">Quiero mi propio bot</a>
+</div>
+</div>
+</section>
 
-    <section class="section" id="precio">
-      <div class="wrap">
-        <div class="section-head">
-          <div class="kicker">Precio</div>
-          <h2>Un solo plan, sin letra pequeña</h2>
-          <p>Todo lo que necesitas para automatizar tu atención por WhatsApp, en un solo precio mensual.</p>
-        </div>
-        <div class="price-card">
-          <div class="plan-name">Plan FRANCO IA</div>
-          <div class="amount">$50.000 <span>COP / mes</span></div>
-          <ul>
-            <li><span class="check">✓</span> Bot de WhatsApp con IA, texto y audio</li>
-          <li><span class="check">✓</span> Agenda automática con Google Calendar</li>
-          <li><span class="check">✓</span> Panel de control para bloquear y reprogramar citas</li>
-          <li><span class="check">✓</span> Configurado con la información de tu negocio</li>
-          <li><span class="check">✓</span> Soporte directo por WhatsApp</li>
-        </ul>
-        <a class="btn btn-primary" style="width:100%; justify-content:center;" href="https://wa.me/573004835833" target="_blank" rel="noopener">Quiero mi asistente de IA</a>
-      </div>
-    </div>
-  </section>
+<section class="cta-section" id="contacto">
+<div class="wrap">
+<div class="kicker">Contacto</div>
+<h2>¿Listo para dejar de perder clientes por no responder a tiempo?</h2>
+<p style="color:var(--text-dim); max-width:520px; margin:0 auto;">Escríbenos y en minutos te mostramos cómo se vería tu asistente funcionando.</p>
+<div class="hero-ctas" style="margin-top:34px;">
+<a class="btn btn-primary" href="https://wa.me/573004835833?text=%C2%A1Hola%21%20Estoy%20interesado%20en%20el%20bot%20de%20FRANCO%20IA%20para%20llevar%20mi%20negocio%20al%20siguiente%20nivel." target="_blank" rel="noopener">Hablar con un asesor de ventas</a>
+<a class="btn btn-ghost" href="mailto:admin@francoia.com">admin@francoia.com</a>
+</div>
+</div>
+</section>
+</main>
 
-  <section class="cta-section" id="contacto">
-    <div class="wrap">
-      <div class="kicker">Contacto</div>
-      <h2>¿Listo para dejar de perder clientes por no responder a tiempo?</h2>
-      <p style="color:var(--text-dim); max-width:520px; margin:0 auto;">Escríbenos y en minutos te mostramos cómo se vería tu asistente funcionando.</p>
-      <div class="hero-ctas" style="margin-top:34px;">
-        <a class="btn btn-primary" href="https://wa.me/573004835833" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-        <a class="btn btn-ghost" href="mailto:admin@francoia.com">admin@francoia.com</a>
-        </div>
-      </div>
-    </section>
-  </main>
+<footer>
+<div class="brand" style="display:flex;">
+<svg class="brand-mark" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1" y="1" width="46" height="46" rx="13" fill="#0a0a0a" stroke="url(#g3)" stroke-width="2"/>
+<path d="M24 12c-6.6 0-12 4.9-12 11 0 3 1.3 5.7 3.5 7.7-.2 1.6-.9 3.1-2 4.3 2.1-.2 4.1-1 5.7-2.2 1.5.5 3.1.7 4.8.7 6.6 0 12-4.9 12-11s-5.4-11-12-11Z" fill="#f2f3f2"/>
+<circle cx="19.5" cy="23" r="2" fill="#0a0a0a"/>
+<circle cx="28.5" cy="23" r="2" fill="#0a0a0a"/>
+<defs>
+<linearGradient id="g3" x1="1" y1="1" x2="47" y2="47" gradientUnits="userSpaceOnUse">
+<stop stop-color="#25d366"/><stop offset="1" stop-color="#128c5e"/>
+</linearGradient>
+</defs>
+</svg>
+FRANCO IA
+</div>
+<div>Soluciones de IA que conectan tu negocio</div>
+<div style="margin-top:8px;">admin@francoia.com · © <span id="year"></span> FRANCO IA</div>
+</footer>
 
-  <footer>
-    <div class="brand" style="display:flex;">
-      <svg class="brand-mark" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="1" y="1" width="46" height="46" rx="13" fill="#0a0a0a" stroke="url(#g3)" stroke-width="2"/>
-        <path d="M24 12c-6.6 0-12 4.9-12 11 0 3 1.3 5.7 3.5 7.7-.2 1.6-.9 3.1-2 4.3 2.1-.2 4.1-1 5.7-2.2 1.5.5 3.1.7 4.8.7 6.6 0 12-4.9 12-11s-5.4-11-12-11Z" fill="#f2f3f2"/>
-        <circle cx="19.5" cy="23" r="2" fill="#0a0a0a"/>
-        <circle cx="28.5" cy="23" r="2" fill="#0a0a0a"/>
-        <defs>
-          <linearGradient id="g3" x1="1" y1="1" x2="47" y2="47" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#25d366"/><stop offset="1" stop-color="#128c5e"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      FRANCO IA
-    </div>
-    <div>Soluciones de IA que conectan tu negocio</div>
-  <div style="margin-top:8px;">admin@francoia.com · © <span id="year"></span> FRANCO IA</div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
 </script>
-
-  </body>
-  </html>
-  
+</body>
+</html>
