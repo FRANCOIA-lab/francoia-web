@@ -291,6 +291,7 @@ FRANCO IA
 <p class="hero-cta-note">Respuesta inmediata — cuéntanos tu negocio y te mostramos cómo se vería tu bot.</p>
 
 <div class="hero-visual">
+<span class="example-tag">Ejemplo ilustrativo</span>
 <div class="phone-mock">
 <div class="phone-screen" id="heroChat">
 <div class="chat-bubble in voice-note" style="animation-delay:.3s">
@@ -301,9 +302,12 @@ FRANCO IA
 <div class="chat-bubble out" style="animation-delay:3.6s">¡Claro! Tengo estos horarios disponibles:
 <div class="slots"><span class="slot">Mar 2:00 pm</span><span class="slot">Mar 4:30 pm</span><span class="slot">Mié 10:00 am</span></div>
 </div>
+<div class="chat-bubble in" style="animation-delay:5.6s">Mar 4:30 pm me sirve, gracias</div>
+<div class="typing-bubble" style="animation-delay:6.8s"><span></span><span></span><span></span></div>
+<div class="chat-bubble out" style="animation-delay:8.4s">Listo, quedas agendado a las 4:30 pm. Te llega la confirmación por aquí mismo ✅</div>
 </div>
 </div>
-<p class="chat-caption">Así procesa una nota de voz y agenda la cita, en segundos.</p>
+<p class="chat-caption">Así entiende una nota de voz, ofrece horarios y confirma la cita — todo en la misma conversación.</p>
 </div>
 </section>
 
@@ -411,23 +415,9 @@ FRANCO IA
 <section class="section" id="prueba">
 <div class="wrap">
 <div class="section-head">
-<span class="example-tag">Ejemplo ilustrativo</span>
 <div class="kicker">Prueba social</div>
-<h2>Así resuelve una cita de principio a fin, sin que nadie del negocio intervenga</h2>
-<p>Desde la pregunta del cliente hasta la cita confirmada en el calendario, en segundos.</p>
-</div>
-<div class="hero-visual">
-<div class="phone-mock">
-<div class="phone-screen" id="proofChat">
-<div class="chat-bubble in" style="animation-delay:.2s">Hola! Quiero saber si tienen citas disponible mañana para corte 💈</div>
-<div class="typing-bubble" style="animation-delay:1.4s"><span></span><span></span><span></span></div>
-<div class="chat-bubble out" style="animation-delay:3.2s">¡Con gusto! Mañana tengo estos espacios:
-<div class="slots"><span class="slot">10:00 am</span><span class="slot">1:30 pm</span><span class="slot">5:00 pm</span></div>
-</div>
-<div class="chat-bubble in" style="animation-delay:5s">1:30 pm me sirve, gracias</div>
-<div class="chat-bubble out" style="animation-delay:6.6s">Listo, quedas agendado a la 1:30 pm. Te llega la confirmación por aquí mismo ✅</div>
-</div>
-</div>
+<h2>La misma conversación de arriba, resuelta sin intervención humana</h2>
+<p>Desde que llega la nota de voz hasta que la cita queda confirmada en el calendario — nadie del negocio tuvo que escribir nada.</p>
 </div>
 <div class="badges">
 <div class="badge">
@@ -536,8 +526,7 @@ clone.id = id;
 current.parentNode.replaceChild(clone, current);
 }, ms);
 }
-loopChat('heroChat', 8000);
-loopChat('proofChat', 10000);
+loopChat('heroChat', 11500);
 })();
 </script>
 
