@@ -55,13 +55,12 @@ border-bottom:1px solid var(--border);
 .nav-links a:hover{color:var(--text);}
 .nav-cta{
 display:inline-flex; align-items:center; gap:8px;
-background:linear-gradient(135deg, var(--green-1), var(--green-2));
-color:#06170f; font-weight:700; font-size:14px;
-padding:10px 18px; border-radius:999px;
-box-shadow:0 0 0 1px rgba(255,255,255,0.06) inset;
-transition:transform .15s ease, box-shadow .15s ease;
+background:transparent; border:1px solid rgba(37,211,102,0.4);
+color:var(--green-1); font-weight:700; font-size:14px;
+padding:9px 18px; border-radius:999px;
+transition:transform .15s ease, background .15s ease, border-color .15s ease;
 }
-.nav-cta:hover{transform:translateY(-1px); box-shadow:0 6px 20px var(--green-glow);}
+.nav-cta:hover{transform:translateY(-1px); background:rgba(37,211,102,0.08); border-color:var(--green-1);}
 .menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--text); width:40px; height:40px; border-radius:8px; font-size:18px;}
 
 /* Hero */
@@ -104,6 +103,38 @@ background:transparent; color:var(--text); border:1px solid var(--border);
 .btn-ghost:hover{border-color:rgba(255,255,255,0.25); background:rgba(255,255,255,0.03);}
 
 .hero-visual{max-width:520px; margin:0 auto;}
+.hero-cta-note{color:var(--text-dim); font-size:13.5px; margin:-46px 0 60px;}
+
+/* Background network effect */
+.network-bg{position:fixed; inset:0; z-index:-1; pointer-events:none;}
+
+/* Phone mockup + chat demo */
+.phone-mock{position:relative; width:260px; margin:0 auto; background:#111214; border:2px solid #242625; border-radius:34px; padding:16px 12px 14px; box-shadow:0 30px 60px rgba(0,0,0,0.45);}
+.phone-mock::before{content:""; position:absolute; top:10px; left:50%; transform:translateX(-50%); width:70px; height:6px; border-radius:4px; background:#242625;}
+.phone-screen{background:#0a0a0a; border-radius:22px; padding:26px 12px 16px; min-height:270px; display:flex; flex-direction:column; gap:10px; overflow:hidden;}
+.chat-bubble{max-width:85%; padding:10px 13px; border-radius:14px; font-size:12.5px; line-height:1.45; opacity:0; transform:translateY(6px); animation:bubbleIn .5s ease forwards;}
+.chat-bubble.in{align-self:flex-start; background:#16171a; color:var(--text); border-bottom-left-radius:4px;}
+.chat-bubble.out{align-self:flex-end; background:linear-gradient(135deg, var(--green-1), var(--green-2)); color:#06170f; border-bottom-right-radius:4px; font-weight:600;}
+@keyframes bubbleIn{to{opacity:1; transform:translateY(0);}}
+.voice-note{display:flex; align-items:center; gap:8px;}
+.voice-note .wave{display:flex; align-items:flex-end; gap:2.5px; height:16px;}
+.voice-note .wave span{width:2.5px; border-radius:2px; background:var(--green-1); opacity:0.85; display:block;}
+.voice-note .dur{font-size:11.5px; color:var(--text-dim);}
+.typing-bubble{align-self:flex-start; display:flex; gap:4px; padding:11px 14px; background:#16171a; border-radius:14px; border-bottom-left-radius:4px; opacity:0; animation:typingInOut 2.4s ease forwards;}
+.typing-bubble span{width:6px; height:6px; border-radius:50%; background:var(--text-dim); animation:typingDot 1s infinite ease-in-out;}
+.typing-bubble span:nth-child(2){animation-delay:.15s;}
+.typing-bubble span:nth-child(3){animation-delay:.3s;}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0); opacity:.4;} 30%{transform:translateY(-4px); opacity:1;}}
+@keyframes typingInOut{0%{opacity:0;} 18%{opacity:1;} 75%{opacity:1;} 100%{opacity:0;}}
+.slots{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+.slot{font-size:11px; padding:5px 9px; border-radius:999px; background:rgba(6,23,15,0.16); border:1px solid rgba(6,23,15,0.28);}
+.chat-caption{color:var(--text-dim); font-size:13px; text-align:center; margin-top:18px;}
+.example-tag{display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--text-dim); border:1px solid var(--border); border-radius:999px; padding:4px 12px; margin-bottom:14px;}
+
+/* Trust badges */
+.badges{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:36px;}
+.badge{display:flex; align-items:center; gap:10px; border:1px solid var(--border); background:var(--panel); border-radius:12px; padding:12px 18px; font-size:13.5px; color:var(--text-dim);}
+.badge svg{flex-shrink:0;}
 
 /* Sections shared */
 .section{padding:88px 0;}
@@ -134,6 +165,7 @@ animation:cardIn .6s ease forwards;
 .card:nth-child(4){animation-delay:.26s;}
 .card:nth-child(5){animation-delay:.33s;}
 .card:nth-child(6){animation-delay:.40s;}
+.card:nth-child(7){animation-delay:.47s;}
 @keyframes cardIn{
 from{opacity:0; transform:translateY(16px);}
 to{opacity:1; transform:translateY(0);}
@@ -180,8 +212,10 @@ box-shadow:0 20px 60px rgba(0,0,0,0.35);
 .price-card .plan-name{color:var(--green-1); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; font-size:13px; margin-bottom:14px;}
 .price-card .amount{font-size:44px; font-weight:800; letter-spacing:-0.02em;}
 .price-card .amount span{font-size:16px; font-weight:600; color:var(--text-dim);}
+.price-card .anchor{color:var(--green-1); font-size:14px; font-weight:600; margin-top:10px;}
 .price-card ul{list-style:none; margin:28px 0 32px; text-align:left; display:flex; flex-direction:column; gap:12px;}
 .price-card li{display:flex; gap:10px; font-size:14.5px; color:var(--text-dim);}
+.price-card li.highlight{background:rgba(37,211,102,0.08); border:1px solid rgba(37,211,102,0.25); border-radius:10px; padding:10px 12px; color:var(--text); font-weight:600;}
 .check{color:var(--green-1); flex-shrink:0;}
 
 /* CTA / contact */
@@ -194,22 +228,28 @@ text-align:center; padding:88px 0;
 
 footer{padding:40px 24px; text-align:center; color:var(--text-dim); font-size:13.5px;}
 footer .brand{justify-content:center; margin-bottom:10px; font-size:15px;}
+.footer-legal{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
+.footer-legal a{color:var(--text-dim); text-decoration:underline; text-underline-offset:3px;}
+.footer-legal a:hover{color:var(--text);}
 
 @media (max-width:860px){
 .nav-links{display:none;}
 .menu-btn{display:block;}
 .grid, .steps{grid-template-columns:1fr;}
 .strip .wrap{grid-template-columns:1fr; gap:20px;}
+.hero-cta-note{margin-top:-40px;}
 }
 
 @media (prefers-reduced-motion: reduce){
 html{scroll-behavior:auto;}
 .card{animation:none; opacity:1; transform:none;}
+.chat-bubble, .typing-bubble{animation:none; opacity:1; transform:none;}
 }
 </style>
 </head>
 <body>
 
+<canvas id="red-ia-canvas" class="network-bg"></canvas>
 <div class="glow"></div>
 
 <header>
@@ -243,33 +283,27 @@ FRANCO IA
 <section class="hero wrap">
 <span class="eyebrow"><span class="dot"></span> Soluciones de IA que conectan tu negocio</span>
 <h1>Tu negocio, atendido <span class="accent">24/7 por IA</span> en WhatsApp</h1>
-<p class="lead">FRANCO IA crea asistentes de WhatsApp que responden, asesoran y agendan citas por ti — con voz humana, sin turnos perdidos y sin que tengas que estar pegado al celular.</p>
+<p class="lead">Recupera clientes perdidos y automatiza tus reservas 24/7 sin estar pegado al celular.</p>
 <div class="hero-ctas">
 <a class="btn btn-primary" href="https://wa.me/573004835833?text=%C2%A1Hola%21%20Estoy%20interesado%20en%20el%20bot%20de%20FRANCO%20IA%20para%20llevar%20mi%20negocio%20al%20siguiente%20nivel." target="_blank" rel="noopener">Quiero mi propio bot por WhatsApp</a>
 <a class="btn btn-ghost" href="#como-funciona">Ver cómo funciona</a>
 </div>
+<p class="hero-cta-note">Respuesta inmediata — prueba una demostración en vivo ahora mismo.</p>
+
 <div class="hero-visual">
-<svg viewBox="0 0 520 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="260" cy="290" rx="180" ry="18" fill="#25d366" opacity="0.08"/>
-<rect x="180" y="20" width="160" height="280" rx="28" fill="#111214" stroke="#242625" stroke-width="2"/>
-<rect x="196" y="52" width="128" height="200" rx="10" fill="#0a0a0a"/>
-<rect x="206" y="64" width="90" height="14" rx="7" fill="#1c1e1c"/>
-<rect x="206" y="88" width="70" height="34" rx="12" fill="#16171a"/>
-<rect x="230" y="130" width="84" height="34" rx="12" fill="url(#g2)"/>
-<rect x="206" y="172" width="60" height="34" rx="12" fill="#16171a"/>
-<circle cx="260" cy="286" r="10" fill="#242625"/>
-<g opacity="0.9">
-<circle cx="90" cy="110" r="46" fill="url(#g2)" opacity="0.14"/>
-<circle cx="430" cy="70" r="30" fill="url(#g2)" opacity="0.16"/>
-<circle cx="450" cy="230" r="40" fill="url(#g2)" opacity="0.12"/>
-</g>
-<defs>
-<linearGradient id="g2" x1="180" y1="20" x2="340" y2="300" gradientUnits="userSpaceOnUse">
-<stop stop-color="#25d366"/>
-<stop offset="1" stop-color="#128c5e"/>
-</linearGradient>
-</defs>
-</svg>
+<div class="phone-mock">
+<div class="phone-screen" id="heroChat">
+<div class="chat-bubble in voice-note" style="animation-delay:.3s">
+<div class="wave"><span style="height:6px"></span><span style="height:12px"></span><span style="height:8px"></span><span style="height:16px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:7px"></span></div>
+<span class="dur">0:07</span>
+</div>
+<div class="typing-bubble" style="animation-delay:1.6s"><span></span><span></span><span></span></div>
+<div class="chat-bubble out" style="animation-delay:3.6s">¡Claro! Tengo estos horarios disponibles:
+<div class="slots"><span class="slot">Mar 2:00 pm</span><span class="slot">Mar 4:30 pm</span><span class="slot">Mié 10:00 am</span></div>
+</div>
+</div>
+</div>
+<p class="chat-caption">Así procesa una nota de voz y agenda la cita, en segundos.</p>
 </div>
 </section>
 
@@ -302,8 +336,8 @@ FRANCO IA
 <div class="card-icon">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
 </div>
-<h3>Responde texto y audio</h3>
-<p>Entiende notas de voz y mensajes escritos, y contesta con naturalidad, como lo haría alguien de tu equipo.</p>
+<h3>Procesa y entiende Notas de Voz</h3>
+<p>Tu cliente manda un audio y el bot extrae la intención exacta, sin que tengas que escucharlo tú. Responde con la misma naturalidad, en texto o en voz.</p>
 </div>
 <div class="card">
 <div class="card-icon">
@@ -340,6 +374,13 @@ FRANCO IA
 <h3>Crece contigo</h3>
 <p>Empiezas simple y vas sumando funciones a medida que tu negocio lo necesita.</p>
 </div>
+<div class="card">
+<div class="card-icon">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 10c0-3.3 1.8-6 4-6s4 2.7 4 6-1.8 8-4 8-4-4.7-4-8Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 20c1.5-2.5 4.5-4 8-4s6.5 1.5 8 4" stroke="#25d366" stroke-width="1.8" stroke-linecap="round"/></svg>
+</div>
+<h3>Habla como tu negocio, no como un robot</h3>
+<p>Defines el tono exacto de tu marca: formal, cercano, con modismos locales o emojis específicos, para que tus clientes sientan que hablan con alguien de tu equipo.</p>
+</div>
 </div>
 </div>
 </section>
@@ -362,6 +403,40 @@ FRANCO IA
 <div class="step">
 <h3>Empieza a atender solo</h3>
 <p>Responde, asesora y agenda citas automáticamente, mientras tú sigues con lo tuyo.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="prueba">
+<div class="wrap">
+<div class="section-head">
+<span class="example-tag">Ejemplo ilustrativo</span>
+<div class="kicker">Prueba social</div>
+<h2>Así se ve una conversación resuelta sola</h2>
+<p>Ejemplo del flujo completo: desde la pregunta del cliente hasta la cita agendada, sin que nadie del negocio intervenga. (Conversación ilustrativa, no corresponde a un cliente real.)</p>
+</div>
+<div class="hero-visual">
+<div class="phone-mock">
+<div class="phone-screen" id="proofChat">
+<div class="chat-bubble in" style="animation-delay:.2s">Hola! Quiero saber si tienen citas disponible mañana para corte 💈</div>
+<div class="typing-bubble" style="animation-delay:1.4s"><span></span><span></span><span></span></div>
+<div class="chat-bubble out" style="animation-delay:3.2s">¡Con gusto! Mañana tengo estos espacios:
+<div class="slots"><span class="slot">10:00 am</span><span class="slot">1:30 pm</span><span class="slot">5:00 pm</span></div>
+</div>
+<div class="chat-bubble in" style="animation-delay:5s">1:30 pm me sirve, gracias</div>
+<div class="chat-bubble out" style="animation-delay:6.6s">Listo, quedas agendado a la 1:30 pm. Te llega la confirmación por aquí mismo ✅</div>
+</div>
+</div>
+</div>
+<div class="badges">
+<div class="badge">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4Z" stroke="#25d366" stroke-width="1.8" stroke-linejoin="round"/></svg>
+Funciona con WhatsApp Business API
+</div>
+<div class="badge">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2" stroke="#25d366" stroke-width="1.8"/><path d="M4 9h16M8 3v4M16 3v4" stroke="#25d366" stroke-width="1.8" stroke-linecap="round"/></svg>
+Se sincroniza con Google Calendar
 </div>
 </div>
 </div>
@@ -394,11 +469,12 @@ FRANCO IA
 <div class="price-card">
 <div class="plan-name">Plan FRANCO IA</div>
 <div class="amount">$50.000 <span>COP / mes</span></div>
+<div class="anchor">Tu propio empleado 24/7 por menos de $1.700 COP al día</div>
 <ul>
+<li class="highlight"><span class="check">✓</span> Configuración inicial incluida: entrenamos el bot con la información de tu negocio y conectamos tus herramientas, sin costo extra</li>
 <li><span class="check">✓</span> Bot de WhatsApp con IA, texto y audio</li>
 <li><span class="check">✓</span> Agenda automática con Google Calendar</li>
 <li><span class="check">✓</span> Panel de control para bloquear y reprogramar citas</li>
-<li><span class="check">✓</span> Configurado con la información de tu negocio</li>
 <li><span class="check">✓</span> Soporte directo por WhatsApp</li>
 </ul>
 <a class="btn btn-primary" style="width:100%; justify-content:center;" href="#contacto">Quiero mi propio bot</a>
@@ -436,10 +512,130 @@ FRANCO IA
 </div>
 <div>Soluciones de IA que conectan tu negocio</div>
 <div style="margin-top:8px;">admin@francoia.com · © <span id="year"></span> FRANCO IA</div>
+<div class="footer-legal">
+<a href="/terminos.html">Términos y Condiciones</a>
+<a href="/politica-datos.html">Política de Tratamiento de Datos</a>
+</div>
 </footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Restart chat-demo animations periodically so the mockups loop */
+(function(){
+var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduceMotion) return;
+function loopChat(id, ms){
+var el = document.getElementById(id);
+if(!el) return;
+setInterval(function(){
+var current = document.getElementById(id);
+if(!current) return;
+var clone = current.cloneNode(true);
+clone.id = id;
+current.parentNode.replaceChild(clone, current);
+}, ms);
+}
+loopChat('heroChat', 8000);
+loopChat('proofChat', 10000);
+})();
 </script>
+
+<script>
+(function(){
+var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var canvas = document.getElementById('red-ia-canvas');
+if(!canvas || reduceMotion) return;
+var ctx = canvas.getContext('2d');
+var isSmall = window.innerWidth < 768;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+var particlesArray = [];
+var mouse = { x: null, y: null };
+window.addEventListener('mousemove', function(event){ mouse.x = event.x; mouse.y = event.y; });
+window.addEventListener('mouseout', function(){ mouse.x = null; mouse.y = null; });
+
+function Particle(x, y, dx, dy, size){
+this.x = x; this.y = y; this.dx = dx; this.dy = dy; this.size = size;
+}
+Particle.prototype.draw = function(){
+ctx.beginPath();
+ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+ctx.fillStyle = 'rgba(150, 150, 150, 0.4)';
+ctx.fill();
+};
+Particle.prototype.update = function(){
+if(this.x > canvas.width || this.x < 0) this.dx = -this.dx;
+if(this.y > canvas.height || this.y < 0) this.dy = -this.dy;
+this.x += this.dx; this.y += this.dy;
+this.draw();
+};
+
+function init(){
+particlesArray = [];
+isSmall = window.innerWidth < 768;
+var divisor = isSmall ? 34000 : 15000;
+var numberOfParticles = Math.min((canvas.width * canvas.height) / divisor, 110);
+for(var i = 0; i < numberOfParticles; i++){
+var size = Math.random() * 2 + 1;
+var x = Math.random() * (canvas.width - size * 2) + size;
+var y = Math.random() * (canvas.height - size * 2) + size;
+var dx = (Math.random() - 0.5) * 1;
+var dy = (Math.random() - 0.5) * 1;
+particlesArray.push(new Particle(x, y, dx, dy, size));
+}
+}
+
+function connect(){
+for(var a = 0; a < particlesArray.length; a++){
+for(var b = a; b < particlesArray.length; b++){
+var distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
++ ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+if(distance < 12000){
+ctx.strokeStyle = 'rgba(150, 150, 150, 0.15)';
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+ctx.stroke();
+}
+if(mouse.x && mouse.y && !isSmall){
+var mouseDistance = ((particlesArray[a].x - mouse.x) * (particlesArray[a].x - mouse.x))
++ ((particlesArray[a].y - mouse.y) * (particlesArray[a].y - mouse.y));
+if(mouseDistance < 20000){
+ctx.strokeStyle = 'rgba(0, 120, 255, 0.4)';
+ctx.lineWidth = 1.5;
+ctx.beginPath();
+ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+ctx.lineTo(mouse.x, mouse.y);
+ctx.stroke();
+}
+}
+}
+}
+}
+
+function animate(){
+requestAnimationFrame(animate);
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+for(var i = 0; i < particlesArray.length; i++){ particlesArray[i].update(); }
+connect();
+}
+
+var resizeTimer;
+window.addEventListener('resize', function(){
+clearTimeout(resizeTimer);
+resizeTimer = setTimeout(function(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+init();
+}, 200);
+});
+
+init();
+animate();
+})();
+</script>
+
 </body>
 </html>
