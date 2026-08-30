@@ -108,33 +108,85 @@ background:transparent; color:var(--text); border:1px solid var(--border);
 /* Background network effect */
 .network-bg{position:fixed; inset:0; z-index:-1; pointer-events:none;}
 
-/* Phone mockup + chat demo */
-.phone-mock{position:relative; width:260px; margin:0 auto; background:#111214; border:2px solid #242625; border-radius:34px; padding:16px 12px 14px; box-shadow:0 30px 60px rgba(0,0,0,0.45);}
-.phone-mock::before{content:""; position:absolute; top:10px; left:50%; transform:translateX(-50%); width:70px; height:6px; border-radius:4px; background:#242625;}
-.phone-screen{background:#0a0a0a; border-radius:22px; padding:26px 12px 16px; min-height:270px; display:flex; flex-direction:column; gap:10px; overflow:hidden;}
-.chat-bubble{max-width:85%; padding:10px 13px; border-radius:14px; font-size:12.5px; line-height:1.45; opacity:0; transform:translateY(6px); animation:bubbleIn .5s ease forwards;}
-.chat-bubble.in{align-self:flex-start; background:#16171a; color:var(--text); border-bottom-left-radius:4px;}
+/* Phone mockup + chat demo (iOS-style, premium) */
+.hero-visual{max-width:520px; margin:0 auto; position:relative;}
+.hero-visual .stage{position:relative; perspective:1500px; margin-bottom:44px;}
+.hero-visual .stage::before{
+content:""; position:absolute; inset:-40px; z-index:0;
+background:radial-gradient(220px 220px at 50% 40%, rgba(37,211,102,0.28), transparent 70%);
+filter:blur(10px); pointer-events:none;
+}
+.phone-mock{
+position:relative; z-index:1; width:264px; margin:0 auto;
+background:linear-gradient(160deg,#3a3c3d,#131415 42%,#0b0c0c);
+border-radius:48px; padding:5px;
+box-shadow:
+0 45px 90px rgba(0,0,0,0.55),
+0 0 0 1px rgba(255,255,255,0.06),
+0 0 60px rgba(37,211,102,0.12);
+transform:rotateY(-10deg) rotateX(4deg);
+transition:transform .5s ease;
+}
+.hero-visual .stage:hover .phone-mock{transform:rotateY(-4deg) rotateX(1.5deg);}
+.phone-mock::before{
+content:""; position:absolute; top:16px; left:50%; transform:translateX(-50%);
+width:80px; height:22px; border-radius:14px; background:#000; z-index:3;
+box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);
+}
+.phone-mock::after{
+content:""; position:absolute; bottom:9px; left:50%; transform:translateX(-50%);
+width:110px; height:4px; border-radius:3px; background:rgba(255,255,255,0.4); z-index:3;
+}
+.phone-inner{background:#000; border-radius:44px; padding:2px; border:1px solid rgba(255,255,255,0.08);}
+.phone-screen{position:relative; background:#050605; border-radius:40px; padding:40px 13px 22px; min-height:300px; display:flex; flex-direction:column; gap:9px; overflow:hidden;}
+.status-bar{position:absolute; top:13px; left:24px; right:24px; display:flex; align-items:center; justify-content:space-between; color:#f2f3f2;}
+.status-bar .time{font-size:12px; font-weight:700; letter-spacing:.2px;}
+.status-bar .icons{display:flex; align-items:center; gap:4px; opacity:.92;}
+.chat-header{display:flex; align-items:center; gap:8px; padding-bottom:9px; margin-bottom:1px; border-bottom:1px solid rgba(255,255,255,0.07);}
+.chat-avatar{width:24px; height:24px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg, var(--green-1), var(--green-2)); display:flex; align-items:center; justify-content:center; font-size:9.5px; font-weight:800; color:#06170f;}
+.chat-header .who{display:flex; flex-direction:column; line-height:1.25;}
+.chat-header .who b{font-size:12px; font-weight:700;}
+.chat-header .who span{font-size:10px; color:var(--green-1);}
+.chat-bubble{max-width:82%; padding:10px 13px; border-radius:14px; font-size:12.5px; line-height:1.45; opacity:0; transform:translateY(6px); animation:bubbleIn .5s ease forwards;}
+.chat-bubble.in{align-self:flex-start; background:#17181b; color:var(--text); border-bottom-left-radius:4px;}
 .chat-bubble.out{align-self:flex-end; background:linear-gradient(135deg, var(--green-1), var(--green-2)); color:#06170f; border-bottom-right-radius:4px; font-weight:600;}
 @keyframes bubbleIn{to{opacity:1; transform:translateY(0);}}
 .voice-note{display:flex; align-items:center; gap:8px;}
 .voice-note .wave{display:flex; align-items:flex-end; gap:2.5px; height:16px;}
-.voice-note .wave span{width:2.5px; border-radius:2px; background:var(--green-1); opacity:0.85; display:block;}
+.voice-note .wave span{width:2.5px; border-radius:2px; opacity:0.9; display:block; background:var(--green-1);}
+.chat-bubble.out .wave span{background:#06170f;}
 .voice-note .dur{font-size:11.5px; color:var(--text-dim);}
-.typing-bubble{align-self:flex-start; display:flex; gap:4px; padding:11px 14px; background:#16171a; border-radius:14px; border-bottom-left-radius:4px; opacity:0; animation:typingInOut 2.4s ease forwards;}
+.chat-bubble.out .dur{color:#06170f; opacity:.7;}
+.typing-bubble{align-self:flex-start; display:flex; gap:4px; padding:11px 14px; background:#17181b; border-radius:14px; border-bottom-left-radius:4px; opacity:0; animation:typingInOut 2.4s ease forwards;}
 .typing-bubble span{width:6px; height:6px; border-radius:50%; background:var(--text-dim); animation:typingDot 1s infinite ease-in-out;}
 .typing-bubble span:nth-child(2){animation-delay:.15s;}
 .typing-bubble span:nth-child(3){animation-delay:.3s;}
 @keyframes typingDot{0%,60%,100%{transform:translateY(0); opacity:.4;} 30%{transform:translateY(-4px); opacity:1;}}
 @keyframes typingInOut{0%{opacity:0;} 18%{opacity:1;} 75%{opacity:1;} 100%{opacity:0;}}
 .slots{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
-.slot{font-size:11px; padding:5px 9px; border-radius:999px; background:rgba(6,23,15,0.16); border:1px solid rgba(6,23,15,0.28);}
-.chat-caption{color:var(--text-dim); font-size:13px; text-align:center; margin-top:18px;}
+.slot{font-size:11px; padding:5px 9px; border-radius:999px; background:rgba(37,211,102,0.12); border:1px solid rgba(37,211,102,0.35); color:var(--green-1); font-weight:600;}
+.chat-bubble.out .slot{background:rgba(6,23,15,0.16); border:1px solid rgba(6,23,15,0.28); color:#06170f;}
+.chat-caption{color:var(--text-dim); font-size:13px; text-align:center; margin-top:22px;}
 .example-tag{display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--text-dim); border:1px solid var(--border); border-radius:999px; padding:4px 12px; margin-bottom:14px;}
 
-/* Trust badges */
-.badges{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:36px;}
-.badge{display:flex; align-items:center; gap:10px; border:1px solid var(--border); background:var(--panel); border-radius:12px; padding:12px 18px; font-size:13.5px; color:var(--text-dim);}
-.badge svg, .badge img{flex-shrink:0; border-radius:5px;}
+/* Floating trust badges (spill outside the phone frame) */
+.float-badge{
+position:absolute; z-index:4; display:flex; align-items:center; gap:8px;
+background:rgba(17,18,20,0.85); border:1px solid var(--border);
+backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+border-radius:13px; padding:9px 13px; font-size:11.5px; font-weight:600; color:var(--text);
+box-shadow:0 18px 40px rgba(0,0,0,0.5); max-width:180px; line-height:1.3;
+opacity:0; transform:translateY(10px); animation:floatIn .6s ease forwards;
+}
+.float-badge svg{flex-shrink:0; color:var(--green-1);}
+.float-badge.badge-top{top:15%; left:-40px; animation-delay:1.5s;}
+.float-badge.badge-bottom{bottom:-34px; right:-26px; animation-delay:9s;}
+@keyframes floatIn{to{opacity:1; transform:translateY(0);}}
+@media (max-width:560px){
+.float-badge{max-width:150px; font-size:11px; padding:8px 11px;}
+.float-badge.badge-top{left:-10px;}
+.float-badge.badge-bottom{right:-8px; bottom:-30px;}
+}
 
 /* Sections shared */
 .section{padding:88px 0;}
@@ -243,7 +295,8 @@ footer .brand{justify-content:center; margin-bottom:10px; font-size:15px;}
 @media (prefers-reduced-motion: reduce){
 html{scroll-behavior:auto;}
 .card{animation:none; opacity:1; transform:none;}
-.chat-bubble, .typing-bubble{animation:none; opacity:1; transform:none;}
+.chat-bubble, .typing-bubble, .float-badge{animation:none; opacity:1; transform:none;}
+.phone-mock{transform:none;}
 }
 </style>
 </head>
@@ -292,19 +345,42 @@ FRANCO IA
 
 <div class="hero-visual">
 <span class="example-tag">Ejemplo ilustrativo</span>
+<div class="stage">
 <div class="phone-mock">
+<div class="phone-inner">
 <div class="phone-screen" id="heroChat">
-<div class="chat-bubble in voice-note" style="animation-delay:.3s">
+<div class="status-bar">
+<span class="time">9:41</span>
+<span class="icons">
+<svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="6" width="2.4" height="4" rx="0.6" fill="currentColor"/><rect x="4.2" y="4" width="2.4" height="6" rx="0.6" fill="currentColor"/><rect x="8.4" y="2" width="2.4" height="8" rx="0.6" fill="currentColor"/><rect x="12.6" y="0" width="2.4" height="10" rx="0.6" fill="currentColor"/></svg>
+<svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="14.5" height="9" rx="2.2" stroke="currentColor"/><rect x="2" y="2" width="11.5" height="6" rx="1.1" fill="currentColor"/><rect x="15.6" y="3" width="1.6" height="4" rx="0.7" fill="currentColor"/></svg>
+</span>
+</div>
+<div class="chat-header">
+<div class="chat-avatar">FI</div>
+<div class="who"><b>Franco IA</b><span>en línea</span></div>
+</div>
+<div class="chat-bubble out voice-note" style="animation-delay:.3s">
 <div class="wave"><span style="height:6px"></span><span style="height:12px"></span><span style="height:8px"></span><span style="height:16px"></span><span style="height:10px"></span><span style="height:14px"></span><span style="height:7px"></span></div>
 <span class="dur">0:07</span>
 </div>
 <div class="typing-bubble" style="animation-delay:1.6s"><span></span><span></span><span></span></div>
-<div class="chat-bubble out" style="animation-delay:3.6s">¡Claro! Tengo estos horarios disponibles:
+<div class="chat-bubble in" style="animation-delay:3.6s">¡Claro! Tengo estos horarios disponibles:
 <div class="slots"><span class="slot">Mar 2:00 pm</span><span class="slot">Mar 4:30 pm</span><span class="slot">Mié 10:00 am</span></div>
 </div>
-<div class="chat-bubble in" style="animation-delay:5.6s">Mar 4:30 pm me sirve, gracias</div>
+<div class="chat-bubble out" style="animation-delay:5.6s">Mar 4:30 pm me sirve, gracias</div>
 <div class="typing-bubble" style="animation-delay:6.8s"><span></span><span></span><span></span></div>
-<div class="chat-bubble out" style="animation-delay:8.4s">Listo, quedas agendado a las 4:30 pm. Te llega la confirmación por aquí mismo ✅</div>
+<div class="chat-bubble in" style="animation-delay:8.4s">Listo, quedas agendado a las 4:30 pm. Te llega la confirmación por aquí mismo ✅</div>
+</div>
+</div>
+<div class="float-badge badge-top">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 1 1-3.6-6.66" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 12a8 8 0 0 1 12.6-6.5L21.5 3l-1 4.2A8 8 0 0 1 8 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 11h6M8 14h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+Funciona con WhatsApp Business API
+</div>
+<div class="float-badge badge-bottom">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="4.5" width="17" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.8"/><path d="M8 2.5v4M16 2.5v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="m8.3 14.8 2.1 2.1 4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+Se sincroniza con Google Calendar
+</div>
 </div>
 </div>
 <p class="chat-caption">Así entiende una nota de voz, ofrece horarios y confirma la cita — todo en la misma conversación.</p>
@@ -407,26 +483,6 @@ FRANCO IA
 <div class="step">
 <h3>Empieza a atender solo</h3>
 <p>Responde, asesora y agenda citas automáticamente, mientras tú sigues con lo tuyo.</p>
-</div>
-</div>
-</div>
-</section>
-
-<section class="section" id="prueba">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Prueba social</div>
-<h2>La misma conversación de arriba, resuelta sin intervención humana</h2>
-<p>Desde que llega la nota de voz hasta que la cita queda confirmada en el calendario — nadie del negocio tuvo que escribir nada.</p>
-</div>
-<div class="badges">
-<div class="badge">
-<img src="data:image/png;base64,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" alt="WhatsApp Business API" width="22" height="22">
-Funciona con WhatsApp Business API
-</div>
-<div class="badge">
-<img src="data:image/png;base64,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" alt="Google Calendar" width="22" height="22">
-Se sincroniza con Google Calendar
 </div>
 </div>
 </div>
