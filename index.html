@@ -575,7 +575,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 2 DEMO -->
-    <section class="slide" data-dur="17500" id="chatSlide" aria-label="Demostración">
+    <section class="slide" data-dur="16100" id="chatSlide" aria-label="Demostración">
       <div class="in split">
         <div>
           <div class="kick rv">Míralo trabajar</div>
@@ -827,10 +827,10 @@ const SFX = {
     noise(t, .15, .8, .07, 4000, 250, 1.5, .5); osc(392, 'sine', t + .1, .02, .02, .9, 196, .8); SFX.hum(false); },
   slide(){ if (!ready()) return; const t = AC.currentTime; noise(t, .02, .22, .025, 2600, 900, 2, .2); },   // cambio de historia (muy sutil)
   // demo de chat: sonidos originales de mensajería (inspirados en apps de chat, sintetizados aquí)
-  sent(){ if (!ready()) return; const t = AC.currentTime;                         // mensaje enviado: "pop" corto ascendente
-    osc(520, 'sine', t, .004, .09, .07, 1150, .05); osc(1500, 'sine', t + .035, .002, .03, .05, null, .05); },
-  received(){ if (!ready()) return; const t = AC.currentTime;                     // mensaje recibido: dos tonos suaves
-    osc(880, 'sine', t, .006, .07, .16, null, .15); osc(1318.5, 'sine', t + .085, .006, .06, .22, null, .2); },
+  sent(){ if (!ready()) return; const t = AC.currentTime;                         // enviado: "pop" seco y corto (~850 Hz, 40 ms)
+    osc(700, 'sine', t, .002, .16, .045, 900, 0); osc(1700, 'triangle', t, .001, .025, .015, null, 0); },
+  received(){ if (!ready()) return; const t = AC.currentTime;                     // recibido: "tic" brillante doble (~3 kHz)
+    osc(3000, 'sine', t, .002, .08, .07, null, .05); osc(3000, 'sine', t + .095, .002, .035, .05, null, .05); },
   typing(ms){ if (!ready()) return; const t = AC.currentTime;                      // escribiendo: clics suaves de teclado
     for (let k = 0, x = 0; x < ms/1000 - .1; k++, x += .09 + Math.random()*.08) noise(t + x, .002, .035, .02 + Math.random()*.01, 3200 + Math.random()*1500, 2500, 4, 0); },
   notify(){ if (!ready()) return; const t = AC.currentTime;                       // aviso de cita creada
@@ -952,7 +952,7 @@ const slides = [...document.querySelectorAll('.slide')], N = slides.length, bars
 slides.forEach(() => bars.insertAdjacentHTML('beforeend', '<div class="bar"><i></i></div>'));
 const fills = [...bars.querySelectorAll('i')];
 let cur = -1, elapsed = 0, last = 0, userPaused = false, holdPaused = false, lastScroll = -1e9;
-document.getElementById('slides').addEventListener('scroll', () => lastScroll = performance.now(), {capture:true, passive:true});
+document.getElementById('slides').addEventListener('scroll', e => { if (!(e.target.closest && e.target.closest('.msgs'))) lastScroll = performance.now(); }, {capture:true, passive:true});   // el auto-scroll del chat no pausa la historia
 
 function go(i, force){
   i = Math.max(0, Math.min(N-1, i));
@@ -973,7 +973,7 @@ const next = () => go(cur+1), prev = () => go(cur-1);
 
 function tick(now){
   const dt = Math.min(100, now - (last || now)); last = now;
-  if (introDone && cur >= 0 && !userPaused && !holdPaused && !document.hidden && now - lastScroll > 1500){
+  if (introDone && cur >= 0 && !userPaused && !holdPaused && !document.hidden && (now - lastScroll > 1500 || slides[cur].id === 'chatSlide')){
     const dur = +slides[cur].dataset.dur;
     if (dur > 0){ elapsed += dt; const p = Math.min(1, elapsed/dur); fills[cur].style.transform = `scaleX(${p})`; if (p >= 1) next(); }
   }
@@ -1034,6 +1034,7 @@ function runChat(){
     }
   });
   at(t + 300, () => { $('#toast').classList.add('show'); SFX.notify(); });
+  $('#chatSlide').dataset.dur = t + 300 + 2000;            // la demo termina 2 s después de registrar la cita en Google Calendar
 }
 function runFlow(fl){
   const pu = fl.querySelector('.pulse'), nds = [...fl.querySelectorAll('.nd')], start = performance.now(), T = 3800, DELAY = 1200;
