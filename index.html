@@ -13,7 +13,15 @@
 <meta property="og:site_name" content="FRANCO IA">
 <meta property="og:title" content="FRANCO IA — Tu empleado digital para WhatsApp, 24/7">
 <meta property="og:description" content="Un empleado digital que atiende tu WhatsApp, responde clientes y gestiona tus citas 24/7 por menos de $1.000 al día.">
-<link rel="icon" href="data:,">
+<meta property="og:image" content="https://francoia.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="FRANCO IA — Tu empleado digital para WhatsApp, 24/7, por menos de $1.000 al día">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FRANCO IA — Tu empleado digital para WhatsApp, 24/7">
+<meta name="twitter:description" content="Atiende tu WhatsApp, responde clientes y gestiona tus citas 24/7 por menos de $1.000 al día.">
+<meta name="twitter:image" content="https://francoia.com/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="11 6 82 82"%3E%3Crect x="11" y="6" width="82" height="82" rx="18" fill="#000"/%3E%3Cpath d="M31.1 72.8A34 34 0 1 0 24.1 65.5L17 79Z" fill="none" stroke="#25d366" stroke-width="6" stroke-linejoin="round"/%3E%3Crect x="30" y="38" width="44" height="24" rx="12" fill="none" stroke="#fff" stroke-width="4.5"/%3E%3Ccircle cx="52" cy="28" r="4.5" fill="#fff"/%3E%3Cpath d="M52 32v6" stroke="#fff" stroke-width="3.5"/%3E%3Ccircle cx="44.4" cy="50" r="4" fill="#25d366"/%3E%3Ccircle cx="59.7" cy="50" r="4" fill="#25d366"/%3E%3C/svg%3E">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -37,16 +45,11 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type":"Question","name":"¿FRANCO funciona por WhatsApp?","acceptedAnswer":{"@type":"Answer","text":"Sí. FRANCO atiende las conversaciones directamente en tu WhatsApp de negocio."}},
-    {"@type":"Question","name":"¿FRANCO trabaja 24/7?","acceptedAnswer":{"@type":"Answer","text":"Sí. FRANCO atiende a tus clientes en cualquier momento, incluso fuera de tu horario laboral."}},
-    {"@type":"Question","name":"¿Puede agendar citas?","acceptedAnswer":{"@type":"Answer","text":"Sí, puede gestionar el proceso de agendamiento según la configuración de tu negocio."}},
-    {"@type":"Question","name":"¿Se conecta con Google Calendar?","acceptedAnswer":{"@type":"Answer","text":"Sí, FRANCO se conecta con Google Calendar para consultar disponibilidad y crear citas."}},
-    {"@type":"Question","name":"¿Puede reagendar una cita?","acceptedAnswer":{"@type":"Answer","text":"Sí, FRANCO puede ayudar a tus clientes a reagendar cuando lo necesiten."}},
-    {"@type":"Question","name":"¿Puede cancelar una cita?","acceptedAnswer":{"@type":"Answer","text":"Sí, FRANCO puede gestionar solicitudes de cancelación."}},
-    {"@type":"Question","name":"¿Puedo personalizarlo para mi negocio?","acceptedAnswer":{"@type":"Answer","text":"Sí, se configura con la información, servicios, horarios y tono de tu negocio."}},
-    {"@type":"Question","name":"¿Cuánto cuesta?","acceptedAnswer":{"@type":"Answer","text":"$29.999 COP al mes, menos de $1.000 al día."}},
-    {"@type":"Question","name":"¿Necesito contratar varios planes?","acceptedAnswer":{"@type":"Answer","text":"No. FRANCO IA tiene un solo plan, con todo incluido."}},
-    {"@type":"Question","name":"¿Qué pasa cuando yo estoy ocupado?","acceptedAnswer":{"@type":"Answer","text":"FRANCO puede atender las conversaciones de tu WhatsApp mientras tú te concentras en tu negocio."}}
+    {"@type":"Question","name":"¿Funciona por WhatsApp?","acceptedAnswer":{"@type":"Answer","text":"Sí, atiende directamente en tu WhatsApp de negocio."}},
+    {"@type":"Question","name":"¿Agenda, reagenda y cancela?","acceptedAnswer":{"@type":"Answer","text":"Sí, y todo queda reflejado en tu Google Calendar."}},
+    {"@type":"Question","name":"¿Necesito varios planes?","acceptedAnswer":{"@type":"Answer","text":"No. Un solo plan de $29.999 COP/mes lo incluye todo."}},
+    {"@type":"Question","name":"¿Lo puedo personalizar?","acceptedAnswer":{"@type":"Answer","text":"Sí. Lo configuramos con tus servicios, precios, horarios y tono."}},
+    {"@type":"Question","name":"¿Y si estoy ocupado?","acceptedAnswer":{"@type":"Answer","text":"Justo para eso existe: FRANCO atiende mientras tú trabajas."}}
   ]
 }
 </script>
@@ -108,8 +111,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 /* módulos de estado (indicadores visuales de la presentación) */
 .mods{position:absolute;inset:0;pointer-events:none}
-.mod{position:absolute;display:flex;flex-direction:column;gap:5px;min-width:262px;padding:10px 14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;border:1px solid rgba(37,211,102,.22);background:rgba(37,211,102,.035);opacity:0}
+.mod{position:absolute;display:flex;align-items:center;gap:12px;min-width:300px;padding:10px 14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;border:1px solid rgba(37,211,102,.22);background:rgba(37,211,102,.035);opacity:0}
 .mod b{font-weight:400;color:#e8ffef}
+.mt{display:flex;flex-direction:column;gap:4px;flex:1}
+.mt b{white-space:nowrap}
+.mt em{font-style:normal;font-size:8.5px;letter-spacing:.3em;color:rgba(232,255,239,.35)}
+.mi{width:34px;height:34px;flex:none;display:grid;place-items:center;border:1px solid rgba(37,211,102,.35);background:rgba(37,211,102,.06);position:relative}
+.mi:before,.mi:after{content:"";position:absolute;width:5px;height:5px;border:1px solid var(--g)}
+.mi:before{top:-1px;left:-1px;border-right:0;border-bottom:0}.mi:after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+.mi svg{width:19px;height:19px;fill:none;stroke:var(--g);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 4px rgba(37,211,102,.45))}
+.mod.l{flex-direction:row-reverse}
+.mod.l .mt{align-items:flex-end}
 .mod span{color:var(--g);display:flex;align-items:center;gap:7px}
 .mod span:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);flex:none}
 .mod:after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--g)}
@@ -189,7 +201,11 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (max-width:1023px){
   .hudwrap{width:min(74vw,44vh,400px)}
   .mods{inset:auto;top:calc(100% + 16px);left:50%;transform:translateX(-50%);width:min(92vw,440px);display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .mod,.mod.l,.mod.r{position:relative;left:auto;right:auto;top:auto;min-width:0;padding:8px 10px;font-size:9px;letter-spacing:.12em;align-items:flex-start;text-align:left;--x:0px}
+  .mod,.mod.l,.mod.r{position:relative;left:auto;right:auto;top:auto;min-width:0;padding:8px 9px;gap:8px;font-size:8.5px;letter-spacing:.1em;flex-direction:row;text-align:left;--x:0px}
+  .mod.l .mt{align-items:flex-start}
+  .mi{width:26px;height:26px}.mi svg{width:15px;height:15px}
+  .mt em{display:none}
+  .mt b{white-space:normal}
   .mod.l span{flex-direction:row}
   .mod:before{display:none}
   .run .mod{animation:modIn .4s ease forwards var(--t), modOut .35s ease forwards 4.75s}
@@ -222,10 +238,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .ib svg{width:16px;height:16px}
 
 .js .slides{position:absolute;inset:0}
-.slide{display:flex;align-items:center;justify-content:center;padding:clamp(120px,15vh,150px) clamp(28px,6vw,90px) clamp(90px,12vh,120px)}
-.js .slide{position:absolute;inset:0;opacity:0;visibility:hidden;transform:scale(.98);transition:opacity .3s ease,transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s linear .3s}
+.slide{display:flex;align-items:flex-start;justify-content:center;padding:clamp(120px,15vh,150px) clamp(28px,6vw,90px) clamp(90px,12vh,120px)}
+.js .slide{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;opacity:0;visibility:hidden;transform:scale(.98);transition:opacity .3s ease,transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s linear .3s}
 .js .slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .3s ease,transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s}
-.in{width:100%;max-width:1120px}
+.in{width:100%;max-width:1120px;margin-block:auto}
 .js .rv{opacity:0;transform:translateY(14px)}
 .js .slide.active .rv{animation:rv .45s cubic-bezier(.2,.8,.2,1) forwards calc(var(--d,0s) * .5)}
 @keyframes rv{to{opacity:1;transform:none}}
@@ -261,22 +277,44 @@ h2{font-size:clamp(34px,6vw,76px)}
 /* chat */
 .split{display:grid;grid-template-columns:1fr auto;gap:clamp(30px,6vw,90px);align-items:center}
 .pw{position:relative}
-.phone{width:min(330px,78vw);height:min(600px,62vh);border-radius:44px;padding:10px;background:linear-gradient(160deg,#2a2f2c,#0b0d0c);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 90px rgba(0,0,0,.7),0 0 80px rgba(37,211,102,.12)}
-.scr{height:100%;border-radius:36px;overflow:hidden;background:#0b141a;display:flex;flex-direction:column}
-.ph{display:flex;align-items:center;gap:10px;padding:16px 16px 12px;background:#1f2c33}
-.av{width:36px;height:36px;border-radius:50%;background:#000;display:grid;place-items:center}
-.av svg{width:32px;height:32px}
-.ph b{font-size:14px;display:block}.ph small{font-size:11px;color:#8fe3ad}
-.msgs{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;justify-content:flex-end;background:#0b141a radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/18px 18px}
-.m{max-width:82%;padding:8px 11px 6px;border-radius:12px;font-size:13.5px;line-height:1.38;animation:pop .35s cubic-bezier(.2,.9,.3,1.3)}
-.m.in{align-self:flex-start;background:#202c33;border-top-left-radius:3px}
-.m.out{align-self:flex-end;background:#005c4b;border-top-right-radius:3px}
-.m small{display:block;text-align:right;font-size:10px;color:rgba(255,255,255,.5);margin-top:2px}
-@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.92)}}
-.typing{align-self:flex-end;background:#005c4b;border-radius:12px;padding:10px 12px;display:flex;gap:4px}
-.typing i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7);animation:dot 1s infinite}
-.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
-@keyframes dot{50%{transform:translateY(-4px);opacity:.4}}
+.demo-note{margin-top:12px;text-align:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
+/* iPhone 17 Pro Max a escala real: cuerpo 78 × 163,4 mm; la interfaz escala con el ancho del teléfono (cqw) */
+.phone{height:min(640px,calc(100vh - 300px));aspect-ratio:78/163.4;width:auto;padding:5px;border-radius:13.5%/6.45%;background:linear-gradient(145deg,#4a4d50,#1c1e20 38%,#2d3033 70%,#16181a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18),0 0 0 1px rgba(0,0,0,.9),0 40px 90px rgba(0,0,0,.75),0 0 80px rgba(37,211,102,.12)}
+.scr{position:relative;height:100%;border-radius:12.6%/6%;overflow:hidden;background:#0b141a;display:flex;flex-direction:column;container-type:inline-size;color:#e9edef;font-family:-apple-system,'SF Pro Text',var(--f)}
+.island{position:absolute;top:2.6cqw;left:50%;transform:translateX(-50%);width:28.5cqw;height:8.4cqw;border-radius:99px;background:#000;z-index:3}
+.sbar2{height:12.5cqw;flex:none;display:flex;align-items:center;justify-content:space-between;padding:1.5cqw 8cqw 0 9cqw;font-size:3.9cqw;font-weight:600;background:#1f2c33}
+.sic{display:flex;gap:1.4cqw;align-items:center}.sic svg{height:2.7cqw;fill:currentColor}.sic svg:last-child{height:3cqw}
+.ph{flex:none;display:flex;align-items:center;gap:2.4cqw;padding:1.6cqw 3.5cqw 2.6cqw;background:#1f2c33;border-bottom:1px solid rgba(255,255,255,.04)}
+.ph .back{width:2.6cqw;color:#53bdeb;flex:none}
+.av{width:9.5cqw;height:9.5cqw;border-radius:50%;background:#000;display:grid;place-items:center;flex:none}
+.av svg{width:88%;height:88%}
+.pn b{display:block;font-size:3.9cqw;font-weight:600}.pn small{font-size:3cqw;color:#8696a0}
+.pn small.typ{color:#25d366}
+.msgs{flex:1;overflow-y:auto;scrollbar-width:none;padding:3cqw 3.2cqw;display:flex;flex-direction:column;gap:1.6cqw;background:#0b141a radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px) 0 0/4.5cqw 4.5cqw}
+.msgs::-webkit-scrollbar{display:none}
+.msgs .m{margin:0;width:auto;max-width:80%}
+.msgs .mw .m{max-width:none}
+.msgs>:first-child{margin-top:auto}
+.m{max-width:80%;padding:1.7cqw 2.6cqw 1.2cqw;border-radius:2.6cqw;font-size:4cqw;line-height:1.35;animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
+.m.in{align-self:flex-start;background:#1f2c33;border-top-left-radius:.6cqw}
+.m.out{align-self:flex-end;background:#005c4b;border-top-right-radius:.6cqw}
+.m small{display:block;text-align:right;font-size:2.7cqw;color:rgba(233,237,239,.6);margin-top:.4cqw}
+.m small i{font-style:normal;color:#53bdeb;margin-left:.6cqw}
+.mw{align-self:flex-start;display:flex;flex-direction:column;gap:.7cqw;max-width:80%;animation:pop .3s cubic-bezier(.2,.9,.3,1.2)}
+.mw .m{max-width:none;animation:none;border-bottom-left-radius:.8cqw;border-bottom-right-radius:.8cqw}
+.qb{background:#1f2c33;color:#53bdeb;text-align:center;font-size:3.8cqw;padding:2.2cqw;border-radius:.8cqw;transition:background .2s}
+.qb:last-child{border-bottom-left-radius:2.6cqw;border-bottom-right-radius:2.6cqw}
+.qb.tap{background:#2a3942}
+@keyframes pop{from{opacity:0;transform:translateY(2cqw) scale(.96)}}
+.ibar{flex:none;display:flex;align-items:center;gap:2.4cqw;padding:2cqw 3cqw 2.6cqw;background:#1f2c33}
+.plus{font-size:6.5cqw;line-height:1;color:#8696a0}
+.inp{flex:1;min-height:8.6cqw;border-radius:99px;background:#2a3942;padding:1.8cqw 3.4cqw;font-size:3.9cqw;display:flex;align-items:center;overflow:hidden;white-space:nowrap}
+.inp .ph0{color:#8696a0}
+.snd{width:8.6cqw;height:8.6cqw;border-radius:50%;background:#25d366;display:grid;place-items:center;flex:none;opacity:.35;transition:opacity .2s}
+.snd.on{opacity:1}
+.snd svg{width:4.4cqw;fill:#0b141a}
+.homeb{flex:none;height:6cqw;background:#1f2c33;display:grid;place-items:center}
+.homeb:after{content:"";width:35cqw;height:1.2cqw;border-radius:99px;background:#e9edef}
 .toast{position:absolute;left:50%;top:18%;transform:translate(-50%,-10px);opacity:0;background:rgba(255,255,255,.95);color:#111;border-radius:16px;padding:10px 14px;font-size:12.5px;display:flex;gap:10px;align-items:center;width:86%;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.5s cubic-bezier(.2,.9,.3,1.2)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast b{display:block;font-size:12px}
@@ -377,15 +415,20 @@ html:not(.js) .slide{min-height:100vh}
   .total .tv{font-size:clamp(38px,11vw,50px)}
   .hero .cta{margin-top:20px}
   .split,.pricegrid{grid-template-columns:1fr;gap:22px}
-  .split .lead,.split .tags,.pricegrid .lead{display:none}
+  .split .lead{font-size:14px}.split .tags{margin-top:12px;gap:6px}.split .tag{font-size:11.5px;padding:6px 10px}.pricegrid .lead{font-size:14.5px;margin-top:10px}
   .split h2{font-size:clamp(28px,7.6vw,40px)}
-  .phone{margin:0 auto;height:min(480px,58vh);width:min(290px,74vw)}
+  .phone{margin:0 auto;height:min(600px,calc(100vh - 325px));width:auto}
+  .split>div:first-child{display:contents}
+  .split .kick{order:1}.split h2{order:2}.split .pw{order:3}.split .lead{order:4;margin-top:0}.split .tags{order:5;margin-top:0}
+  .split{gap:12px}
+  .pw{display:flex;flex-direction:column;align-items:center}
+  .demo-note{order:-1;margin:0 0 8px}
   .grid3{grid-template-columns:1fr 1fr;gap:8px;margin-top:24px}
   .pc{padding:12px;border-radius:14px;font-size:13px}
-  .fc{display:flex;align-items:center;gap:10px;padding:14px 12px;border-radius:16px}
-  .fc p{display:none}
+  .fc{display:grid;grid-template-columns:auto 1fr;column-gap:10px;align-items:center;padding:12px;border-radius:16px}
+  .fc p{grid-column:1/-1;font-size:12px;margin-top:6px;line-height:1.4}
   .fc b{margin:0;font-size:14.5px;line-height:1.2}
-  .fc .ic{font-size:22px;flex:none}
+  .fc .ic{font-size:22px}
   .steps{grid-template-columns:1fr}
   .sc{padding:14px}
   .sc:before{font-size:34px;top:8px;color:rgba(37,211,102,.12)}
@@ -408,18 +451,18 @@ html:not(.js) .slide{min-height:100vh}
   .mail{font-size:12px}.legal{font-size:10px;letter-spacing:.04em}
   .wa{padding:10px 14px;font-size:12px;gap:6px}
   .nav{bottom:20px}
+  .nav:before{content:"";position:absolute;left:-22px;right:-22px;bottom:-28px;height:118px;background:linear-gradient(rgba(0,0,0,0),#000 55%);z-index:-1;pointer-events:none}
   .frame{border-radius:18px}
 }
 @media (max-width:860px) and (max-height:760px){
   .slide{padding-top:104px;padding-bottom:84px}
   h2{font-size:clamp(27px,7.8vw,34px)}
   .pc{font-size:12.5px;padding:10px}
-  .phone{height:min(420px,54vh)}
+  .phone{height:min(560px,calc(100vh - 305px))}
   .steps{gap:8px;margin-top:20px}
   .sc{padding:12px 14px}
   .pcard ul{gap:4px 10px}
   .pricegrid{gap:14px}
-  .grid3 .pc:nth-child(n+5),.faq .fq:nth-child(n+5){display:none}
   .h-mid{margin-top:14px}
   .total{margin-top:16px;padding:12px 22px}
   .hero .cta{margin-top:16px;padding:14px 22px}
@@ -486,20 +529,20 @@ html:not(.js) .slide{min-height:100vh}
       </svg>
       <!-- fase 3: módulos (indicadores visuales de la presentación) -->
       <div class="mods" aria-hidden="true">
-        <div class="mod l m1" style="--t:3.1s"><b>NEURAL CORE</b><span>ONLINE</span></div>
-        <div class="mod l m2" style="--t:3.5s"><b>KNOWLEDGE BASE</b><span>READY</span></div>
-        <div class="mod r m3" style="--t:3.9s"><b>COMMUNICATION MODULE</b><span>READY</span></div>
-        <div class="mod r m4" style="--t:4.3s"><b>CALENDAR SYNCHRONIZATION</b><span>READY</span></div>
+        <div class="mod l m1" style="--t:3.1s"><i class="mi"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.2 7v10L12 21.5 3.8 17V7z"/><circle cx="12" cy="12" r="3.2"/><path d="M12 5.5v3.3M12 15.2v3.3M6.4 8.8l2.8 1.6M14.8 13.6l2.8 1.6M6.4 15.2l2.8-1.6M14.8 10.4l2.8-1.6"/></svg></i><div class="mt"><em>MÓD·01</em><b>NÚCLEO NEURONAL</b><span>EN LÍNEA</span></div></div>
+        <div class="mod l m2" style="--t:3.5s"><i class="mi"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="7.5" ry="2.8"/><path d="M4.5 5.5v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V5.5"/><path d="M4.5 12v6.5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8V12"/></svg></i><div class="mt"><em>MÓD·02</em><b>BASE DE CONOCIMIENTO</b><span>LISTA</span></div></div>
+        <div class="mod r m3" style="--t:3.9s"><i class="mi"><svg viewBox="0 0 24 24"><path d="M4 5.5h16v10H9.5L5.5 19v-3.5H4z"/><path d="M8 9.5h8M8 12.3h5"/></svg></i><div class="mt"><em>MÓD·03</em><b>MÓDULO DE COMUNICACIÓN</b><span>LISTO</span></div></div>
+        <div class="mod r m4" style="--t:4.3s"><i class="mi"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="1.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M8.5 15l2.3 2.2 4.7-4.7"/></svg></i><div class="mt"><em>MÓD·04</em><b>SINCRONIZACIÓN DE AGENDA</b><span>LISTA</span></div></div>
       </div>
     </div>
     <div class="idb">
       <div class="brand" id="brand" aria-label="FRANCO IA"></div>
-      <div class="sub fi" style="--d:5.6s;--dur:.6s">INTELLIGENT ASSISTANT SYSTEM</div>
+      <div class="sub fi" style="--d:5.6s;--dur:.6s">SISTEMA DE ASISTENCIA INTELIGENTE</div>
       <div class="osl fi" style="--d:6s;--dur:.5s">FRANCO IA — SISTEMA OPERATIVO</div>
       <div class="ask"><span id="ask"></span><i class="cur"></i></div>
     </div>
   </div>
-  <div class="sys" aria-hidden="true"><div class="sl" id="sysl">SYSTEM INITIALIZATION</div><div class="sbar"><i></i></div><b id="pct">0%</b></div>
+  <div class="sys" aria-hidden="true"><div class="sl" id="sysl">INICIALIZANDO SISTEMA</div><div class="sbar"><i></i></div><b id="pct">0%</b></div>
 </div>
 
 <!-- ================= HISTORIAS ================= -->
@@ -520,38 +563,43 @@ html:not(.js) .slide{min-height:100vh}
   <div class="slides" id="slides" aria-live="polite">
 
     <!-- 1 PORTADA -->
-    <section class="slide" data-dur="5000" aria-label="Inicio">
+    <section class="slide" data-dur="6500" aria-label="Inicio">
       <div class="in hero">
         <h1 class="h-top rv" style="--d:.1s">Tu empleado que trabaja para ti <span class="gtxt">24/7</span></h1>
         <p class="h-mid rv" style="--d:.3s">por menos de</p>
         <p class="pricebig rv" style="--d:.45s"><span class="big">$1.000</span><span class="per">al<br>día</span></p>
         <div class="rv" style="--d:.7s"><div class="total"><span class="tl">Todo el mes por solo</span><span class="tv">$29.999 <small>COP</small></span></div></div>
-        <div class="rv" style="--d:.9s"><a class="cta wa-link" data-cta="portada" target="_blank" rel="noopener">Quiero mi empleado digital</a></div>
+        <div class="rv" style="--d:.9s"><a href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024%2F7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." class="cta wa-link" data-cta="portada" target="_blank" rel="noopener">Quiero mi empleado digital</a></div>
       </div>
       <div class="hint" aria-hidden="true"><span class="pc-t">CLIC O → PARA CONTINUAR</span><span class="mob">TOCA PARA CONTINUAR →</span></div>
     </section>
 
     <!-- 2 DEMO -->
-    <section class="slide" data-dur="13000" id="chatSlide" aria-label="Demostración">
+    <section class="slide" data-dur="17500" id="chatSlide" aria-label="Demostración">
       <div class="in split">
         <div>
           <div class="kick rv">Míralo trabajar</div>
           <h2 class="rv" style="--d:.1s">Tu cliente escribe.<br><span class="gtxt">FRANCO agenda.</span></h2>
-          <p class="lead rv" style="--d:.2s">Conversación real → disponibilidad → elección → cita confirmada. Sin que tú toques el celular.</p>
+          <p class="lead rv" style="--d:.2s">Saludo → servicio → horario → cita confirmada. Sin que tú toques el celular.</p>
           <div class="tags rv" style="--d:.3s"><span class="tag">WhatsApp Business API</span><span class="tag">Google Calendar</span></div>
         </div>
         <div class="pw rv" style="--d:.3s" aria-hidden="true">
           <div class="phone"><div class="scr">
-            <div class="ph"><div class="av"><svg viewBox="0 0 82 82"><use href="#fia-logo"/></svg></div><div><b>FRANCO IA</b><small>en línea</small></div></div>
+            <div class="island"></div>
+            <div class="sbar2"><span>9:41</span><span class="sic"><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg><svg viewBox="0 0 16 12"><path d="M8 11.5 5.6 9a3.4 3.4 0 0 1 4.8 0z"/><path d="M3.4 6.8a6.5 6.5 0 0 1 9.2 0l-1.3 1.3a4.7 4.7 0 0 0-6.6 0z"/><path d="M1.2 4.6a9.6 9.6 0 0 1 13.6 0l-1.3 1.3a7.8 7.8 0 0 0-11 0z"/></svg><svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="17" height="8" rx="2"/><rect x="24.6" y="4" width="1.6" height="4" rx=".8" opacity=".4"/></svg></span></div>
+            <div class="ph"><svg class="back" viewBox="0 0 12 20"><path d="M10 2 2 10l8 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="av"><svg viewBox="0 0 82 82"><use href="#fia-logo"/></svg></div><div class="pn"><b>SPA FRANCO IA</b><small id="pstat">en línea</small></div></div>
             <div class="msgs" id="msgs"></div>
+            <div class="ibar"><span class="plus">+</span><div class="inp" id="inp"><span class="ph0">Mensaje</span></div><span class="snd" id="sendb"><svg viewBox="0 0 24 24"><path d="M3 20.5 21 12 3 3.5l.01 6.6L15 12 3.01 13.9z"/></svg></span></div>
+            <div class="homeb"></div>
           </div></div>
-          <div class="toast" id="toast"><span style="font-size:22px">📅</span><div><b>Google Calendar</b>Nueva cita: Laura · mañana 2:00 p. m.</div></div>
+          <p class="demo-note">Conversación de ejemplo · demostración ilustrativa</p>
+          <div class="toast" id="toast"><span style="font-size:22px">📅</span><div><b>Google Calendar del negocio</b>Nueva cita: Laura · Cabello · mañana 2:00 p. m.</div></div>
         </div>
       </div>
     </section>
 
     <!-- 3 PROBLEMA -->
-    <section class="slide" data-dur="4000" aria-label="El problema">
+    <section class="slide" data-dur="11000" aria-label="El problema">
       <div class="in">
         <div class="kick rv">El problema</div>
         <h2 class="rv" style="--d:.1s">Cada WhatsApp sin responder <br>es una <span style="color:#ff6b6b">cita perdida.</span></h2>
@@ -567,7 +615,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 4 QUE HACE -->
-    <section class="slide" data-dur="3800" aria-label="Qué hace">
+    <section class="slide" data-dur="12500" aria-label="Qué hace">
       <div class="in">
         <div class="kick rv">Tu empleado digital</div>
         <h2 class="rv" style="--d:.1s">Un empleado que <span class="gtxt">nunca se desconecta.</span></h2>
@@ -583,7 +631,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 5 INTEGRACION -->
-    <section class="slide" data-dur="5200" aria-label="Integración con Google Calendar">
+    <section class="slide" data-dur="7600" aria-label="Integración con Google Calendar">
       <div class="in">
         <div class="kick rv">Integración</div>
         <h2 class="rv" style="--d:.1s">Tu calendario y FRANCO <br><span class="gtxt">trabajan juntos.</span></h2>
@@ -599,7 +647,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 6 PARA QUIEN -->
-    <section class="slide" data-dur="3000" aria-label="Para quién es">
+    <section class="slide" data-dur="6500" aria-label="Para quién es">
       <div class="in">
         <div class="kick rv">Para quién es</div>
         <h2 class="rv" style="--d:.1s">Para negocios que viven <br>de <span class="gtxt">atender clientes.</span></h2>
@@ -615,7 +663,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 7 COMO FUNCIONA -->
-    <section class="slide" data-dur="3800" aria-label="Cómo funciona">
+    <section class="slide" data-dur="10000" aria-label="Cómo funciona">
       <div class="in">
         <div class="kick rv">Cómo funciona</div>
         <h2 class="rv" style="--d:.1s">De cero a atendiendo <br>en <span class="gtxt">tres pasos.</span></h2>
@@ -628,7 +676,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 8 PRECIO -->
-    <section class="slide" data-dur="4500" aria-label="Precio">
+    <section class="slide" data-dur="12500" aria-label="Precio">
       <div class="in pricegrid">
         <div>
           <div class="kick rv">Precio</div>
@@ -642,14 +690,14 @@ html:not(.js) .slide{min-height:100vh}
             <li>Empleado digital WhatsApp</li><li>Atención 24/7</li><li>Gestión de citas</li><li>Consulta de disponibilidad</li>
             <li>Reagendamiento</li><li>Cancelaciones</li><li>Google Calendar</li><li>Personalización</li><li>Panel de seguimiento</li>
           </ul>
-          <a class="cta wa-link" data-cta="precio" target="_blank" rel="noopener">Quiero mi empleado digital</a>
+          <a href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024%2F7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." class="cta wa-link" data-cta="precio" target="_blank" rel="noopener">Quiero mi empleado digital</a>
           <span class="micro">Te atiende un asesor por WhatsApp</span>
         </div>
       </div>
     </section>
 
     <!-- 9 FAQ -->
-    <section class="slide" data-dur="5000" aria-label="Preguntas frecuentes">
+    <section class="slide" data-dur="13500" aria-label="Preguntas frecuentes">
       <div class="in">
         <div class="kick rv">Preguntas frecuentes</div>
         <h2 class="rv" style="--d:.1s">Lo que todos <span class="gtxt">preguntan.</span></h2>
@@ -669,7 +717,7 @@ html:not(.js) .slide{min-height:100vh}
         <div class="kick rv" style="justify-content:center">Contrátalo hoy</div>
         <h2 class="rv" style="--d:.1s">Tu negocio no debería depender de que estés <span class="gtxt">pegado al WhatsApp.</span></h2>
         <p class="lead rv" style="--d:.25s">Escríbenos y te mostramos cómo FRANCO atendería a tus clientes.</p>
-        <div class="rv" style="--d:.4s"><a class="cta wa-link" data-cta="cierre" target="_blank" rel="noopener">
+        <div class="rv" style="--d:.4s"><a href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024%2F7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." class="cta wa-link" data-cta="cierre" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>
           Quiero mi empleado digital</a></div>
         <a class="mail rv" style="--d:.5s" href="mailto:admin@francoia.com">admin@francoia.com</a>
@@ -684,7 +732,7 @@ html:not(.js) .slide{min-height:100vh}
       <button id="next" type="button" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
     </div>
     <div class="count" id="count" aria-hidden="true"><b>01</b> / 10</div>
-    <a class="wa wa-link" data-cta="barra" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>Hablar con un ASESOR</a>
+    <a href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024%2F7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." class="wa wa-link" data-cta="barra" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>Hablar con un ASESOR</a>
   </nav>
 </main>
 
@@ -732,19 +780,26 @@ function audio(){
   return AC;
 }
 const ready = () => soundOn && AC && AC.state === 'running';
+const LIVE = new Set();                                   // fuentes de sonido activas (para poder detenerlas todas)
+function track(n){ LIVE.add(n); n.onended = () => LIVE.delete(n); return n; }
+function stopAllAudio(){                                  // SALTAR / silenciar: corta todo al instante
+  LIVE.forEach(n => { try { n.onended = null; n.stop(0); } catch (e) {} }); LIVE.clear();
+  if (HUM){ try { HUM.o1.stop(0); HUM.o2.stop(0); } catch (e) {} HUM = null; }
+  stopVoice();
+}
 function out(node, rev){ node.connect(BUS); if (rev) { const s = AC.createGain(); s.gain.value = rev; node.connect(s); s.connect(VERB); } }
 function env(g, t, a, peak, d){ g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(.0001, t + a + d); }
 function osc(f, type, t, a, peak, d, f2, rev = .5){
   const o = AC.createOscillator(), g = AC.createGain(); o.type = type; o.frequency.setValueAtTime(f, t);
   if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + a + d*.8);
-  env(g, t, a, peak, d); o.connect(g); out(g, rev); o.start(t); o.stop(t + a + d + .1);
+  env(g, t, a, peak, d); o.connect(g); out(g, rev); track(o); o.start(t); o.stop(t + a + d + .1);
 }
 let NOISE = null;
 function noise(t, a, d, peak, f1, f2, q = 2, rev = .4){
   if (!NOISE){ NOISE = AC.createBuffer(1, AC.sampleRate*2, AC.sampleRate); const n = NOISE.getChannelData(0); for (let i = 0; i < n.length; i++) n[i] = Math.random()*2-1; }
   const s = AC.createBufferSource(), bp = AC.createBiquadFilter(), g = AC.createGain();
   s.buffer = NOISE; bp.type = 'bandpass'; bp.Q.value = q; bp.frequency.setValueAtTime(f1, t); bp.frequency.exponentialRampToValueAtTime(f2, t + a + d);
-  env(g, t, a, peak, d); s.connect(bp); bp.connect(g); out(g, rev); s.start(t); s.stop(t + a + d + .1);
+  env(g, t, a, peak, d); s.connect(bp); bp.connect(g); out(g, rev); track(s); s.start(t); s.stop(t + a + d + .1);
 }
 const SFX = {
   power(){ if (!ready()) return; const t = AC.currentTime;                       // botón: encendido del sistema
@@ -771,23 +826,37 @@ const SFX = {
   exit(){ if (!ready()) return; const t = AC.currentTime;                         // salida hacia la web
     noise(t, .15, .8, .07, 4000, 250, 1.5, .5); osc(392, 'sine', t + .1, .02, .02, .9, 196, .8); SFX.hum(false); },
   slide(){ if (!ready()) return; const t = AC.currentTime; noise(t, .02, .22, .025, 2600, 900, 2, .2); },   // cambio de historia (muy sutil)
+  // demo de chat: sonidos originales de mensajería (inspirados en apps de chat, sintetizados aquí)
+  sent(){ if (!ready()) return; const t = AC.currentTime;                         // mensaje enviado: "pop" corto ascendente
+    osc(520, 'sine', t, .004, .09, .07, 1150, .05); osc(1500, 'sine', t + .035, .002, .03, .05, null, .05); },
+  received(){ if (!ready()) return; const t = AC.currentTime;                     // mensaje recibido: dos tonos suaves
+    osc(880, 'sine', t, .006, .07, .16, null, .15); osc(1318.5, 'sine', t + .085, .006, .06, .22, null, .2); },
+  typing(ms){ if (!ready()) return; const t = AC.currentTime;                      // escribiendo: clics suaves de teclado
+    for (let k = 0, x = 0; x < ms/1000 - .1; k++, x += .09 + Math.random()*.08) noise(t + x, .002, .035, .02 + Math.random()*.01, 3200 + Math.random()*1500, 2500, 4, 0); },
+  notify(){ if (!ready()) return; const t = AC.currentTime;                       // aviso de cita creada
+    osc(1046.5, 'sine', t, .01, .05, .5, null, .5); osc(1568, 'sine', t + .12, .01, .04, .6, null, .6); },
 };
-function setSound(v){
-  soundOn = v; try { localStorage.setItem('fia_snd', v ? '1' : '0'); } catch (e) {}
+function setSound(v, uiOnly){
+  soundOn = v; const b0 = $('#snd'); b0.classList.toggle('on', v); b0.setAttribute('aria-pressed', v); b0.setAttribute('aria-label', v ? 'Silenciar' : 'Activar sonido');
+  if (uiOnly) return;
+  try { localStorage.setItem('fia_snd', v ? '1' : '0'); } catch (e) {}
   const b = $('#snd'); b.classList.toggle('on', v); b.setAttribute('aria-pressed', v); b.setAttribute('aria-label', v ? 'Silenciar' : 'Activar sonido');
   if (v){ const c = audio(); if (c && c.resume) c.resume().then(() => { if (!introDone && intro.classList.contains('run')) SFX.hum(true); }); }
-  else { SFX.hum(false); stopVoice(); }
+  else stopAllAudio();
 }
 $('#snd').onclick = e => { e.stopPropagation(); setSound(!soundOn); if (soundOn && !introDone && voiceDue && !voiceStarted) speak(); };
 
 /* voz del sistema: grabación propia (archivo del sitio), tratada en vivo para sonar como asistente IA. Igual en todos los dispositivos. */
 const VOICE_URL = 'WhatsApp%20Audio%202026-11-26%20at%201.52.20%20AM.mpeg';
 let voiceBuf = null, voiceNode = null, voiceDue = false, voiceStarted = false, voiceSpeaking = false, endPending = false;
+let voiceData = null;                                     // descarga anticipada del archivo (no reproduce nada)
+function preloadVoice(){ if (!voiceData) voiceData = fetch(VOICE_URL).then(r => { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); }).catch(() => null); return voiceData; }
 function loadVoice(){
   if (voiceBuf || !AC || loadVoice.busy) return; loadVoice.busy = true;
-  fetch(VOICE_URL).then(r => r.arrayBuffer()).then(b => AC.decodeAudioData(b))
-    .then(b => { voiceBuf = b; if (!introDone && voiceDue && !voiceStarted) speak(); })
-    .catch(() => { loadVoice.busy = false; });
+  preloadVoice().then(ab => ab ? new Promise((ok, ko) => AC.decodeAudioData(ab.slice(0), ok, ko)) : null)
+    .then(b => { if (!b) return; voiceBuf = b; if (!introDone && voiceDue && !voiceStarted) speak(); })
+    .catch(() => {})                                      // si falla la voz, la intro sigue con efectos y texto
+    .finally(() => { loadVoice.busy = false; });
 }
 function speak(){
   if (!soundOn || voiceStarted || !AC || AC.state !== 'running') return;
@@ -805,6 +874,7 @@ function speak(){
   const rs = AC.createGain(); rs.gain.value = .22; vc.connect(rs); rs.connect(VERB);
   voiceStarted = voiceSpeaking = true; voiceNode = src;
   src.onended = () => { voiceSpeaking = false; voiceNode = null; setTimeout(() => { if (endPending) endIntro(); }, 450); };
+  // los ecos/reverberación de la voz se cortan con stopVoice al saltar
   src.start(t);
 }
 function stopVoice(){ if (voiceNode){ voiceNode.onended = null; try { voiceNode.stop(); } catch (e) {} voiceNode = null; } voiceSpeaking = false; }
@@ -815,7 +885,9 @@ function unlock(){
   if (!introDone && voiceDue && !voiceStarted) speak();
 }
 ['pointerdown','keydown','touchstart'].forEach(t => addEventListener(t, unlock, true));
-setSound(soundOn);
+setSound(soundOn, true);
+/* si la pestaña pierde visibilidad durante la intro, el audio se pausa y se reanuda al volver */
+document.addEventListener('visibilitychange', () => { if (!AC || introDone) return; if (document.hidden) AC.suspend(); else if (soundOn) AC.resume(); });
 
 function buildHUD(){
   const g = $('#ticks'); g.innerHTML = '';
@@ -837,14 +909,14 @@ function playIntro(){
   stopVoice();
   intro.style.display = ''; intro.classList.remove('out', 'run', 'gated');
   $('#stories').classList.remove('on'); stopSlideFx();
-  buildHUD(); $('#ask').textContent = ''; $('#pct').textContent = '0%'; setSys('SYSTEM INITIALIZATION');
+  buildHUD(); $('#ask').textContent = ''; $('#pct').textContent = '0%'; setSys('INICIALIZANDO SISTEMA');
   void intro.offsetWidth; intro.classList.add('run');          // reinicia todas las animaciones CSS
   SFX.hum(true);
   [[200, SFX.core],
-   [1200, () => { setSys('BUILDING INTERFACE'); SFX.build(); }],
-   [3000, () => { setSys('LOADING MODULES'); SFX.hud(); }],
+   [1200, () => { setSys('CONSTRUYENDO INTERFAZ'); SFX.build(); }],
+   [3000, () => { setSys('CARGANDO MÓDULOS'); SFX.hud(); }],
    [3100, () => SFX.mod(0)], [3500, () => SFX.mod(1)], [3900, () => SFX.mod(2)], [4300, () => SFX.mod(3)],
-   [4500, () => { setSys('SYSTEM STATUS: OPERATIONAL', true); SFX.ok(); }],
+   [4500, () => { setSys('ESTADO DEL SISTEMA: OPERATIVO', true); SFX.ok(); }],
    [4800, SFX.pulse],
    [5900, () => { voiceDue = true; speak(); }],
    [6300, typeAsk],
@@ -853,10 +925,10 @@ function playIntro(){
   const tick = now => { const p = Math.min(100, Math.round((now - t0)/45)); pct.textContent = p + '%'; if (p < 100 && !introDone) introRAF = requestAnimationFrame(tick); };
   introRAF = requestAnimationFrame(tick);
 }
-function endIntro(){
+function endIntro(skip){
   if (introDone) return;
   introDone = true; endPending = false; clearIntro();
-  if (intro.classList.contains('run')) SFX.exit(); else SFX.hum(false);
+  if (skip === true) stopAllAudio(); else if (intro.classList.contains('run')) SFX.exit(); else SFX.hum(false);
   intro.classList.add('out'); $('#stories').classList.add('on');
   setTimeout(() => { if (introDone){ intro.style.display = 'none'; intro.classList.remove('run'); } }, 850);   // detiene las animaciones infinitas
   go(0, true);
@@ -865,7 +937,7 @@ function endIntro(){
 function showGate(){
   clearIntro(); introDone = false;
   intro.style.display = ''; intro.classList.remove('out', 'run'); intro.classList.add('gated');
-  $('#stories').classList.remove('on');
+  $('#stories').classList.remove('on'); preloadVoice();
   setTimeout(() => $('#gbtn').focus({preventScroll:true}), 50);
 }
 function startFromGate(){
@@ -873,13 +945,14 @@ function startFromGate(){
   playIntro();
 }
 $('#gbtn').onclick = e => { e.stopPropagation(); startFromGate(); };
-$('#gskip').onclick = e => { e.stopPropagation(); endIntro(); };
+$('#gskip').onclick = e => { e.stopPropagation(); endIntro(true); };
 
 /* ---------- HISTORIAS ---------- */
 const slides = [...document.querySelectorAll('.slide')], N = slides.length, bars = $('#bars');
 slides.forEach(() => bars.insertAdjacentHTML('beforeend', '<div class="bar"><i></i></div>'));
 const fills = [...bars.querySelectorAll('i')];
-let cur = -1, elapsed = 0, last = 0, userPaused = false, holdPaused = false;
+let cur = -1, elapsed = 0, last = 0, userPaused = false, holdPaused = false, lastScroll = -1e9;
+document.getElementById('slides').addEventListener('scroll', () => lastScroll = performance.now(), {capture:true, passive:true});
 
 function go(i, force){
   i = Math.max(0, Math.min(N-1, i));
@@ -900,7 +973,7 @@ const next = () => go(cur+1), prev = () => go(cur-1);
 
 function tick(now){
   const dt = Math.min(100, now - (last || now)); last = now;
-  if (introDone && cur >= 0 && !userPaused && !holdPaused && !document.hidden){
+  if (introDone && cur >= 0 && !userPaused && !holdPaused && !document.hidden && now - lastScroll > 1500){
     const dur = +slides[cur].dataset.dur;
     if (dur > 0){ elapsed += dt; const p = Math.min(1, elapsed/dur); fills[cur].style.transform = `scaleX(${p})`; if (p >= 1) next(); }
   }
@@ -910,27 +983,57 @@ function tick(now){
 /* efectos por diapositiva: chat y flujo (se detienen al salir) */
 let fxTimers = [], flowRAF;
 function stopSlideFx(){
-  fxTimers.forEach(clearTimeout); fxTimers = []; cancelAnimationFrame(flowRAF);
+  fxTimers.forEach(clearTimeout); fxTimers = []; if (chatOn){ chatOn = false; LIVE.forEach(n => { try { n.onended = null; n.stop(0); } catch (e) {} }); LIVE.clear(); } cancelAnimationFrame(flowRAF);
   $('#toast').classList.remove('show');
   document.querySelectorAll('.nd.lit').forEach(n => n.classList.remove('lit'));
 }
+/* demo: vista del cliente (verde) conversando con el WhatsApp del negocio atendido por FRANCO (gris) */
 const CHAT = [
-  ['in','Hola, ¿tienen disponibilidad mañana?'],
-  ['out','¡Hola! 👋 Claro. Tengo 10:00 a. m., 2:00 p. m. y 4:30 p. m. ¿Cuál te funciona mejor?'],
-  ['in','2:00 pm'],
-  ['out','¡Perfecto! 🙌 Te agendo mañana a las 2:00 p. m. ¿Me confirmas tu nombre?'],
-  ['in','Laura'],
-  ['out','Listo, Laura. Tu cita quedó agendada para mañana a las 2:00 p. m. ✅'],
+  {who:'c', type:'Hola, ¿tienen disponibilidad para mañana?'},
+  {who:'b', txt:'¡Hola! 👋 Bienvenido a SPA FRANCO IA. ¿Con quién tengo el gusto?'},
+  {who:'c', type:'Laura'},
+  {who:'b', txt:'¡Un gusto, Laura! 😊 ¿Qué servicio quieres recibir?', opts:['Uñas','Cejas','Cabello'], pick:2},
+  {who:'b', txt:'Para mañana tengo estos horarios disponibles para cabello:', opts:['10:00 a. m.','2:00 p. m.','4:30 p. m.'], pick:1},
+  {who:'b', txt:'¡Listo, Laura! ✅ Tu cita de cabello quedó agendada para mañana a las 2:00 p. m. ¡Te esperamos!'},
 ];
+let chatOn = false;
 function runChat(){
-  const box = $('#msgs'); box.innerHTML = ''; let t = 900, n = 0;
-  CHAT.forEach(([side, txt]) => {
-    if (side === 'out'){ fxTimers.push(setTimeout(() => box.insertAdjacentHTML('beforeend','<div class="typing"><i></i><i></i><i></i></div>'), t)); t += 1100; }
-    const stamp = `9:4${++n}${side === 'out' ? ' ✓✓' : ''}`;
-    fxTimers.push(setTimeout(() => { box.querySelector('.typing')?.remove(); box.insertAdjacentHTML('beforeend', `<div class="m ${side}">${txt}<small>${stamp}</small></div>`); }, t));
-    t += side === 'in' ? 1000 : 1300;
+  chatOn = true;
+  const box = $('#msgs'), inp = $('#inp'), sendb = $('#sendb'), stat = $('#pstat');
+  box.innerHTML = ''; inp.innerHTML = '<span class="ph0">Mensaje</span>'; sendb.classList.remove('on'); stat.textContent = 'en línea'; stat.classList.remove('typ');
+  let t = 700, min = 41;
+  const at = (ms, fn) => fxTimers.push(setTimeout(fn, ms));
+  const add = html => { box.insertAdjacentHTML('beforeend', html); box.scrollTo({top: box.scrollHeight, behavior: 'smooth'}); };
+  const stamp = out => `<small>9:${min++}${out ? '<i>✓✓</i>' : ''}</small>`;
+  const clientSends = text => { add(`<div class="m out">${text}${stamp(true)}</div>`); SFX.sent(); };
+  const botTyping = (ms) => { at(t, () => { stat.textContent = 'escribiendo…'; stat.classList.add('typ'); }); t += ms; };
+  CHAT.forEach(step => {
+    if (step.who === 'c'){                                  // el cliente escribe en el campo de texto y envía
+      const txt = step.type; let k = 0;
+      at(t, () => { inp.textContent = ''; sendb.classList.add('on'); SFX.typing(txt.length*38); });
+      for (const ch of txt){ at(t + (++k)*38, () => inp.textContent += ch); }
+      t += txt.length*38 + 350;
+      at(t, () => { inp.innerHTML = '<span class="ph0">Mensaje</span>'; sendb.classList.remove('on'); clientSends(txt); });
+      t += 500;
+    } else {                                                // FRANCO responde (con botones de respuesta si aplica)
+      botTyping(1100);
+      at(t, () => {
+        stat.textContent = 'en línea'; stat.classList.remove('typ');
+        const btns = step.opts ? step.opts.map(o => `<div class="qb">${o}</div>`).join('') : '';
+        add(step.opts ? `<div class="mw"><div class="m in">${step.txt}${stamp(false)}</div>${btns}</div>` : `<div class="m in">${step.txt}${stamp(false)}</div>`);
+        SFX.received();
+      });
+      t += 400;
+      if (step.opts){                                       // el cliente toca una opción
+        t += 900;
+        at(t, () => { const b = box.querySelectorAll('.mw:last-child .qb')[step.pick]; if (b) b.classList.add('tap'); });
+        t += 280;
+        at(t, () => clientSends(step.opts[step.pick]));
+        t += 500;
+      }
+    }
   });
-  fxTimers.push(setTimeout(() => $('#toast').classList.add('show'), t + 200));
+  at(t + 300, () => { $('#toast').classList.add('show'); SFX.notify(); });
 }
 function runFlow(fl){
   const pu = fl.querySelector('.pulse'), nds = [...fl.querySelectorAll('.nd')], start = performance.now(), T = 3800, DELAY = 1200;
@@ -957,13 +1060,13 @@ function setPause(v){
 $('#next').onclick = e => { e.stopPropagation(); next(); };
 $('#prev').onclick = e => { e.stopPropagation(); prev(); };
 $('#pause').onclick = e => { e.stopPropagation(); setPause(!userPaused); };
-$('#replay').onclick = e => { e.stopPropagation(); if (soundOn){ const c = audio(); if (c && c.resume) c.resume().then(SFX.power); } playIntro(); };
-$('#skip').onclick = e => { e.stopPropagation(); endIntro(); };
+$('#replay').onclick = e => { e.stopPropagation(); stopAllAudio(); preloadVoice(); if (soundOn){ const c = audio(); if (c && c.resume) c.resume().then(SFX.power); } playIntro(); };
+$('#skip').onclick = e => { e.stopPropagation(); endIntro(true); };
 
 addEventListener('keydown', e => {
   if (!introDone){
-    if (intro.classList.contains('gated')){ if (e.key === 'Escape') endIntro(); return; }   // Enter/Espacio activan el botón enfocado
-    if ([' ','Enter','Escape'].includes(e.key)){ e.preventDefault(); endIntro(); } return;
+    if (intro.classList.contains('gated')){ if (e.key === 'Escape') endIntro(true); return; }   // Enter/Espacio activan el botón enfocado
+    if ([' ','Enter','Escape'].includes(e.key)){ e.preventDefault(); endIntro(true); } return;
   }
   if (e.key === 'ArrowRight' || e.key === 'PageDown') next();
   else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prev();
