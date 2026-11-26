@@ -1,8 +1,8 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>FRANCO IA — Tu empleado digital para WhatsApp, 24/7</title>
 <meta name="description" content="Contrata un empleado digital que atiende tu WhatsApp, responde a tus clientes y gestiona tus citas 24/7 por menos de $1.000 al día. Ideal para salones de belleza, barberías, spas y consultorios.">
 <meta name="robots" content="index, follow">
@@ -50,726 +50,640 @@
   ]
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
---bg: #0a0a0a;
---bg-soft: #111214;
---panel: #16171a;
---border: rgba(255,255,255,0.08);
---text: #f2f3f2;
---text-dim: #a3a6a3;
---green-1: #25d366;
---green-2: #128c5e;
---green-glow: rgba(37,211,102,0.35);
---red-1: #ff6b6b;
+  --bg:#050605; --g:#25d366; --g2:#1fae55; --gs:rgba(37,211,102,.14);
+  --t:#f2f5f3; --m:#8a948e; --line:rgba(255,255,255,.08);
+  --f:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
 }
-*{box-sizing:border-box; margin:0; padding:0;}
-html{scroll-behavior:smooth;}
-body{
-background:var(--bg);
-color:var(--text);
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-line-height:1.55;
--webkit-font-smoothing:antialiased;
-overflow-x:hidden;
-}
-a{color:inherit; text-decoration:none;}
-img,svg{display:block; max-width:100%;}
-.wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
-section{position:relative;}
-ul{list-style:none;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--t);font-family:var(--f);overflow:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
-.glow{
-position:fixed; inset:0; z-index:0; pointer-events:none;
-background:
-radial-gradient(600px 400px at 15% 0%, rgba(37,211,102,0.09), transparent 60%),
-radial-gradient(500px 500px at 100% 20%, rgba(18,140,94,0.10), transparent 60%);
-}
+/* ============ INTRO (JARVIS) ============ */
+#intro{position:fixed;inset:0;z-index:50;background:#000;display:grid;place-items:center;transition:opacity .8s ease,transform .8s cubic-bezier(.7,0,.3,1)}
+#intro.out{opacity:0;transform:scale(1.6);pointer-events:none}
+#fx{position:absolute;inset:0;width:100%;height:100%}
+.hudwrap{position:relative;width:min(72vmin,440px);aspect-ratio:1;display:grid;place-items:center}
+#hud{width:100%;height:100%;overflow:visible}
+#hud .st{fill:none;stroke:#e8ffef;stroke-width:1;stroke-linecap:round}
+#hud .dim{stroke:rgba(232,255,239,.35)}
+#hud .gr{stroke:var(--g)}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw var(--dur,1.4s) cubic-bezier(.6,0,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.fadein{opacity:0;animation:fade .6s ease forwards;animation-delay:var(--d,0s)}
+@keyframes fade{to{opacity:1}}
+.spin{transform-origin:200px 200px;animation:spin var(--s,20s) linear infinite}
+.spinr{transform-origin:200px 200px;animation:spin var(--s,14s) linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+#logoFill{opacity:0;animation:fade .5s ease forwards 3s}
+#logoGlow{opacity:0;animation:pulseGlow 1.6s ease forwards 3s}
+@keyframes pulseGlow{0%{opacity:0}40%{opacity:.9}100%{opacity:.35}}
+.brand{position:absolute;left:50%;top:calc(50% + min(36vmin,220px) + 18px);transform:translateX(-50%);display:flex;gap:.08em;font-weight:700;font-size:clamp(28px,6vmin,46px);letter-spacing:.22em;white-space:nowrap}
+.brand span{opacity:0;transform:translateY(10px);filter:blur(8px);animation:letter .5s ease forwards}
+.brand span.g{color:var(--g)}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+.sys{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:rgba(232,255,239,.6);white-space:nowrap;text-transform:uppercase}
+.sys b{color:var(--g);font-weight:600}
+.corner{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:rgba(232,255,239,.35);line-height:1.7}
+.corner.tl{top:24px;left:24px}.corner.tr{top:24px;right:24px;text-align:right}
+#skip{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.55);padding:8px 14px;border:1px solid rgba(255,255,255,.15);border-radius:99px;z-index:2}
+#skip:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 
-/* Header */
-header{
-position:sticky; top:0; z-index:50;
-background:rgba(10,10,10,0.78);
-backdrop-filter:blur(10px);
-border-bottom:1px solid var(--border);
-}
-.nav{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px;}
-.brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:0.02em; font-size:17px; flex-shrink:0;}
-.brand-mark{width:32px; height:32px; flex-shrink:0;}
-.nav-links{display:flex; gap:28px; font-size:14.5px; color:var(--text-dim);}
-.nav-links a:hover{color:var(--text);}
-.nav-cta{
-display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
-background:linear-gradient(135deg, var(--green-1), var(--green-2));
-color:#06170f; font-weight:700; font-size:14px;
-padding:10px 18px; border-radius:999px;
-transition:transform .15s ease, box-shadow .15s ease;
-}
-.nav-cta:hover{transform:translateY(-1px); box-shadow:0 8px 22px var(--green-glow);}
-.menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--text); width:40px; height:40px; border-radius:8px; font-size:18px; flex-shrink:0;}
-.nav-cta span.short{display:none;}
+/* ============ STORIES ============ */
+#stories{position:fixed;inset:0;opacity:0;transition:opacity .8s ease;user-select:none;-webkit-user-select:none;touch-action:pan-y}
+#stories.on{opacity:1}
+.bgpat{position:absolute;inset:0;background:
+  radial-gradient(900px 600px at 80% -10%,rgba(37,211,102,.13),transparent 60%),
+  radial-gradient(700px 500px at -10% 110%,rgba(37,211,102,.08),transparent 60%),
+  repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0 2px,transparent 2px 46px),#050605}
+.frame{position:absolute;inset:clamp(10px,2.4vw,28px);border-radius:22px;padding:1px;pointer-events:none;
+  background:linear-gradient(135deg,rgba(37,211,102,.7),rgba(255,255,255,.08) 30%,rgba(255,255,255,.03) 70%,rgba(37,211,102,.5));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.top{position:absolute;top:clamp(18px,3.4vw,42px);left:clamp(24px,4.4vw,60px);right:clamp(24px,4.4vw,60px);z-index:5}
+.bars{display:flex;gap:5px}
+.bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.18);overflow:hidden}
+.bar i{display:block;height:100%;background:#fff;transform-origin:left;transform:scaleX(0)}
+.hdr{display:flex;align-items:center;gap:10px;margin-top:14px}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--g);display:grid;place-items:center;box-shadow:0 0 24px rgba(37,211,102,.35)}
+.logo svg{width:20px;height:20px}
+.hdr .nm{font-weight:700;letter-spacing:.06em;font-size:15px}
+.hdr .on{font-size:12px;color:var(--g);display:flex;align-items:center;gap:6px}
+.hdr .on:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g)}
+.hdr .sp{flex:1}
+.ib{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.ib:hover{background:rgba(255,255,255,.08)}
+.ib svg{width:16px;height:16px}
 
-@media (max-width:900px){
-.nav-links{display:none;}
-.menu-btn{display:block;}
-}
-@media (max-width:400px){
-.nav-cta span.full{display:none;}
-.nav-cta span.short{display:inline;}
-}
+.slides{position:absolute;inset:0}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  padding:clamp(120px,15vh,150px) clamp(28px,6vw,90px) clamp(90px,12vh,120px);
+  opacity:0;visibility:hidden;transform:scale(.97);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1),visibility 0s linear .55s}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .55s ease,transform .7s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.in{width:100%;max-width:1120px}
+.rv{opacity:0;transform:translateY(26px);filter:blur(8px)}
+.slide.active .rv{animation:rv .9s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:var(--d,0s)}
+@keyframes rv{to{opacity:1;transform:none;filter:none}}
 
-/* Buttons */
-.btn{
-display:inline-flex; align-items:center; gap:10px;
-padding:15px 28px; border-radius:999px; font-weight:700; font-size:15.5px;
-transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-border:none; cursor:pointer;
-}
-.btn-primary{
-background:linear-gradient(135deg, var(--green-1), var(--green-2));
-color:#06170f;
-}
-.btn-primary:hover{transform:translateY(-2px); box-shadow:0 12px 30px var(--green-glow);}
-.btn-ghost{
-background:transparent; color:var(--text); border:1px solid var(--border);
-}
-.btn-ghost:hover{border-color:rgba(255,255,255,0.28); background:rgba(255,255,255,0.03);}
-.btn-block{width:100%; justify-content:center;}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.28em;color:var(--g);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.kick:before{content:"";width:22px;height:1px;background:var(--g)}
+h1,h2{font-weight:700;letter-spacing:-.03em;line-height:.98}
+h2{font-size:clamp(34px,6vw,76px)}
+.lead{color:var(--m);font-size:clamp(16px,1.8vw,21px);line-height:1.5;max-width:620px;margin-top:22px}
+.gtxt{color:var(--g)}
+.cta{display:inline-flex;align-items:center;gap:10px;margin-top:34px;padding:17px 30px;border-radius:99px;background:var(--g);color:#03140a;font-weight:700;font-size:17px;box-shadow:0 10px 40px rgba(37,211,102,.35);transition:transform .2s,box-shadow .2s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 14px 50px rgba(37,211,102,.5)}
+.cta svg{width:20px;height:20px}
 
-/* Hero */
-.hero{padding:76px 0 64px;}
-.hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
-.eyebrow{
-display:inline-flex; align-items:center; gap:8px;
-font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase;
-color:var(--green-1); border:1px solid rgba(37,211,102,0.35);
-padding:7px 14px; border-radius:999px; margin-bottom:22px;
-background:rgba(37,211,102,0.07); font-weight:700;
-}
-.dot{width:6px; height:6px; border-radius:50%; background:var(--green-1); box-shadow:0 0 8px var(--green-1); flex-shrink:0;}
-h1{
-font-size:clamp(32px, 4.6vw, 52px);
-font-weight:800; letter-spacing:-0.02em; line-height:1.08;
-margin-bottom:20px;
-}
-h1 .accent{
-background:linear-gradient(135deg, var(--green-1), #7ee8a8);
--webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.hero p.lead{
-font-size:clamp(16px, 1.6vw, 18.5px); color:var(--text-dim);
-max-width:520px; margin-bottom:26px;
-}
-.price-line{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:30px;}
-.price-line .tag{font-size:15px; color:var(--text); font-weight:700;}
-.price-line .amt{font-size:15px; color:var(--green-1); font-weight:800;}
-.price-line .sep{color:var(--border);}
-.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px;}
-.hero-note{color:var(--text-dim); font-size:13.5px;}
+/* hero */
+.hero{text-align:center}
+.hero h1{font-size:clamp(38px,7.4vw,104px)}
+.hero .big{display:block;font-size:clamp(110px,24vw,300px);line-height:.85;letter-spacing:-.06em;margin:6px 0 4px;
+  background:linear-gradient(180deg,#7dffad,#25d366 55%,#0f7a3a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 40px rgba(37,211,102,.35))}
+.price{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 18px;margin-top:20px;font-size:clamp(18px,2.4vw,30px);font-weight:500}
+.pill{font-family:var(--mono);font-size:clamp(12px,1.3vw,15px);padding:8px 14px;border:1px solid rgba(37,211,102,.45);border-radius:99px;color:var(--g);background:var(--gs)}
+.hint{position:absolute;bottom:clamp(28px,5vh,56px);left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:rgba(255,255,255,.5);display:flex;gap:10px;align-items:center;white-space:nowrap;animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(calc(-50% + 8px))}}
 
-/* Hero visual: phone mockup */
-.hero-visual{position:relative;}
-.stage{position:relative; perspective:1500px;}
-.stage::before{
-content:""; position:absolute; inset:-30px; z-index:0;
-background:radial-gradient(220px 220px at 50% 40%, rgba(37,211,102,0.24), transparent 70%);
-filter:blur(8px); pointer-events:none;
+/* chat */
+.split{display:grid;grid-template-columns:1fr auto;gap:clamp(30px,6vw,90px);align-items:center}
+.phone{width:min(330px,78vw);height:min(600px,62vh);border-radius:44px;padding:10px;background:linear-gradient(160deg,#2a2f2c,#0b0d0c);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 90px rgba(0,0,0,.7),0 0 80px rgba(37,211,102,.12)}
+.scr{height:100%;border-radius:36px;overflow:hidden;background:#0b141a;display:flex;flex-direction:column}
+.ph{display:flex;align-items:center;gap:10px;padding:16px 16px 12px;background:#1f2c33}
+.ph .av{width:34px;height:34px;border-radius:50%;background:var(--g);display:grid;place-items:center}
+.ph .av svg{width:18px;height:18px}
+.ph b{font-size:14px;display:block}.ph small{font-size:11px;color:#8fe3ad}
+.msgs{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;justify-content:flex-end;
+  background:#0b141a radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/18px 18px}
+.m{max-width:82%;padding:8px 11px 6px;border-radius:12px;font-size:13.5px;line-height:1.38;animation:pop .35s cubic-bezier(.2,.9,.3,1.3)}
+.m.in{align-self:flex-start;background:#202c33;border-top-left-radius:3px}
+.m.out{align-self:flex-end;background:#005c4b;border-top-right-radius:3px}
+.m small{display:block;text-align:right;font-size:10px;color:rgba(255,255,255,.5);margin-top:2px}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.92)}}
+.typing{align-self:flex-end;background:#005c4b;border-radius:12px;padding:10px 12px;display:flex;gap:4px}
+.typing i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.7);animation:dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{50%{transform:translateY(-4px);opacity:.4}}
+.toast{position:absolute;left:50%;top:18%;transform:translate(-50%,-10px);opacity:0;background:rgba(255,255,255,.95);color:#111;border-radius:16px;padding:10px 14px;font-size:12.5px;display:flex;gap:10px;align-items:center;width:86%;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.5s cubic-bezier(.2,.9,.3,1.2)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast b{display:block;font-size:12px}
+.pw{position:relative}
+.tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.tag{font-size:13px;padding:8px 14px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#cfd6d2}
+
+/* problem */
+.prob{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.pc{padding:20px;border-radius:18px;border:1px solid rgba(255,80,80,.18);background:linear-gradient(180deg,rgba(255,70,70,.06),transparent);font-size:15px;line-height:1.45;color:#d9dfdb;display:flex;gap:12px}
+.pc em{font-style:normal;color:#ff6b6b;font-weight:700}
+
+/* features */
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.fc{padding:22px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.025);transition:.3s}
+.fc:hover{border-color:rgba(37,211,102,.45);background:var(--gs)}
+.fc .ic{font-size:26px}
+.fc b{display:block;font-size:18px;margin:12px 0 6px}
+.fc p{color:var(--m);font-size:14px;line-height:1.45}
+
+/* flow */
+.flow{display:flex;align-items:center;justify-content:space-between;margin-top:56px;position:relative}
+.flow:before{content:"";position:absolute;left:6%;right:6%;top:46px;height:2px;background:repeating-linear-gradient(90deg,rgba(37,211,102,.5) 0 8px,transparent 8px 16px);animation:dash 1s linear infinite}
+@keyframes dash{to{background-position:16px 0}}
+.flow .pulse{position:absolute;top:41px;left:6%;width:12px;height:12px;border-radius:50%;background:var(--g);box-shadow:0 0 18px 4px var(--g);opacity:0}
+.slide.active .flow .pulse{animation:travel 3s cubic-bezier(.6,0,.4,1) infinite 1.4s}
+@keyframes travel{0%{left:6%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(94% - 12px);opacity:0}}
+.nd{position:relative;z-index:1;text-align:center;width:23%}
+.nd .c{width:92px;height:92px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-size:36px;background:#0b0f0c;border:1px solid rgba(37,211,102,.4);box-shadow:0 0 0 8px rgba(5,6,5,1),0 0 40px rgba(37,211,102,.2)}
+.nd.k .c{background:var(--g);box-shadow:0 0 0 8px rgba(5,6,5,1),0 0 60px rgba(37,211,102,.6)}
+.nd b{display:block;margin-top:16px;font-size:16px}
+
+/* who */
+.who{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.wc{font-size:clamp(17px,2vw,24px);font-weight:500;padding:16px 24px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.wc span{margin-right:8px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;counter-reset:s}
+.sc{padding:26px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.025);position:relative;overflow:hidden}
+.sc:before{counter-increment:s;content:"0" counter(s);font-family:var(--mono);font-size:64px;font-weight:600;color:rgba(37,211,102,.15);position:absolute;right:14px;top:4px}
+.sc b{display:block;font-size:20px;margin-bottom:10px;position:relative}
+.sc p{color:var(--m);font-size:15px;line-height:1.5;position:relative}
+
+/* pricing */
+.pricegrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.pcard{padding:clamp(24px,3vw,38px);border-radius:28px;border:1px solid rgba(37,211,102,.5);background:linear-gradient(180deg,rgba(37,211,102,.12),rgba(37,211,102,.02));box-shadow:0 0 80px rgba(37,211,102,.12)}
+.pcard .amt{font-size:clamp(44px,5.6vw,68px);font-weight:700;letter-spacing:-.04em}
+.pcard .amt small{font-size:.32em;color:var(--m);font-weight:500;letter-spacing:0}
+.pcard ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:9px 16px;margin-top:20px}
+.pcard li{font-size:14px;color:#d5ddd8;display:flex;gap:8px}
+.pcard li:before{content:"✓";color:var(--g);font-weight:700}
+.pcard .cta{width:100%;justify-content:center;margin-top:26px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
+.fq{padding:18px 20px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
+.fq b{display:block;font-size:15.5px;margin-bottom:6px}
+.fq p{color:var(--m);font-size:14px;line-height:1.45}
+
+/* final */
+.final{text-align:center}
+.final h2{font-size:clamp(36px,6.2vw,84px);max-width:1000px;margin:0 auto}
+.final .lead{margin:22px auto 0}
+.mail{display:block;margin-top:22px;color:var(--m);font-family:var(--mono);font-size:13px;letter-spacing:.1em}
+
+/* nav */
+.nav{position:absolute;bottom:clamp(22px,4.2vw,50px);left:clamp(24px,4.4vw,60px);right:clamp(24px,4.4vw,60px);display:flex;align-items:center;justify-content:space-between;z-index:5;pointer-events:none}
+.nav>*{pointer-events:auto}
+.arrows{display:flex;gap:8px}
+.arrows button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:rgba(255,255,255,.03);transition:.2s}
+.arrows button:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3)}
+.arrows button:disabled{opacity:.3;pointer-events:none}
+.arrows svg{width:18px;height:18px}
+.count{font-family:var(--mono);font-size:12px;letter-spacing:.2em;color:var(--m)}
+.count b{color:#fff}
+.wa{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:11px 18px;border-radius:99px;background:var(--g);color:#03140a}
+.wa svg{width:16px;height:16px}
+
+/* responsive */
+@media (max-width:860px){
+  .split,.pricegrid{grid-template-columns:1fr;gap:22px}
+  .split .txt .lead,.split .txt .tags{display:none}
+  .split .txt h2{font-size:clamp(28px,7.6vw,40px)}
+  .split .phone{margin:0 auto;height:min(480px,58vh);width:min(290px,74vw)}
+  .prob,.feat,.steps{grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}
+  .steps{grid-template-columns:1fr}
+  .pc,.fc,.sc{padding:14px}
+  .pc{font-size:13px}
+  .fc b{font-size:15px;margin:6px 0 4px}.fc p{font-size:12.5px}.fc .ic{font-size:22px}
+  .sc b{font-size:17px;margin-bottom:4px}.sc p{font-size:13.5px}.sc:before{font-size:44px}
+  .flow{flex-direction:column;gap:18px;margin-top:34px}
+  .flow:before{left:45px;right:auto;top:6%;bottom:6%;width:2px;height:auto;background:repeating-linear-gradient(180deg,rgba(37,211,102,.5) 0 8px,transparent 8px 16px)}
+  .flow .pulse{display:none}
+  .nd{width:100%;display:flex;align-items:center;gap:18px;text-align:left}
+  .nd .c{width:70px;height:70px;font-size:28px;margin:0 0 0 10px}
+  .nd b{margin:0}
+  .faq{grid-template-columns:1fr;gap:8px;margin-top:22px}
+  .fq{padding:12px 14px}.fq b{font-size:14px;margin-bottom:3px}.fq p{font-size:12.5px}
+  .pcard ul{gap:6px 10px}.pcard li{font-size:12.5px}
+  .pricegrid .lead{display:none}
+  .wa span{display:none}.wa{padding:11px}
+  .kick{margin-bottom:12px;font-size:11px}
+  .lead{margin-top:14px}
+  .who{gap:8px;margin-top:26px}.wc{padding:12px 16px}
 }
-.phone-mock{
-position:relative; z-index:1; width:280px; margin:0 auto;
-background:linear-gradient(160deg,#3a3c3d,#131415 42%,#0b0c0c);
-border-radius:48px; padding:5px;
-box-shadow:
-0 40px 80px rgba(0,0,0,0.55),
-0 0 0 1px rgba(255,255,255,0.06),
-0 0 60px rgba(37,211,102,0.10);
+@media (max-width:860px){
+  .hint{bottom:96px}
+  .corner{display:none}
+  #skip{top:auto;bottom:64px}
 }
-.phone-mock::before{
-content:""; position:absolute; top:16px; left:50%; transform:translateX(-50%);
-width:80px; height:22px; border-radius:14px; background:#000; z-index:3;
-box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);
-}
-.phone-mock::after{
-content:""; position:absolute; bottom:9px; left:50%; transform:translateX(-50%);
-width:110px; height:4px; border-radius:3px; background:rgba(255,255,255,0.4); z-index:3;
-}
-.phone-inner{background:#000; border-radius:44px; padding:2px; border:1px solid rgba(255,255,255,0.08);}
-.phone-screen{position:relative; background:#050605; border-radius:40px; padding:40px 16px 20px; min-height:400px; display:flex; flex-direction:column; gap:8px; overflow:hidden;}
-.status-bar{position:absolute; top:13px; left:24px; right:24px; display:flex; align-items:center; justify-content:space-between; color:#f2f3f2;}
-.status-bar .time{font-size:12px; font-weight:700;}
-.chat-header{display:flex; align-items:center; gap:8px; padding-bottom:9px; margin-bottom:1px; border-bottom:1px solid rgba(255,255,255,0.07);}
-.chat-avatar{width:24px; height:24px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg, var(--green-1), var(--green-2)); display:flex; align-items:center; justify-content:center; font-size:9.5px; font-weight:800; color:#06170f;}
-.chat-header .who{display:flex; flex-direction:column; line-height:1.25;}
-.chat-header .who b{font-size:12px; font-weight:700;}
-.chat-header .who span{font-size:10px; color:var(--green-1);}
-.chat-bubble{max-width:86%; padding:12px 16px; border-radius:16px; font-size:14px; line-height:1.42; opacity:0; transform:translateY(6px); animation:bubbleIn .5s ease forwards;}
-.chat-bubble.in{align-self:flex-start; background:#17181b; color:var(--text); border-bottom-left-radius:4px; box-shadow:0 10px 24px rgba(0,0,0,0.4);}
-.chat-bubble.out{align-self:flex-end; background:linear-gradient(135deg, var(--green-1), var(--green-2)); color:#06170f; border-bottom-right-radius:4px; font-weight:600; box-shadow:0 10px 24px rgba(0,0,0,0.35), 0 0 22px rgba(37,211,102,0.2);}
-@keyframes bubbleIn{to{opacity:1; transform:translateY(0);}}
-.typing-bubble{align-self:flex-start; display:flex; gap:4px; padding:11px 14px; background:#17181b; border-radius:14px; border-bottom-left-radius:4px; opacity:0; animation:typingInOut 2.2s ease forwards;}
-.typing-bubble span{width:6px; height:6px; border-radius:50%; background:var(--text-dim); animation:typingDot 1s infinite ease-in-out;}
-.typing-bubble span:nth-child(2){animation-delay:.15s;}
-.typing-bubble span:nth-child(3){animation-delay:.3s;}
-@keyframes typingDot{0%,60%,100%{transform:translateY(0); opacity:.4;} 30%{transform:translateY(-4px); opacity:1;}}
-@keyframes typingInOut{0%{opacity:0;} 18%{opacity:1;} 78%{opacity:1;} 100%{opacity:0;}}
-.chat-caption{color:var(--text-dim); font-size:13px; text-align:center; margin-top:20px;}
-
-.flow-steps{display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap; margin-top:14px;}
-.flow-steps .fs{font-size:11.5px; font-weight:700; color:var(--text-dim); background:var(--panel); border:1px solid var(--border); border-radius:999px; padding:6px 12px;}
-.flow-steps .fa{color:var(--green-1); font-size:12px;}
-
-.trust-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
-.trust-pill{display:flex; align-items:center; gap:7px; background:var(--panel); border:1px solid var(--border); border-radius:999px; padding:9px 15px; font-size:12px; font-weight:600; color:var(--text-dim);}
-.trust-pill svg{flex-shrink:0; color:var(--green-1);}
-
-@media (max-width:900px){
-.hero-grid{grid-template-columns:1fr; gap:40px; text-align:center;}
-.hero p.lead{margin-left:auto; margin-right:auto;}
-.price-line, .hero-ctas, .trust-row{justify-content:center;}
-}
-@media (max-width:520px){
-.hero{padding:32px 0 40px;}
-.phone-mock{width:230px;}
-.phone-screen{padding:32px 12px 14px; min-height:340px;}
-.chat-bubble{font-size:12.5px; padding:10px 13px;}
-}
-
-/* Section shared */
-.section{padding:84px 0;}
-.section-head{max-width:660px; margin:0 auto 52px; text-align:center;}
-.kicker{color:var(--green-1); font-size:13px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:14px;}
-h2{font-size:clamp(25px, 3.6vw, 36px); font-weight:800; letter-spacing:-0.01em; margin-bottom:14px;}
-.section-head p{color:var(--text-dim); font-size:16px;}
-.soft{background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
-
-/* Problem section */
-.problem-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; max-width:880px; margin:0 auto;}
-.problem-item{display:flex; gap:14px; align-items:flex-start; background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:20px 22px;}
-.problem-item .x{flex-shrink:0; width:26px; height:26px; border-radius:50%; background:rgba(255,107,107,0.12); border:1px solid rgba(255,107,107,0.3); color:var(--red-1); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800;}
-.problem-item p{color:var(--text-dim); font-size:14.5px; margin:0;}
-@media (max-width:700px){.problem-grid{grid-template-columns:1fr;}}
-
-/* Before / After */
-.compare{display:grid; grid-template-columns:1fr 1fr; gap:24px; max-width:900px; margin:0 auto;}
-.compare-col{border-radius:16px; padding:28px 26px; border:1px solid var(--border);}
-.compare-col.before{background:var(--bg-soft);}
-.compare-col.after{background:linear-gradient(180deg, rgba(37,211,102,0.07), transparent); border-color:rgba(37,211,102,0.28);}
-.compare-col h3{font-size:14px; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px; color:var(--text-dim);}
-.compare-col.after h3{color:var(--green-1);}
-.compare-col ul{display:flex; flex-direction:column; gap:12px;}
-.compare-col li{display:flex; gap:10px; font-size:14.5px; color:var(--text-dim); align-items:flex-start;}
-.compare-col.before li::before{content:"–"; color:var(--text-dim); font-weight:800; flex-shrink:0;}
-.compare-col.after li::before{content:"✓"; color:var(--green-1); font-weight:800; flex-shrink:0;}
-.compare-col.after li{color:var(--text); font-weight:500;}
-@media (max-width:700px){.compare{grid-template-columns:1fr;}}
-
-/* Feature grid (employee cards) */
-.grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;}
-.card{
-background:var(--panel); border:1px solid var(--border); border-radius:16px;
-padding:26px; opacity:0;
-animation:cardIn .6s ease forwards;
-}
-.card:nth-child(1){animation-delay:.04s;}
-.card:nth-child(2){animation-delay:.1s;}
-.card:nth-child(3){animation-delay:.16s;}
-.card:nth-child(4){animation-delay:.22s;}
-.card:nth-child(5){animation-delay:.28s;}
-.card:nth-child(6){animation-delay:.34s;}
-@keyframes cardIn{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);}}
-.card-icon{
-width:44px; height:44px; border-radius:12px; margin-bottom:16px;
-display:flex; align-items:center; justify-content:center; font-size:20px;
-background:linear-gradient(135deg, rgba(37,211,102,0.18), rgba(18,140,94,0.08));
-border:1px solid rgba(37,211,102,0.25);
-}
-.card h3{font-size:16.5px; font-weight:700; margin-bottom:8px;}
-.card p{color:var(--text-dim); font-size:14.5px;}
-@media (max-width:860px){.grid{grid-template-columns:1fr 1fr;}}
-@media (max-width:560px){.grid{grid-template-columns:1fr;}}
-
-/* Calendar flow */
-.calendar-flow{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:36px 0 8px;}
-.cf-node{display:flex; flex-direction:column; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--text-dim); min-width:110px;}
-.cf-node .ic{width:52px; height:52px; border-radius:14px; background:var(--panel); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:22px;}
-.cf-node.on .ic{border-color:rgba(37,211,102,0.35); box-shadow:0 0 0 1px rgba(37,211,102,0.15) inset;}
-.cf-arrow{color:var(--green-1); font-size:18px; flex-shrink:0;}
-@media (max-width:640px){.calendar-flow{gap:6px;} .cf-arrow{transform:rotate(90deg);} .calendar-flow{flex-direction:column;}}
-
-/* Industries */
-.industry-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
-.industry-card{background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:26px;}
-.industry-card .n{display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:8px; background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.28); color:var(--green-1); font-weight:800; font-size:13px; margin-bottom:14px;}
-.industry-card h3{font-size:16.5px; font-weight:700; margin-bottom:8px;}
-.industry-card p{color:var(--text-dim); font-size:14px;}
-@media (max-width:860px){.industry-grid{grid-template-columns:1fr 1fr;}}
-@media (max-width:560px){.industry-grid{grid-template-columns:1fr;}}
-
-/* Steps */
-.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; counter-reset:step;}
-.step{position:relative; padding:32px 24px 24px; border:1px solid var(--border); border-radius:16px; background:var(--bg-soft);}
-.step::before{
-counter-increment:step; content:counter(step);
-position:absolute; top:-18px; left:24px;
-width:36px; height:36px; border-radius:50%;
-background:linear-gradient(135deg, var(--green-1), var(--green-2));
-color:#06170f; font-weight:800; font-size:15px;
-display:flex; align-items:center; justify-content:center;
-}
-.step h3{font-size:16.5px; font-weight:700; margin:10px 0 8px;}
-.step p{color:var(--text-dim); font-size:14.5px;}
-@media (max-width:760px){.steps{grid-template-columns:1fr;}}
-
-/* Pricing */
-.value-note{max-width:560px; margin:0 auto 44px; text-align:center; padding:22px 26px; border:1px solid var(--border); border-radius:14px; background:var(--panel);}
-.value-note .q{color:var(--text-dim); font-size:15px; margin-bottom:8px;}
-.value-note .a{font-size:17px; font-weight:700;}
-.value-note .a b{color:var(--green-1);}
-.price-card{
-max-width:460px; margin:0 auto; text-align:center;
-background:linear-gradient(180deg, var(--panel), var(--bg-soft));
-border:1px solid rgba(37,211,102,0.28); border-radius:20px; padding:44px 36px;
-box-shadow:0 20px 60px rgba(0,0,0,0.35);
-}
-.price-card .plan-name{color:var(--green-1); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; font-size:13px; margin-bottom:16px;}
-.price-card .amount{font-size:48px; font-weight:800; letter-spacing:-0.02em;}
-.price-card .amount span{font-size:16px; font-weight:600; color:var(--text-dim);}
-.price-card .anchor{color:var(--green-1); font-size:14.5px; font-weight:700; margin-top:10px;}
-.price-card ul{margin:28px 0 32px; text-align:left; display:flex; flex-direction:column; gap:12px;}
-.price-card li{display:flex; gap:10px; font-size:14.5px; color:var(--text-dim);}
-.check{color:var(--green-1); flex-shrink:0;}
-
-/* FAQ */
-.faq{max-width:760px; margin:0 auto;}
-.faq details{border-bottom:1px solid var(--border); padding:20px 0;}
-.faq summary{cursor:pointer; font-weight:700; font-size:16px; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px;}
-.faq summary::-webkit-details-marker{display:none;}
-.faq summary::after{content:"+"; font-size:22px; color:var(--green-1); flex-shrink:0; transition:transform .2s ease;}
-.faq details[open] summary::after{content:"–";}
-.faq p{color:var(--text-dim); font-size:15px; margin-top:12px; padding-right:30px;}
-
-/* Final CTA */
-.cta-section{
-background:var(--bg-soft); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
-text-align:center; padding:84px 0;
-}
-.cta-section h2{max-width:640px; margin-left:auto; margin-right:auto;}
-.contact-links{display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:30px;}
-
-footer{padding:40px 24px; text-align:center; color:var(--text-dim); font-size:13.5px;}
-footer .brand{justify-content:center; margin-bottom:10px; font-size:15px;}
-.footer-legal{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:14px;}
-.footer-legal a{color:var(--text-dim); text-decoration:underline; text-underline-offset:3px;}
-.footer-legal a:hover{color:var(--text);}
-
-/* Sticky mobile WhatsApp bar */
-.mobile-cta{
-position:fixed; left:0; right:0; bottom:0; z-index:60;
-display:none; padding:12px 16px; background:rgba(10,10,10,0.92);
-backdrop-filter:blur(10px); border-top:1px solid var(--border);
-}
-@media (max-width:640px){
-.mobile-cta{display:block;}
-body{padding-bottom:74px;}
-}
-
-@media (prefers-reduced-motion: reduce){
-html{scroll-behavior:auto;}
-.card{animation:none; opacity:1; transform:none;}
-.chat-bubble, .typing-bubble{animation:none; opacity:1; transform:none;}
-}
+@media (max-height:700px) and (max-width:860px){.prob .pc:nth-child(n+5),.faq .fq:nth-child(n+5){display:none}}
+@media (prefers-reduced-motion:reduce){.rv,.slide.active .rv{animation:none;opacity:1;transform:none;filter:none}}
 </style>
 </head>
 <body>
 
-<div class="glow"></div>
-
-<header>
-<div class="nav wrap">
-<div class="brand">
-<svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="1" y="1" width="46" height="46" rx="13" fill="#0a0a0a" stroke="url(#g1)" stroke-width="2"/>
-<path d="M24 12c-6.6 0-12 4.9-12 11 0 3 1.3 5.7 3.5 7.7-.2 1.6-.9 3.1-2 4.3 2.1-.2 4.1-1 5.7-2.2 1.5.5 3.1.7 4.8.7 6.6 0 12-4.9 12-11s-5.4-11-12-11Z" fill="#f2f3f2"/>
-<circle cx="19.5" cy="23" r="2" fill="#0a0a0a"/>
-<circle cx="28.5" cy="23" r="2" fill="#0a0a0a"/>
-<defs>
-<linearGradient id="g1" x1="1" y1="1" x2="47" y2="47" gradientUnits="userSpaceOnUse">
-<stop stop-color="#25d366"/>
-<stop offset="1" stop-color="#128c5e"/>
-</linearGradient>
-</defs>
-</svg>
-FRANCO IA
-</div>
-<nav class="nav-links">
-<a href="#como-funciona">Cómo funciona</a>
-<a href="#que-hace">Qué hace</a>
-<a href="#para-quien">Para quién</a>
-<a href="#precio">Precio</a>
-<a href="#faq">FAQ</a>
-</nav>
-<a class="nav-cta" href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024/7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." target="_blank" rel="noopener"><span class="full">Quiero mi empleado digital</span><span class="short">Empleado digital</span></a>
-</div>
-</header>
-
-<main>
-<!-- HERO -->
-<section class="hero wrap">
-<div class="hero-grid">
-<div>
-<span class="eyebrow"><span class="dot"></span> Empleado digital para tu negocio</span>
-<h1>Tu próximo empleado trabaja <span class="accent">24/7</span>.</h1>
-<p class="lead">Atiende tu WhatsApp, responde a tus clientes y ayuda a concretar tus citas mientras tú te concentras en hacer crecer tu negocio.</p>
-<div class="price-line">
-<span class="tag">Por menos de $1.000 al día</span>
-<span class="sep">·</span>
-<span class="amt">$29.999 COP / mes</span>
-</div>
-<div class="hero-ctas">
-<a class="btn btn-primary" href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024/7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." target="_blank" rel="noopener">Quiero mi empleado digital</a>
-<a class="btn btn-ghost" href="#como-funciona">Ver cómo funciona</a>
-</div>
-<p class="hero-note">Configuramos FRANCO con la información de tu negocio y empieza a atender por ti.</p>
+<!-- ================= INTRO ================= -->
+<div id="intro" aria-hidden="true">
+  <canvas id="fx"></canvas>
+  <div class="corner tl">FRANCO_OS v2.6<br>NÚCLEO NEURONAL · ONLINE<br>CANAL: WHATSAPP</div>
+  <div class="corner tr">LAT 4.71 · LON -74.07<br>UPTIME 24/7<br>LATENCIA 0.8s</div>
+  <button id="skip">SALTAR ›</button>
+  <div class="hudwrap">
+    <svg id="hud" viewBox="0 0 400 400">
+      <defs>
+        <radialGradient id="glow"><stop offset="0" stop-color="#25d366" stop-opacity=".55"/><stop offset="1" stop-color="#25d366" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle id="logoGlow" cx="200" cy="200" r="120" fill="url(#glow)"/>
+      <g id="ticks" class="fadein" style="--d:.9s"></g>
+      <circle class="st draw" pathLength="1" cx="200" cy="200" r="182" style="--d:.5s;--dur:1.5s"/>
+      <g class="spin" style="--s:24s"><circle class="st dim fadein" cx="200" cy="200" r="164" stroke-dasharray="2 7" style="--d:1.1s"/></g>
+      <g class="spinr" style="--s:9s">
+        <circle class="st gr draw" pathLength="1" cx="200" cy="200" r="146" style="--d:1.2s;--dur:1s;stroke-width:2;stroke-dasharray:.18 .07 .1 .65"/>
+      </g>
+      <g class="spin" style="--s:6s">
+        <circle class="st dim draw" pathLength="1" cx="200" cy="200" r="128" style="--d:1.4s;--dur:1s;stroke-dasharray:.3 .7"/>
+        <circle cx="328" cy="200" r="3" fill="#e8ffef" class="fadein" style="--d:1.8s"/>
+      </g>
+      <g class="spinr" style="--s:16s">
+        <circle cx="200" cy="54" r="2.5" fill="#25d366" class="fadein" style="--d:1.6s"/>
+        <circle cx="200" cy="346" r="2.5" fill="#25d366" class="fadein" style="--d:1.6s"/>
+      </g>
+      <circle class="st dim draw" pathLength="1" cx="200" cy="200" r="98" style="--d:1.7s;--dur:1s"/>
+      <!-- crosshair -->
+      <g class="fadein" style="--d:1.9s">
+        <line class="st dim" x1="200" y1="88" x2="200" y2="104"/><line class="st dim" x1="200" y1="296" x2="200" y2="312"/>
+        <line class="st dim" x1="88" y1="200" x2="104" y2="200"/><line class="st dim" x1="296" y1="200" x2="312" y2="200"/>
+      </g>
+      <!-- logo -->
+      <rect id="logoFill" x="158" y="158" width="84" height="84" rx="22" fill="#25d366"/>
+      <rect class="st draw" pathLength="1" x="158" y="158" width="84" height="84" rx="22" style="--d:2s;--dur:1s;stroke-width:1.6"/>
+      <path class="st draw" pathLength="1" d="M181 184h38a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8h-20l-11 9v-9h-7a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8z" style="--d:2.4s;--dur:.9s;stroke-width:2.4;stroke:#fff"/>
+      <g class="fadein" style="--d:3s" fill="#fff"><circle cx="190" cy="200" r="2.6"/><circle cx="200" cy="200" r="2.6"/><circle cx="210" cy="200" r="2.6"/></g>
+    </svg>
+    <div class="brand" id="brand"></div>
+  </div>
+  <div class="sys">Inicializando empleado digital · <b id="pct">0%</b></div>
 </div>
 
-<div class="hero-visual">
-<div class="stage">
-<div class="phone-mock">
-<div class="phone-inner">
-<div class="phone-screen" id="heroChat">
-<div class="status-bar">
-<span class="time">9:41</span>
-<svg width="18" height="10" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="14.5" height="9" rx="2.2" stroke="currentColor"/><rect x="2" y="2" width="11.5" height="6" rx="1.1" fill="currentColor"/><rect x="15.6" y="3" width="1.6" height="4" rx="0.7" fill="currentColor"/></svg>
-</div>
-<div class="chat-header">
-<div class="chat-avatar">FI</div>
-<div class="who"><b>FRANCO IA</b><span>en línea</span></div>
-</div>
-<div class="chat-bubble in" style="animation-delay:.3s">Hola, ¿tienen disponibilidad mañana?</div>
-<div class="typing-bubble" style="animation-delay:1.4s"><span></span><span></span><span></span></div>
-<div class="chat-bubble out" style="animation-delay:2.7s">¡Hola! 👋 Claro. Tengo 10:00 a. m., 2:00 p. m. y 4:30 p. m. ¿Cuál te funciona mejor?</div>
-<div class="chat-bubble in" style="animation-delay:4.6s">2:00 pm</div>
-<div class="typing-bubble" style="animation-delay:5.6s"><span></span><span></span><span></span></div>
-<div class="chat-bubble out" style="animation-delay:6.9s">¡Perfecto! 🙌 Te agendo mañana a las 2:00 p. m. ¿Me confirmas tu nombre?</div>
-<div class="chat-bubble in" style="animation-delay:8.6s">Laura</div>
-<div class="typing-bubble" style="animation-delay:9.6s"><span></span><span></span><span></span></div>
-<div class="chat-bubble out" style="animation-delay:10.9s">Listo, Laura. Tu cita quedó agendada para mañana a las 2:00 p. m. ✅</div>
-</div>
-</div>
-</div>
-</div>
-<p class="chat-caption">Conversación real → disponibilidad → elección → cita confirmada.</p>
-<div class="trust-row">
-<span class="trust-pill"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 12a8 8 0 1 1-3.6-6.66" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M8 12a8 8 0 0 1 12.6-6.5L21.5 3l-1 4.2A8 8 0 0 1 8 12Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>WhatsApp Business API</span>
-<span class="trust-pill"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.5" y="4.5" width="17" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 9.5h17" stroke="currentColor" stroke-width="1.8"/><path d="M8 2.5v4M16 2.5v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Google Calendar</span>
-</div>
-</div>
-</div>
-</section>
+<!-- ================= STORIES ================= -->
+<div id="stories">
+  <div class="bgpat"></div>
+  <div class="frame"></div>
 
-<!-- PROBLEM -->
-<section class="section soft">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">El problema</div>
-<h2>Cada WhatsApp que no respondes a tiempo puede ser una cita que pierdes.</h2>
-<p>Mientras atiendes a un cliente, otro te está escribiendo. Y si no respondes rápido, se va con otro negocio.</p>
-</div>
-<div class="problem-grid">
-<div class="problem-item"><span class="x">✕</span><p>Estás atendiendo a un cliente y no puedes responder el WhatsApp.</p></div>
-<div class="problem-item"><span class="x">✕</span><p>Te escriben fuera de tu horario laboral, cuando ya cerraste.</p></div>
-<div class="problem-item"><span class="x">✕</span><p>Respondes el mensaje horas después, cuando ya perdiste el interés del cliente.</p></div>
-<div class="problem-item"><span class="x">✕</span><p>Un cliente pregunta por disponibilidad y termina agendando en otro lado.</p></div>
-<div class="problem-item"><span class="x">✕</span><p>Interrumpes tu trabajo constantemente para contestar mensajes.</p></div>
-<div class="problem-item"><span class="x">✕</span><p>Se pierden citas porque nadie respondió a tiempo.</p></div>
-</div>
-</div>
-</section>
+  <div class="top">
+    <div class="bars" id="bars"></div>
+    <div class="hdr">
+      <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><path d="M6 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-7l-4 3.5V17H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/></svg></div>
+      <div><div class="nm">FRANCO IA</div><div class="on">en línea 24/7</div></div>
+      <div class="sp"></div>
+      <button class="ib" id="pause" aria-label="Pausar"><svg id="pIc" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+      <button class="ib" id="replay" aria-label="Ver intro de nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button>
+    </div>
+  </div>
 
-<!-- PARADIGM SHIFT -->
-<section class="section">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Cambio de paradigma</div>
-<h2>De responder mensajes, a tener un empleado que los responde por ti.</h2>
-</div>
-<div class="compare">
-<div class="compare-col before">
-<h3>Antes</h3>
-<ul>
-<li>Revisar WhatsApp constantemente</li>
-<li>Responder preguntas repetitivas</li>
-<li>Confirmar disponibilidad a mano</li>
-<li>Agendar manualmente</li>
-<li>Reagendar y cancelar por tu cuenta</li>
-<li>Quedar sin atender fuera de horario</li>
-</ul>
-</div>
-<div class="compare-col after">
-<h3>Con FRANCO</h3>
-<ul>
-<li>FRANCO responde</li>
-<li>FRANCO revisa disponibilidad</li>
-<li>FRANCO ayuda a agendar</li>
-<li>FRANCO gestiona los cambios</li>
-<li>FRANCO atiende 24/7</li>
-<li>Tú te concentras en tu negocio</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
+  <div class="slides" id="slides">
 
-<!-- TU EMPLEADO DIGITAL -->
-<section class="section soft" id="que-hace">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Tu empleado digital</div>
-<h2>Un empleado que nunca se desconecta.</h2>
-<p>FRANCO trabaja detrás de tu WhatsApp para que tus clientes siempre tengan a quién preguntar.</p>
-</div>
-<div class="grid">
-<div class="card">
-<div class="card-icon">💬</div>
-<h3>Responde clientes</h3>
-<p>Atiende las preguntas frecuentes de tus clientes de forma automática.</p>
-</div>
-<div class="card">
-<div class="card-icon">📅</div>
-<h3>Agenda citas</h3>
-<p>Consulta disponibilidad y ayuda a concretar la cita con tu cliente.</p>
-</div>
-<div class="card">
-<div class="card-icon">🔄</div>
-<h3>Reagenda</h3>
-<p>Ayuda a tus clientes cuando necesitan cambiar el horario de su cita.</p>
-</div>
-<div class="card">
-<div class="card-icon">❌</div>
-<h3>Cancela</h3>
-<p>Gestiona las solicitudes de cancelación sin que tengas que intervenir.</p>
-</div>
-<div class="card">
-<div class="card-icon">🧠</div>
-<h3>Conoce tu negocio</h3>
-<p>Se configura con la información y forma de atender de tu negocio.</p>
-</div>
-<div class="card">
-<div class="card-icon">🌙</div>
-<h3>Trabaja 24/7</h3>
-<p>Tus clientes pueden escribir incluso cuando tú estás ocupado o descansando.</p>
-</div>
-</div>
-</div>
-</section>
+    <!-- 1 HERO -->
+    <section class="slide" data-dur="7000">
+      <div class="in hero">
+        <h1><span class="rv" style="--d:.1s;display:block">Tu empleado que</span><span class="rv" style="--d:.3s;display:block">trabaja para ti</span>
+          <span class="big rv" style="--d:.55s">24/7</span></h1>
+        <div class="price rv" style="--d:.95s">por menos de <span class="gtxt" style="font-weight:700">$1.000 al día</span> <span class="pill">$29.999 COP / mes</span></div>
+      </div>
+      <div class="hint">TOCA PARA CONTINUAR <span>→</span></div>
+    </section>
 
-<!-- GOOGLE CALENDAR -->
-<section class="section">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Integración</div>
-<h2>Tu calendario y FRANCO trabajan juntos.</h2>
-<p>FRANCO consulta la disponibilidad real de tu Google Calendar y crea la cita ahí mismo, sin que tengas que pasar nada a mano.</p>
-</div>
-<div class="calendar-flow">
-<div class="cf-node on"><span class="ic">💬</span>WhatsApp</div>
-<span class="cf-arrow">→</span>
-<div class="cf-node on"><span class="ic">🤖</span>FRANCO</div>
-<span class="cf-arrow">→</span>
-<div class="cf-node on"><span class="ic">📅</span>Google Calendar</div>
-<span class="cf-arrow">→</span>
-<div class="cf-node on"><span class="ic">✅</span>Cita confirmada</div>
-</div>
-</div>
-</section>
+    <!-- 2 CHAT DEMO -->
+    <section class="slide" data-dur="13000" id="chatSlide">
+      <div class="in split">
+        <div class="txt">
+          <div class="kick rv">Míralo trabajar</div>
+          <h2 class="rv" style="--d:.1s">Tu cliente escribe.<br><span class="gtxt">FRANCO agenda.</span></h2>
+          <p class="lead rv" style="--d:.2s">Conversación real → disponibilidad → elección → cita confirmada. Sin que tú toques el celular.</p>
+          <div class="tags rv" style="--d:.3s"><span class="tag">WhatsApp Business API</span><span class="tag">Google Calendar</span></div>
+        </div>
+        <div class="pw rv" style="--d:.15s">
+          <div class="phone"><div class="scr">
+            <div class="ph"><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><path d="M6 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-7l-4 3.5V17H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/></svg></div><div><b>FRANCO IA</b><small>en línea</small></div></div>
+            <div class="msgs" id="msgs"></div>
+          </div></div>
+          <div class="toast" id="toast"><span style="font-size:22px">📅</span><div><b>Google Calendar</b>Nueva cita: Laura · mañana 2:00 p. m.</div></div>
+        </div>
+      </div>
+    </section>
 
-<!-- INDUSTRIAS -->
-<section class="section soft" id="para-quien">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Para quién es</div>
-<h2>Pensado para negocios que viven de la atención al cliente</h2>
-</div>
-<div class="industry-grid">
-<div class="industry-card"><span class="n">1</span><h3>Salones de belleza</h3><p>Convierte preguntas sobre servicios y disponibilidad en citas.</p></div>
-<div class="industry-card"><span class="n">2</span><h3>Barberías</h3><p>Tus clientes preguntan, eligen horario y pueden agendar sin esperar.</p></div>
-<div class="industry-card"><span class="n">3</span><h3>Spas</h3><p>Atiende consultas y facilita la reserva de servicios.</p></div>
-<div class="industry-card"><span class="n">4</span><h3>Consultorios</h3><p>Ayuda a gestionar solicitudes de citas y disponibilidad.</p></div>
-<div class="industry-card"><span class="n">5</span><h3>Emprendedores</h3><p>Un asistente digital para quienes todavía hacen todo solos.</p></div>
-<div class="industry-card"><span class="n">6</span><h3>Negocios locales con cita</h3><p>Si tu negocio funciona con reservas, FRANCO puede ayudarte a automatizar la atención.</p></div>
-</div>
-</div>
-</section>
+    <!-- 3 PROBLEMA -->
+    <section class="slide" data-dur="9000">
+      <div class="in">
+        <div class="kick rv">El problema</div>
+        <h2 class="rv" style="--d:.1s">Cada WhatsApp sin responder<br>es una <span style="color:#ff6b6b">cita perdida.</span></h2>
+        <div class="prob">
+          <div class="pc rv" style="--d:.3s"><em>✕</em>Estás atendiendo y no puedes contestar.</div>
+          <div class="pc rv" style="--d:.4s"><em>✕</em>Te escriben cuando ya cerraste.</div>
+          <div class="pc rv" style="--d:.5s"><em>✕</em>Respondes horas después y el cliente ya se fue.</div>
+          <div class="pc rv" style="--d:.6s"><em>✕</em>Pregunta por disponibilidad… y agenda en otro lado.</div>
+          <div class="pc rv" style="--d:.7s"><em>✕</em>Interrumpes tu trabajo a cada rato.</div>
+          <div class="pc rv" style="--d:.8s"><em>✕</em>Se pierden citas porque nadie respondió.</div>
+        </div>
+      </div>
+    </section>
 
-<!-- CÓMO FUNCIONA -->
-<section class="section" id="como-funciona">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Cómo funciona</div>
-<h2>De cero a atendiendo clientes en tres pasos</h2>
-</div>
-<div class="steps">
-<div class="step">
-<h3>Configuramos FRANCO</h3>
-<p>Adaptamos el asistente a la información de tu negocio: servicios, precios, horarios y tono.</p>
-</div>
-<div class="step">
-<h3>Lo conectamos a tu WhatsApp</h3>
-<p>FRANCO queda integrado a tu WhatsApp Business y comienza a atender las conversaciones.</p>
-</div>
-<div class="step">
-<h3>Empieza a trabajar</h3>
-<p>Tus clientes pueden escribir, consultar disponibilidad y gestionar sus citas.</p>
-</div>
-</div>
-</div>
-</section>
+    <!-- 4 QUÉ HACE -->
+    <section class="slide" data-dur="9000">
+      <div class="in">
+        <div class="kick rv">Tu empleado digital</div>
+        <h2 class="rv" style="--d:.1s">Un empleado que <span class="gtxt">nunca se desconecta.</span></h2>
+        <div class="feat">
+          <div class="fc rv" style="--d:.3s"><div class="ic">💬</div><b>Responde clientes</b><p>Atiende las preguntas frecuentes al instante.</p></div>
+          <div class="fc rv" style="--d:.4s"><div class="ic">📅</div><b>Agenda citas</b><p>Consulta disponibilidad y concreta la cita.</p></div>
+          <div class="fc rv" style="--d:.5s"><div class="ic">🔄</div><b>Reagenda</b><p>Cambia el horario cuando tu cliente lo necesita.</p></div>
+          <div class="fc rv" style="--d:.6s"><div class="ic">❌</div><b>Cancela</b><p>Gestiona cancelaciones sin que intervengas.</p></div>
+          <div class="fc rv" style="--d:.7s"><div class="ic">🧠</div><b>Conoce tu negocio</b><p>Servicios, precios, horarios y tu forma de atender.</p></div>
+          <div class="fc rv" style="--d:.8s"><div class="ic">🌙</div><b>Trabaja 24/7</b><p>Atiende aunque estés ocupado o descansando.</p></div>
+        </div>
+      </div>
+    </section>
 
-<!-- PRECIO -->
-<section class="section soft" id="precio">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Precio</div>
-<h2>Contrata a FRANCO por menos de $1.000 al día.</h2>
-</div>
-<div class="value-note">
-<div class="q">¿Cuánto cuesta tener a alguien atendiendo tu WhatsApp?</div>
-<div class="a">FRANCO: <b>$29.999 COP</b> al mes.</div>
-</div>
-<div class="price-card">
-<div class="plan-name">Plan FRANCO IA</div>
-<div class="amount">$29.999 <span>COP / mes</span></div>
-<div class="anchor">Menos de $1.000 al día</div>
-<ul>
-<li><span class="check">✓</span> Empleado digital para WhatsApp</li>
-<li><span class="check">✓</span> Atención 24/7</li>
-<li><span class="check">✓</span> Gestión de citas</li>
-<li><span class="check">✓</span> Consulta de disponibilidad</li>
-<li><span class="check">✓</span> Reagendamiento</li>
-<li><span class="check">✓</span> Cancelaciones</li>
-<li><span class="check">✓</span> Integración con Google Calendar</li>
-<li><span class="check">✓</span> Personalización para tu negocio</li>
-<li><span class="check">✓</span> Panel de seguimiento</li>
-</ul>
-<a class="btn btn-primary btn-block" href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024/7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." target="_blank" rel="noopener">Quiero mi empleado digital</a>
-</div>
-</div>
-</section>
+    <!-- 5 INTEGRACIÓN -->
+    <section class="slide" data-dur="8000">
+      <div class="in">
+        <div class="kick rv">Integración</div>
+        <h2 class="rv" style="--d:.1s">Tu calendario y FRANCO<br><span class="gtxt">trabajan juntos.</span></h2>
+        <p class="lead rv" style="--d:.2s">Consulta la disponibilidad real de tu Google Calendar y crea la cita ahí mismo. Nada a mano.</p>
+        <div class="flow">
+          <div class="pulse"></div>
+          <div class="nd rv" style="--d:.4s"><div class="c">💬</div><b>WhatsApp</b></div>
+          <div class="nd k rv" style="--d:.6s"><div class="c">🤖</div><b>FRANCO</b></div>
+          <div class="nd rv" style="--d:.8s"><div class="c">📅</div><b>Google Calendar</b></div>
+          <div class="nd rv" style="--d:1s"><div class="c">✅</div><b>Cita confirmada</b></div>
+        </div>
+      </div>
+    </section>
 
-<!-- FAQ -->
-<section class="section" id="faq">
-<div class="wrap">
-<div class="section-head">
-<div class="kicker">Preguntas frecuentes</div>
-<h2>Todo lo que necesitas saber</h2>
-</div>
-<div class="faq">
-<details open>
-<summary>¿FRANCO funciona por WhatsApp?</summary>
-<p>Sí. FRANCO atiende las conversaciones directamente en tu WhatsApp de negocio.</p>
-</details>
-<details>
-<summary>¿FRANCO trabaja 24/7?</summary>
-<p>Sí. FRANCO atiende a tus clientes en cualquier momento, incluso fuera de tu horario laboral.</p>
-</details>
-<details>
-<summary>¿Puede agendar citas?</summary>
-<p>Sí, puede gestionar el proceso de agendamiento según la configuración de tu negocio.</p>
-</details>
-<details>
-<summary>¿Se conecta con Google Calendar?</summary>
-<p>Sí, FRANCO se conecta con Google Calendar para consultar disponibilidad y crear citas.</p>
-</details>
-<details>
-<summary>¿Puede reagendar una cita?</summary>
-<p>Sí, FRANCO puede ayudar a tus clientes a reagendar cuando lo necesiten.</p>
-</details>
-<details>
-<summary>¿Puede cancelar una cita?</summary>
-<p>Sí, FRANCO puede gestionar solicitudes de cancelación.</p>
-</details>
-<details>
-<summary>¿Puedo personalizarlo para mi negocio?</summary>
-<p>Sí, se configura con la información, servicios, horarios y tono de tu negocio.</p>
-</details>
-<details>
-<summary>¿Cuánto cuesta?</summary>
-<p>$29.999 COP al mes, menos de $1.000 al día.</p>
-</details>
-<details>
-<summary>¿Necesito contratar varios planes?</summary>
-<p>No. FRANCO IA tiene un solo plan, con todo incluido.</p>
-</details>
-<details>
-<summary>¿Qué pasa cuando yo estoy ocupado?</summary>
-<p>FRANCO puede atender las conversaciones de tu WhatsApp mientras tú te concentras en tu negocio.</p>
-</details>
-</div>
-</div>
-</section>
+    <!-- 6 PARA QUIÉN -->
+    <section class="slide" data-dur="7000">
+      <div class="in">
+        <div class="kick rv">Para quién es</div>
+        <h2 class="rv" style="--d:.1s">Para negocios que viven<br>de <span class="gtxt">atender clientes.</span></h2>
+        <div class="who">
+          <div class="wc rv" style="--d:.3s"><span>💇‍♀️</span>Salones de belleza</div>
+          <div class="wc rv" style="--d:.38s"><span>💈</span>Barberías</div>
+          <div class="wc rv" style="--d:.46s"><span>🧖</span>Spas</div>
+          <div class="wc rv" style="--d:.54s"><span>🩺</span>Consultorios</div>
+          <div class="wc rv" style="--d:.62s"><span>🚀</span>Emprendedores</div>
+          <div class="wc rv" style="--d:.7s"><span>📍</span>Negocios locales con cita</div>
+        </div>
+      </div>
+    </section>
 
-<!-- CTA FINAL -->
-<section class="cta-section" id="contacto">
-<div class="wrap">
-<div class="kicker">Contrátalo hoy</div>
-<h2>Tu negocio no debería depender de que tú estés pegado al WhatsApp.</h2>
-<p style="color:var(--text-dim); max-width:520px; margin:0 auto;">Contrata un empleado digital que trabaje 24/7 por menos de $1.000 al día.</p>
-<div class="contact-links">
-<a class="btn btn-primary" href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024/7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." target="_blank" rel="noopener">Quiero mi empleado digital</a>
-<a class="btn btn-ghost" href="mailto:admin@francoia.com">admin@francoia.com</a>
-</div>
-</div>
-</section>
-</main>
+    <!-- 7 CÓMO FUNCIONA -->
+    <section class="slide" data-dur="8000">
+      <div class="in">
+        <div class="kick rv">Cómo funciona</div>
+        <h2 class="rv" style="--d:.1s">De cero a atendiendo<br>en <span class="gtxt">tres pasos.</span></h2>
+        <div class="steps">
+          <div class="sc rv" style="--d:.3s"><b>Configuramos FRANCO</b><p>Lo adaptamos a tu negocio: servicios, precios, horarios y tono.</p></div>
+          <div class="sc rv" style="--d:.45s"><b>Lo conectamos a tu WhatsApp</b><p>Queda integrado a tu WhatsApp Business y empieza a atender.</p></div>
+          <div class="sc rv" style="--d:.6s"><b>Empieza a trabajar</b><p>Tus clientes escriben, consultan disponibilidad y gestionan sus citas.</p></div>
+        </div>
+      </div>
+    </section>
 
-<footer>
-<div class="brand" style="display:flex;">
-<svg class="brand-mark" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="1" y="1" width="46" height="46" rx="13" fill="#0a0a0a" stroke="url(#g3)" stroke-width="2"/>
-<path d="M24 12c-6.6 0-12 4.9-12 11 0 3 1.3 5.7 3.5 7.7-.2 1.6-.9 3.1-2 4.3 2.1-.2 4.1-1 5.7-2.2 1.5.5 3.1.7 4.8.7 6.6 0 12-4.9 12-11s-5.4-11-12-11Z" fill="#f2f3f2"/>
-<circle cx="19.5" cy="23" r="2" fill="#0a0a0a"/>
-<circle cx="28.5" cy="23" r="2" fill="#0a0a0a"/>
-<defs>
-<linearGradient id="g3" x1="1" y1="1" x2="47" y2="47" gradientUnits="userSpaceOnUse">
-<stop stop-color="#25d366"/><stop offset="1" stop-color="#128c5e"/>
-</linearGradient>
-</defs>
-</svg>
-FRANCO IA
-</div>
-<div>Tu empleado digital para WhatsApp, 24/7</div>
-<div style="margin-top:8px;">admin@francoia.com · © <span id="year"></span> FRANCO IA</div>
-<div class="footer-legal">
-<a href="/terminos.html">Términos y Condiciones</a>
-<a href="/politica-datos.html">Política de Tratamiento de Datos</a>
-</div>
-</footer>
+    <!-- 8 PRECIO -->
+    <section class="slide" data-dur="10000">
+      <div class="in pricegrid">
+        <div>
+          <div class="kick rv">Precio</div>
+          <h2 class="rv" style="--d:.1s">Contrata a FRANCO por menos de <span class="gtxt">$1.000 al día.</span></h2>
+          <p class="lead rv" style="--d:.2s">¿Cuánto te cuesta hoy tener a alguien pendiente de tu WhatsApp? Con FRANCO es un solo plan, todo incluido.</p>
+        </div>
+        <div class="pcard rv" style="--d:.3s">
+          <div class="kick" style="margin-bottom:8px">Plan FRANCO IA</div>
+          <div class="amt">$29.999 <small>COP / mes</small></div>
+          <ul>
+            <li>Empleado digital WhatsApp</li><li>Atención 24/7</li><li>Gestión de citas</li><li>Consulta de disponibilidad</li>
+            <li>Reagendamiento</li><li>Cancelaciones</li><li>Google Calendar</li><li>Personalización</li><li>Panel de seguimiento</li>
+          </ul>
+          <a class="cta wa-link" target="_blank" rel="noopener">Quiero mi empleado digital</a>
+        </div>
+      </div>
+    </section>
 
-<div class="mobile-cta">
-<a class="btn btn-primary btn-block" href="https://wa.me/573106272323?text=Hola%20FRANCO%20IA%20%F0%9F%91%8B%20Vi%20que%20puedo%20tener%20un%20empleado%20digital%20trabajando%2024/7%20por%20menos%20de%20%241.000%20al%20d%C3%ADa.%20Quiero%20saber%20c%C3%B3mo%20funciona%20y%20c%C3%B3mo%20puedo%20implementarlo%20en%20mi%20negocio." target="_blank" rel="noopener">Quiero mi empleado digital</a>
+    <!-- 9 FAQ -->
+    <section class="slide" data-dur="12000">
+      <div class="in">
+        <div class="kick rv">Preguntas frecuentes</div>
+        <h2 class="rv" style="--d:.1s">Lo que todos <span class="gtxt">preguntan.</span></h2>
+        <div class="faq">
+          <div class="fq rv" style="--d:.25s"><b>¿Funciona por WhatsApp?</b><p>Sí, atiende directamente en tu WhatsApp de negocio.</p></div>
+          <div class="fq rv" style="--d:.32s"><b>¿Trabaja 24/7?</b><p>Sí. Responde de día, de noche, fines de semana y festivos.</p></div>
+          <div class="fq rv" style="--d:.39s"><b>¿Agenda, reagenda y cancela?</b><p>Sí, y todo queda reflejado en tu Google Calendar.</p></div>
+          <div class="fq rv" style="--d:.46s"><b>¿Lo puedo personalizar?</b><p>Sí. Lo configuramos con tus servicios, precios, horarios y tono.</p></div>
+          <div class="fq rv" style="--d:.53s"><b>¿Necesito varios planes?</b><p>No. Un solo plan de $29.999 COP/mes lo incluye todo.</p></div>
+          <div class="fq rv" style="--d:.6s"><b>¿Y si estoy ocupado?</b><p>Justo para eso existe: FRANCO atiende mientras tú trabajas.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 FINAL -->
+    <section class="slide" data-dur="0">
+      <div class="in final">
+        <div class="kick rv" style="justify-content:center">Contrátalo hoy</div>
+        <h2 class="rv" style="--d:.1s">Tu negocio no debería depender de que estés <span class="gtxt">pegado al WhatsApp.</span></h2>
+        <p class="lead rv" style="--d:.25s">Un empleado digital que trabaja 24/7 por menos de $1.000 al día.</p>
+        <div class="rv" style="--d:.4s"><a class="cta wa-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>
+          Quiero mi empleado digital</a></div>
+        <a class="mail rv" style="--d:.5s" href="mailto:admin@francoia.com">admin@francoia.com</a>
+        <div class="mail rv" style="--d:.6s;margin-top:10px;font-size:11px"><a href="terminos.html">Términos y condiciones</a> · <a href="politica-datos.html">Política de datos</a></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav">
+    <div class="arrows">
+      <button id="prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+    <div class="count" id="count"><b>01</b> / 10</div>
+    <a class="wa wa-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg><span>Hablar con FRANCO</span></a>
+  </div>
 </div>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
+(() => {
+const WA = 'https://wa.me/573106272323?text=' + encodeURIComponent('Hola FRANCO IA 👋 Vi que puedo tener un empleado digital trabajando 24/7 por menos de $1.000 al día. Quiero saber cómo funciona y cómo puedo implementarlo en mi negocio.');
+document.querySelectorAll('.wa-link').forEach(a => a.href = WA);
 
-/* Restart the hero chat-demo animation periodically so it loops */
-(function(){
-var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if(reduceMotion) return;
-function loopChat(id, ms){
-var el = document.getElementById(id);
-if(!el) return;
-setInterval(function(){
-var current = document.getElementById(id);
-if(!current) return;
-var clone = current.cloneNode(true);
-clone.id = id;
-current.parentNode.replaceChild(clone, current);
-}, ms);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+
+/* ======================= INTRO ======================= */
+const intro = $('#intro'), cv = $('#fx'), ctx = cv.getContext('2d');
+let W, H, DPR, introRAF, introDone = false, introTimers = [];
+const SNIPS = ['init neural_core()','whatsapp.connect(business_id)','calendar.sync("google")','load knowledge_base(negocio)','agent.mode = "24/7"','> escuchando mensajes...','0x7F3A::FRANCO','agenda.disponibilidad()','nlp.intent("agendar_cita")','respuesta_ms = 812','await cliente.mensaje','cita.confirmar(✓)','status: ONLINE','token.verify() ok','webhook /meta/cloud-api','for (msg of inbox) responder(msg)','reagendar() · cancelar()','memory.load(servicios, precios)'];
+let parts = [], codes = [], t0;
+
+function size(){ DPR = Math.min(devicePixelRatio||1,2); W = innerWidth; H = innerHeight; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); }
+function initFX(){
+  size(); parts = []; codes = [];
+  const n = Math.min(90, Math.floor(W*H/14000));
+  for (let i=0;i<n;i++) parts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,a:Math.random()*Math.PI*2});
 }
-loopChat('heroChat', 13500);
+function frame(now){
+  const t = now - t0;
+  ctx.clearRect(0,0,W,H);
+  const cx = W/2, cy = H/2, R = Math.min(W,H)*.36*.92, fade = t>4300 ? Math.max(0,1-(t-4300)/600) : 1;
+  // code lines
+  if (t < 3900 && Math.random() < (W < 700 ? .12 : .35)) codes.push({x: Math.random()<.5 ? 20+Math.random()*W*.28 : W*.7+Math.random()*W*.26, y: 60+Math.random()*(H-120), s: SNIPS[Math.random()*SNIPS.length|0], b: t});
+  ctx.font = '11px "JetBrains Mono", monospace';
+  codes = codes.filter(c => t - c.b < 1700);
+  for (const c of codes){
+    const age = t - c.b, n = Math.min(c.s.length, age/22|0), al = (age<1200?1:1-(age-1200)/500)*.55*fade;
+    ctx.fillStyle = `rgba(37,211,102,${al})`; ctx.fillText(c.s.slice(0,n) + (n<c.s.length?'▌':''), c.x, c.y);
+    ctx.fillStyle = `rgba(232,255,239,${al*.4})`; ctx.fillRect(c.x-10, c.y-4, 4, 1);
+  }
+  // network
+  const pull = t>1400 ? Math.min(1,(t-1400)/1800) : 0;
+  for (const p of parts){
+    if (pull){ p.a += .004; const tx = cx+Math.cos(p.a)*R*(1.05+((p.a*7)%1)*.25), ty = cy+Math.sin(p.a)*R*(1.05+((p.a*7)%1)*.25); p.x += (tx-p.x)*.03*pull; p.y += (ty-p.y)*.03*pull; }
+    p.x += p.vx*(1-pull); p.y += p.vy*(1-pull);
+    if (p.x<0||p.x>W) p.vx*=-1; if (p.y<0||p.y>H) p.vy*=-1;
+  }
+  for (let i=0;i<parts.length;i++){ const a = parts[i];
+    for (let j=i+1;j<parts.length;j++){ const b = parts[j], d = Math.hypot(a.x-b.x,a.y-b.y);
+      if (d<120){ ctx.strokeStyle = `rgba(232,255,239,${(1-d/120)*.22*fade})`; ctx.lineWidth=.6; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); } }
+    ctx.fillStyle = `rgba(37,211,102,${.85*fade})`; ctx.beginPath(); ctx.arc(a.x,a.y,1.6,0,7); ctx.fill();
+  }
+  const p = Math.min(100, Math.round(t/42)); $('#pct').textContent = p + '%';
+  if (!introDone) introRAF = requestAnimationFrame(frame);
+}
+function buildHUD(){
+  const g = $('#ticks'); g.innerHTML = '';
+  for (let i=0;i<90;i++){ const a = i/90*Math.PI*2, r1 = 190, r2 = i%5===0 ? 198 : 194;
+    const l = document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',200+Math.cos(a)*r1); l.setAttribute('y1',200+Math.sin(a)*r1); l.setAttribute('x2',200+Math.cos(a)*r2); l.setAttribute('y2',200+Math.sin(a)*r2);
+    l.setAttribute('class','st dim'); g.appendChild(l); }
+  const b = $('#brand'); b.innerHTML = '';
+  'FRANCO IA'.split('').forEach((ch,i) => { const s = document.createElement('span'); s.textContent = ch === ' ' ? ' ' : ch; if (i>6) s.className = 'g'; s.style.animationDelay = (3.2 + i*.08) + 's'; b.appendChild(s); });
+}
+function playIntro(){
+  introDone = false; intro.style.display = ''; intro.classList.remove('out');
+  // restart CSS animations
+  const clone = intro.querySelector('.hudwrap'); const fresh = clone.cloneNode(true); clone.replaceWith(fresh);
+  buildHUD(); initFX(); t0 = performance.now(); cancelAnimationFrame(introRAF); introRAF = requestAnimationFrame(frame);
+  introTimers.forEach(clearTimeout);
+  introTimers = [setTimeout(endIntro, 5200)];
+}
+function endIntro(){
+  if (introDone) return; introDone = true; introTimers.forEach(clearTimeout);
+  intro.classList.add('out'); $('#stories').classList.add('on');
+  setTimeout(() => { intro.style.display = 'none'; cancelAnimationFrame(introRAF); }, 800);
+  go(0, true);
+}
+$('#skip').addEventListener('click', e => { e.stopPropagation(); endIntro(); });
+addEventListener('resize', () => { if (!introDone) size(); });
+
+/* ======================= STORIES ======================= */
+const slides = [...document.querySelectorAll('.slide')], N = slides.length;
+const bars = $('#bars');
+slides.forEach(() => { const d = document.createElement('div'); d.className = 'bar'; d.innerHTML = '<i></i>'; bars.appendChild(d); });
+const fills = [...bars.querySelectorAll('i')];
+let cur = -1, elapsed = 0, last = 0, userPaused = false, holdPaused = false, chatTimers = [];
+
+function go(i, force){
+  i = Math.max(0, Math.min(N-1, i));
+  if (i === cur && !force) return;
+  if (cur >= 0) slides[cur].classList.remove('active');
+  cur = i; elapsed = 0;
+  // restart reveal animations
+  const s = slides[cur]; s.querySelectorAll('.rv').forEach(el => { el.style.animation = 'none'; el.offsetHeight; el.style.animation = ''; });
+  s.classList.add('active');
+  fills.forEach((f,k) => f.style.transform = `scaleX(${k<cur?1:0})`);
+  $('#count').innerHTML = `<b>${String(cur+1).padStart(2,'0')}</b> / ${String(N).padStart(2,'0')}`;
+  $('#prev').disabled = cur === 0; $('#next').disabled = cur === N-1;
+  s.id === 'chatSlide' ? runChat() : stopChat();
+  if (cur === N-1) fills[cur].style.transform = 'scaleX(1)';
+}
+const next = () => go(cur+1), prev = () => go(cur-1);
+
+function tick(now){
+  const dt = Math.min(100, now - (last||now)); last = now;
+  if (introDone && cur >= 0 && !userPaused && !holdPaused && !document.hidden){
+    const dur = +slides[cur].dataset.dur;
+    if (dur > 0){ elapsed += dt; const p = Math.min(1, elapsed/dur); fills[cur].style.transform = `scaleX(${p})`; if (p >= 1) next(); }
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+/* chat demo */
+const CHAT = [
+  ['in','Hola, ¿tienen disponibilidad mañana?'],
+  ['out','¡Hola! 👋 Claro. Tengo 10:00 a. m., 2:00 p. m. y 4:30 p. m. ¿Cuál te funciona mejor?'],
+  ['in','2:00 pm'],
+  ['out','¡Perfecto! 🙌 Te agendo mañana a las 2:00 p. m. ¿Me confirmas tu nombre?'],
+  ['in','Laura'],
+  ['out','Listo, Laura. Tu cita quedó agendada para mañana a las 2:00 p. m. ✅'],
+];
+function stopChat(){ chatTimers.forEach(clearTimeout); chatTimers = []; $('#toast').classList.remove('show'); }
+function runChat(){
+  stopChat(); const box = $('#msgs'); box.innerHTML = ''; let t = 900;
+  const time = () => { const d = new Date(); return d.getHours()%12||12 } ;
+  CHAT.forEach(([side,txt]) => {
+    if (side === 'out'){
+      chatTimers.push(setTimeout(() => { const ty = document.createElement('div'); ty.className = 'typing'; ty.innerHTML = '<i></i><i></i><i></i>'; box.appendChild(ty); }, t));
+      t += 1100;
+    }
+    chatTimers.push(setTimeout(() => { const ty = box.querySelector('.typing'); if (ty) ty.remove();
+      const m = document.createElement('div'); m.className = 'm ' + side; m.innerHTML = txt + `<small>9:4${1+box.children.length%8}${side==='out'?' ✓✓':''}</small>`; box.appendChild(m); }, t));
+    t += side === 'in' ? 1000 : 1300;
+  });
+  chatTimers.push(setTimeout(() => $('#toast').classList.add('show'), t + 200));
+}
+
+/* controls */
+$('#next').onclick = e => { e.stopPropagation(); next(); };
+$('#prev').onclick = e => { e.stopPropagation(); prev(); };
+function setPause(v){ userPaused = v; $('#pIc').innerHTML = v ? '<path d="M7 5l12 7-12 7z"/>' : '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>'; }
+$('#pause').onclick = e => { e.stopPropagation(); setPause(!userPaused); };
+$('#replay').onclick = e => { e.stopPropagation(); $('#stories').classList.remove('on'); stopChat(); playIntro(); };
+
+addEventListener('keydown', e => {
+  if (!introDone){ if (e.key===' '||e.key==='Enter'||e.key==='Escape') endIntro(); return; }
+  if (e.key==='ArrowRight'||e.key==='PageDown') next();
+  else if (e.key==='ArrowLeft'||e.key==='PageUp') prev();
+  else if (e.key===' '){ e.preventDefault(); setPause(!userPaused); }
+});
+
+// tap / hold / swipe (estilo historias de WhatsApp)
+const st = $('#stories'); let px=0, py=0, pt=0, holdT;
+st.addEventListener('pointerdown', e => {
+  if (e.target.closest('a,button')) return;
+  px = e.clientX; py = e.clientY; pt = performance.now();
+  holdT = setTimeout(() => holdPaused = true, 220);
+});
+st.addEventListener('pointerup', e => {
+  clearTimeout(holdT);
+  if (e.target.closest('a,button') || !pt) return;
+  const dx = e.clientX - px, dy = e.clientY - py, held = performance.now() - pt; pt = 0;
+  const wasHold = holdPaused; holdPaused = false;
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); return; }
+  if (wasHold || held > 220) return;
+  (e.clientX < innerWidth * .3) ? prev() : next();
+});
+st.addEventListener('pointercancel', () => { clearTimeout(holdT); holdPaused = false; pt = 0; });
+let wheelLock = 0;
+st.addEventListener('wheel', e => { const n = performance.now(); if (n - wheelLock < 700 || Math.abs(e.deltaY) < 25) return; wheelLock = n; e.deltaY > 0 ? next() : prev(); }, {passive:true});
+
+/* start */
+if (reduce){ introDone = true; intro.style.display = 'none'; $('#stories').classList.add('on'); go(0, true); }
+else playIntro();
 })();
 </script>
-
 </body>
 </html>
