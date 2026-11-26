@@ -69,7 +69,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 #intro{position:fixed;inset:0;z-index:50;background:#000;display:grid;place-items:center;transition:opacity .8s ease,transform .8s cubic-bezier(.7,0,.3,1)}
 #intro.out{opacity:0;transform:scale(1.6);pointer-events:none}
 #fx{position:absolute;inset:0;width:100%;height:100%}
-.hudwrap{position:relative;width:min(72vmin,440px);aspect-ratio:1;display:grid;place-items:center}
+.hudwrap{position:relative;margin-top:-9vh;width:min(72vmin,440px);aspect-ratio:1;display:grid;place-items:center}
 #hud{width:100%;height:100%;overflow:visible}
 #hud .st{fill:none;stroke:#e8ffef;stroke-width:1;stroke-linecap:round}
 #hud .dim{stroke:rgba(232,255,239,.35)}
@@ -88,8 +88,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .brand span{opacity:0;transform:translateY(10px);filter:blur(8px);animation:letter .5s ease forwards}
 .brand span.g{color:var(--g)}
 @keyframes letter{to{opacity:1;transform:none;filter:none}}
-.sys{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:rgba(232,255,239,.6);white-space:nowrap;text-transform:uppercase}
-.sys b{color:var(--g);font-weight:600}
+.sys{position:absolute;bottom:max(34px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);text-transform:uppercase;white-space:nowrap}
+.sys .sl{font-size:clamp(11px,1.3vw,14px);letter-spacing:.3em;color:#e8ffef}
+.sys .sbar{width:min(300px,66vw);height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
+.sys .sbar i{display:block;height:100%;width:0;background:var(--g);box-shadow:0 0 12px var(--g)}
+.sys b{font-size:clamp(32px,4.4vw,48px);font-weight:600;color:var(--g);text-shadow:0 0 24px rgba(37,211,102,.6);letter-spacing:.04em;line-height:1}
+.sys.done .sl{color:var(--g)}
 .corner{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:rgba(232,255,239,.35);line-height:1.7}
 .corner.tl{top:24px;left:24px}.corner.tr{top:24px;right:24px;text-align:right}
 #skip{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.55);padding:8px 14px;border:1px solid rgba(255,255,255,.15);border-radius:99px;z-index:2;background:#000}
@@ -275,7 +279,7 @@ h2{font-size:clamp(34px,6vw,76px)}
   .fq{padding:12px 14px}.fq b{font-size:14px;margin-bottom:3px}.fq p{font-size:12.5px}
   .pcard ul{gap:6px 10px}.pcard li{font-size:12.5px}
   .pricegrid .lead{display:none}
-  .wa span{display:none}.wa{padding:11px}
+  .wa{padding:10px 14px;font-size:12px;gap:6px}
   .kick{margin-bottom:12px;font-size:11px}
   .lead{margin-top:14px}
   .who{gap:8px;margin-top:26px}.wc{padding:12px 16px}
@@ -285,7 +289,7 @@ h2{font-size:clamp(34px,6vw,76px)}
   .hero .big{font-size:clamp(56px,16vw,84px)}
   .total{padding:14px 20px}
   .corner{display:none}
-  #skip{top:auto;bottom:64px}
+  #skip{top:18px;bottom:auto}
 }
 @media (max-height:700px) and (max-width:860px){.prob .pc:nth-child(n+5),.faq .fq:nth-child(n+5){display:none}}
 /* ===== MOBILE POLISH ===== */
@@ -359,6 +363,17 @@ h2{font-size:clamp(34px,6vw,76px)}
   .slide.active .nd:nth-child(5) .c{animation-delay:3.65s}
   @keyframes lit{0%,100%{transform:scale(1)}12%{transform:scale(1.12);box-shadow:0 0 0 8px #000,0 0 50px rgba(37,211,102,.8)}28%{transform:scale(1)}}
 }
+/* punto de luz + iconos que se encienden (PC y movil) */
+.flow .pulse{display:block!important;width:16px!important;height:16px!important;z-index:0;opacity:0;transition:opacity .3s;background:#eafff1!important;box-shadow:0 0 0 4px rgba(37,211,102,.55),0 0 28px 10px rgba(37,211,102,.9)!important}
+.flow .pulse.on{opacity:1}
+.slide.active .flow .pulse{animation:none!important}
+.slide.active .nd .c{animation:none!important}
+.nd .c{transition:transform .35s cubic-bezier(.2,.9,.3,1.4),box-shadow .35s,border-color .35s,background .35s}
+.nd.lit .c{transform:scale(1.18);border-color:#7dffad;box-shadow:0 0 0 8px #000,0 0 30px rgba(37,211,102,.9),0 0 70px rgba(37,211,102,.6)}
+.nd:not(.k).lit .c{background:#0f3a1f}
+.nd b{transition:color .35s}
+.nd.lit b{color:var(--g)}
+@media (max-width:860px){.count{display:none}}
 @media (prefers-reduced-motion:reduce){.rv,.slide.active .rv{animation:none;opacity:1;transform:none;filter:none}}
 </style>
 </head>
@@ -404,7 +419,7 @@ h2{font-size:clamp(34px,6vw,76px)}
     </svg>
     <div class="brand" id="brand"></div>
   </div>
-  <div class="sys">Inicializando empleado digital · <b id="pct">0%</b></div>
+  <div class="sys"><div class="sl" id="sysl">Conectando tu canal de ventas</div><div class="sbar"><i id="sbar"></i></div><b id="pct">0%</b></div>
 </div>
 
 <!-- ================= STORIES ================= -->
@@ -496,7 +511,7 @@ h2{font-size:clamp(34px,6vw,76px)}
         <div class="flow">
           <div class="pulse"></div>
           <div class="nd rv" style="--d:.4s"><div class="c">💬</div><b>WhatsApp</b></div>
-          <div class="nd k rv" style="--d:.6s"><div class="c">🤖</div><b>FRANCO</b></div>
+          <div class="nd k rv" style="--d:.6s"><div class="c"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><path d="M6 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-7l-4 3.5V17H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/></svg></div><b>FRANCO</b></div>
           <div class="nd rv" style="--d:.8s"><div class="c">📅</div><b>Google Calendar</b></div>
           <div class="nd rv" style="--d:1s"><div class="c">✅</div><b>Cita confirmada</b></div>
         </div>
@@ -589,7 +604,7 @@ h2{font-size:clamp(34px,6vw,76px)}
       <button id="next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
     </div>
     <div class="count" id="count"><b>01</b> / 10</div>
-    <a class="wa wa-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg><span>Hablar con FRANCO</span></a>
+    <a class="wa wa-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg><span>Hablar con un ASESOR</span></a>
   </div>
 </div>
 
@@ -638,7 +653,7 @@ function frame(now){
       if (d<120){ ctx.strokeStyle = `rgba(232,255,239,${(1-d/120)*.22*fade})`; ctx.lineWidth=.6; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); } }
     ctx.fillStyle = `rgba(37,211,102,${.85*fade})`; ctx.beginPath(); ctx.arc(a.x,a.y,1.6,0,7); ctx.fill();
   }
-  const p = Math.min(100, Math.round(t/42)); $('#pct').textContent = p + '%';
+  const p = Math.min(100, Math.round(t/42)); $('#pct').textContent = p + '%'; $('#sbar').style.width = p + '%'; if (p >= 100 && !$('.sys').classList.contains('done')) { $('.sys').classList.add('done'); $('#sysl').textContent = 'Canal de ventas conectado ✓'; }
   if (!introDone) introRAF = requestAnimationFrame(frame);
 }
 function buildHUD(){
@@ -654,7 +669,7 @@ function playIntro(){
   introDone = false; intro.style.display = ''; intro.classList.remove('out');
   // restart CSS animations
   const clone = intro.querySelector('.hudwrap'); const fresh = clone.cloneNode(true); clone.replaceWith(fresh);
-  buildHUD(); initFX(); t0 = performance.now(); cancelAnimationFrame(introRAF); introRAF = requestAnimationFrame(frame);
+  $('.sys').classList.remove('done'); $('#sysl').textContent = 'Conectando tu canal de ventas'; buildHUD(); initFX(); t0 = performance.now(); cancelAnimationFrame(introRAF); introRAF = requestAnimationFrame(frame);
   introTimers.forEach(clearTimeout);
   introTimers = [setTimeout(endIntro, 5200)];
 }
@@ -686,6 +701,7 @@ function go(i, force){
   $('#count').innerHTML = `<b>${String(cur+1).padStart(2,'0')}</b> / ${String(N).padStart(2,'0')}`;
   $('#prev').disabled = cur === 0; $('#next').disabled = cur === N-1;
   s.id === 'chatSlide' ? runChat() : stopChat();
+  s.querySelector('.flow') ? runFlow() : stopFlow();
   if (cur === N-1) fills[cur].style.transform = 'scaleX(1)';
 }
 const next = () => go(cur+1), prev = () => go(cur-1);
@@ -699,6 +715,27 @@ function tick(now){
   requestAnimationFrame(tick);
 }
 requestAnimationFrame(tick);
+
+/* flujo integracion: punto de luz sincronizado */
+let flowRAF;
+function stopFlow(){ cancelAnimationFrame(flowRAF); document.querySelectorAll('.flow .nd').forEach(n => n.classList.remove('lit')); }
+function runFlow(){
+  stopFlow(); const fl = document.querySelector('.flow'); if (!fl) return;
+  const pu = fl.querySelector('.pulse'), nds = [...fl.querySelectorAll('.nd')], t0 = performance.now(), T = 3800, DELAY = 1300;
+  const step = now => {
+    const e = now - t0 - DELAY;
+    if (e >= 0){
+      const fr = fl.getBoundingClientRect();
+      const cs = nds.map(n => { const r = n.querySelector('.c').getBoundingClientRect(); return {x:r.left-fr.left+r.width/2, y:r.top-fr.top+r.height/2, r:r.width/2}; });
+      const k = (e % T) / T, u = Math.min(1, k/.82), ease = u<.5 ? 2*u*u : 1-Math.pow(-2*u+2,2)/2;
+      const a = cs[0], b = cs[cs.length-1], x = a.x+(b.x-a.x)*ease, y = a.y+(b.y-a.y)*ease;
+      pu.style.left = (x-8)+'px'; pu.style.top = (y-8)+'px'; pu.classList.toggle('on', k < .9);
+      nds.forEach((n,i) => n.classList.toggle('lit', k < .95 && Math.hypot(cs[i].x-x, cs[i].y-y) < cs[i].r + 16));
+    }
+    flowRAF = requestAnimationFrame(step);
+  };
+  flowRAF = requestAnimationFrame(step);
+}
 
 /* chat demo */
 const CHAT = [
