@@ -83,7 +83,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .fadein{opacity:0;animation:fade .5s ease forwards var(--d,0s)}
 .spin,.spinr{transform-origin:200px 200px;animation:spin var(--s,20s) linear infinite}
 .spinr{animation-direction:reverse}
-#logoFill{opacity:0;animation:fade .4s ease forwards 2.4s}
 #logoGlow{opacity:0;animation:glow 1.4s ease forwards 2.4s}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes fade{to{opacity:1}}
@@ -92,6 +91,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .brand{position:absolute;left:50%;top:calc(100% + 18px);transform:translateX(-50%);display:flex;gap:.08em;font-weight:700;font-size:clamp(28px,6vmin,46px);letter-spacing:.22em;white-space:nowrap}
 .brand span{opacity:0;transform:translateY(10px);animation:letter .45s ease forwards}
 .brand .g{color:var(--g)}
+.tagl{position:absolute;left:50%;top:calc(100% + 30px + clamp(28px,6vmin,46px));transform:translateX(-50%);white-space:nowrap;font-family:var(--mono);font-size:clamp(8.5px,2.3vw,12px);letter-spacing:.24em;text-transform:uppercase;color:#e8ffef;opacity:0;animation:fade .6s ease forwards 3.3s}
+.tagl b{color:var(--g);font-weight:600}
 @keyframes letter{to{opacity:1;transform:none}}
 .sys{position:absolute;bottom:max(34px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);text-transform:uppercase;white-space:nowrap}
 .sys .sl{font-size:clamp(11px,1.3vw,14px);letter-spacing:.3em;color:#e8ffef}
@@ -115,8 +116,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .bar{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.18);overflow:hidden}
 .bar i{display:block;height:100%;background:#fff;transform-origin:left;transform:scaleX(0)}
 .hdr{display:flex;align-items:center;gap:10px;margin-top:14px}
-.logo{width:34px;height:34px;border-radius:10px;background:var(--g);display:grid;place-items:center;box-shadow:0 0 24px rgba(37,211,102,.35)}
-.logo svg{width:20px;height:20px}
+.logo{width:40px;height:40px;display:grid;place-items:center;filter:drop-shadow(0 0 8px rgba(37,211,102,.45))}
+.logo svg{width:40px;height:40px}
 .nm{font-weight:700;letter-spacing:.06em;font-size:15px}
 .online{font-size:12px;color:var(--g);display:flex;align-items:center;gap:6px}
 .online:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 8px var(--g)}
@@ -168,8 +169,8 @@ h2{font-size:clamp(34px,6vw,76px)}
 .phone{width:min(330px,78vw);height:min(600px,62vh);border-radius:44px;padding:10px;background:linear-gradient(160deg,#2a2f2c,#0b0d0c);box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 90px rgba(0,0,0,.7),0 0 80px rgba(37,211,102,.12)}
 .scr{height:100%;border-radius:36px;overflow:hidden;background:#0b141a;display:flex;flex-direction:column}
 .ph{display:flex;align-items:center;gap:10px;padding:16px 16px 12px;background:#1f2c33}
-.av{width:34px;height:34px;border-radius:50%;background:var(--g);display:grid;place-items:center}
-.av svg{width:18px;height:18px}
+.av{width:36px;height:36px;border-radius:50%;background:#000;display:grid;place-items:center}
+.av svg{width:32px;height:32px}
 .ph b{font-size:14px;display:block}.ph small{font-size:11px;color:#8fe3ad}
 .msgs{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;justify-content:flex-end;background:#0b141a radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/18px 18px}
 .m{max-width:82%;padding:8px 11px 6px;border-radius:12px;font-size:13.5px;line-height:1.38;animation:pop .35s cubic-bezier(.2,.9,.3,1.3)}
@@ -214,7 +215,8 @@ h2{font-size:clamp(34px,6vw,76px)}
 .pulse.on{opacity:1}
 .nd{position:relative;z-index:1;text-align:center;width:23%}
 .nd .c{width:92px;height:92px;margin:0 auto;border-radius:50%;display:grid;place-items:center;font-size:36px;background:#0b0f0c;border:1px solid rgba(37,211,102,.4);box-shadow:0 0 0 8px #000,0 0 40px rgba(37,211,102,.2);transition:transform .35s cubic-bezier(.2,.9,.3,1.4),box-shadow .35s,border-color .35s,background .35s}
-.nd.k .c{background:var(--g);box-shadow:0 0 0 8px #000,0 0 60px rgba(37,211,102,.6)}
+.nd.k .c{background:#000;border:1.5px solid var(--g);box-shadow:0 0 0 8px #000,0 0 60px rgba(37,211,102,.6)}
+.nd.k .c svg{width:78%;height:78%}
 .nd b{display:block;margin-top:16px;font-size:16px;transition:color .35s}
 .nd.lit .c{transform:scale(1.18);border-color:#7dffad;box-shadow:0 0 0 8px #000,0 0 30px rgba(37,211,102,.9),0 0 70px rgba(37,211,102,.6)}
 .nd.lit:not(.k) .c{background:#0f3a1f}
@@ -343,6 +345,7 @@ html:not(.js) .slide{min-height:100vh}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="fiaG" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#12b24f"/><stop offset=".55" stop-color="#25d366"/><stop offset="1" stop-color="#a6ff3d"/></linearGradient><symbol id="fia-logo" viewBox="11 6 82 82"><path d="M31.1 72.8A34 34 0 1 0 24.1 65.5L17 79Z" fill="none" stroke="url(#fiaG)" stroke-width="5.5" stroke-linejoin="round"/><circle cx="52" cy="28" r="4.3" fill="#fff"/><path d="M52 32v6" stroke="#fff" stroke-width="3"/><rect x="30" y="38" width="44" height="24" rx="12" fill="none" stroke="#fff" stroke-width="3.8"/><circle cx="44.4" cy="50" r="3.6" fill="#25d366"/><circle cx="59.7" cy="50" r="3.6" fill="#25d366"/></symbol></defs></svg>
 
 <!-- ================= INTRO ================= -->
 <div id="intro">
@@ -371,12 +374,15 @@ html:not(.js) .slide{min-height:100vh}
         <line class="st dim" x1="200" y1="88" x2="200" y2="104"/><line class="st dim" x1="200" y1="296" x2="200" y2="312"/>
         <line class="st dim" x1="88" y1="200" x2="104" y2="200"/><line class="st dim" x1="296" y1="200" x2="312" y2="200"/>
       </g>
-      <rect id="logoFill" x="158" y="158" width="84" height="84" rx="22" fill="#25d366"/>
-      <rect class="st draw" pathLength="1" x="158" y="158" width="84" height="84" rx="22" style="--d:1.6s;--dur:.8s;stroke-width:1.6"/>
-      <path class="st draw" pathLength="1" d="M181 184h38a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8h-20l-11 9v-9h-7a8 8 0 0 1-8-8v-16a8 8 0 0 1 8-8z" style="--d:1.9s;--dur:.7s;stroke-width:2.4;stroke:#fff"/>
-      <g class="fadein" style="--d:2.4s" fill="#fff"><circle cx="190" cy="200" r="2.6"/><circle cx="200" cy="200" r="2.6"/><circle cx="210" cy="200" r="2.6"/></g>
+      <g transform="translate(200 200) scale(1.75) translate(-52 -47)">
+        <path class="draw" pathLength="1" d="M31.1 72.8A34 34 0 1 0 24.1 65.5L17 79Z" fill="none" stroke="url(#fiaG)" stroke-width="5.5" stroke-linejoin="round" style="--d:1.5s;--dur:.9s"/>
+        <rect class="draw" pathLength="1" x="30" y="38" width="44" height="24" rx="12" fill="none" stroke="#fff" stroke-width="3.8" style="--d:1.9s;--dur:.7s"/>
+        <path class="draw" pathLength="1" d="M52 32v6" stroke="#fff" stroke-width="3" style="--d:2.2s;--dur:.3s"/>
+        <g class="fadein" style="--d:2.4s"><circle cx="52" cy="28" r="4.3" fill="#fff"/><circle cx="44.4" cy="50" r="3.6" fill="#25d366"/><circle cx="59.7" cy="50" r="3.6" fill="#25d366"/></g>
+      </g>
     </svg>
     <div class="brand" id="brand"></div>
+    <div class="tagl">Soluciones de IA que <b>conectan</b> tu negocio</div>
   </div>
   <div class="sys" aria-hidden="true"><div class="sl" id="sysl">Conectando tu canal de ventas</div><div class="sbar"><i id="sbar"></i></div><b id="pct">0%</b></div>
 </div>
@@ -388,7 +394,7 @@ html:not(.js) .slide{min-height:100vh}
   <div class="top">
     <div class="bars" id="bars" aria-hidden="true"></div>
     <div class="hdr">
-      <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><path d="M6 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-7l-4 3.5V17H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/></svg></div>
+      <div class="logo" aria-hidden="true"><svg viewBox="11 6 82 82"><use href="#fia-logo"/></svg></div>
       <div><div class="nm">FRANCO IA</div><div class="online">en línea 24/7</div></div>
       <div class="sp"></div>
       <button class="ib" id="pause" type="button" aria-label="Pausar"><svg id="pIc" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
@@ -421,7 +427,7 @@ html:not(.js) .slide{min-height:100vh}
         </div>
         <div class="pw rv" style="--d:.15s" aria-hidden="true">
           <div class="phone"><div class="scr">
-            <div class="ph"><div class="av"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><path d="M6 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-7l-4 3.5V17H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/></svg></div><div><b>FRANCO IA</b><small>en línea</small></div></div>
+            <div class="ph"><div class="av"><svg viewBox="11 6 82 82"><use href="#fia-logo"/></svg></div><div><b>FRANCO IA</b><small>en línea</small></div></div>
             <div class="msgs" id="msgs"></div>
           </div></div>
           <div class="toast" id="toast"><span style="font-size:22px">📅</span><div><b>Google Calendar</b>Nueva cita: Laura · mañana 2:00 p. m.</div></div>
@@ -470,7 +476,7 @@ html:not(.js) .slide{min-height:100vh}
         <div class="flow">
           <div class="pulse" aria-hidden="true"></div>
           <div class="nd rv" style="--d:.4s"><div class="c" aria-hidden="true">💬</div><b>WhatsApp</b></div>
-          <div class="nd k rv" style="--d:.55s"><div class="c" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"><path d="M6 5h12a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-7l-4 3.5V17H6a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z"/></svg></div><b>FRANCO</b></div>
+          <div class="nd k rv" style="--d:.55s"><div class="c" aria-hidden="true"><svg viewBox="11 6 82 82"><use href="#fia-logo"/></svg></div><b>FRANCO</b></div>
           <div class="nd rv" style="--d:.7s"><div class="c" aria-hidden="true">📅</div><b>Google Calendar</b></div>
           <div class="nd rv" style="--d:.85s"><div class="c" aria-hidden="true">✅</div><b>Cita confirmada</b></div>
         </div>
