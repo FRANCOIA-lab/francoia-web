@@ -723,11 +723,12 @@ function audio(){
   const C = window.AudioContext || window.webkitAudioContext; if (!C) return null;
   AC = new C();
   const comp = AC.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 4; comp.connect(AC.destination);
-  BUS = AC.createGain(); BUS.gain.value = .9; BUS.connect(comp);
+  BUS = AC.createGain(); BUS.gain.value = .63; BUS.connect(comp);   // efectos 30 % más bajos
   // reverberación generada (impulso de ruido con caída exponencial)
   const len = AC.sampleRate*2.4, ir = AC.createBuffer(2, len, AC.sampleRate);
   for (let ch = 0; ch < 2; ch++){ const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1)*Math.pow(1 - i/len, 2.8); }
   VERB = AC.createConvolver(); VERB.buffer = ir; const wet = AC.createGain(); wet.gain.value = .32; VERB.connect(wet); wet.connect(comp);
+  setTimeout(loadVoice, 0);
   return AC;
 }
 const ready = () => soundOn && AC && AC.state === 'running';
@@ -775,27 +776,38 @@ function setSound(v){
   soundOn = v; try { localStorage.setItem('fia_snd', v ? '1' : '0'); } catch (e) {}
   const b = $('#snd'); b.classList.toggle('on', v); b.setAttribute('aria-pressed', v); b.setAttribute('aria-label', v ? 'Silenciar' : 'Activar sonido');
   if (v){ const c = audio(); if (c && c.resume) c.resume().then(() => { if (!introDone && intro.classList.contains('run')) SFX.hum(true); }); }
-  else { SFX.hum(false); if (window.speechSynthesis) speechSynthesis.cancel(); }
+  else { SFX.hum(false); stopVoice(); }
 }
 $('#snd').onclick = e => { e.stopPropagation(); setSound(!soundOn); if (soundOn && !introDone && voiceDue && !voiceStarted) speak(); };
 
-/* voz del sistema (síntesis de voz del dispositivo, en español; tono grave y pausado) */
-const VOICE_TXT = 'Franco I A está operativo. Todos los sistemas disponibles funcionan correctamente. ¿En qué puedo ayudarte?';
-let voiceDue = false, voiceStarted = false, voiceSpeaking = false, endPending = false;
-function pickVoice(){
-  const vs = (window.speechSynthesis && speechSynthesis.getVoices()) || [], es = vs.filter(v => /^es/i.test(v.lang));
-  const male = /jorge|pablo|diego|ra[uú]l|alvaro|enrique|carlos|juan|andr[eé]s|gonzalo|jos[eé]|male|hombre/i;
-  return es.find(v => male.test(v.name)) || es.find(v => /es[-_](CO|MX|US)/i.test(v.lang)) || es[0] || null;
+/* voz del sistema: grabación propia (archivo del sitio), tratada en vivo para sonar como asistente IA. Igual en todos los dispositivos. */
+const VOICE_URL = 'WhatsApp%20Audio%202026-11-26%20at%201.52.20%20AM.mpeg';
+let voiceBuf = null, voiceNode = null, voiceDue = false, voiceStarted = false, voiceSpeaking = false, endPending = false;
+function loadVoice(){
+  if (voiceBuf || !AC || loadVoice.busy) return; loadVoice.busy = true;
+  fetch(VOICE_URL).then(r => r.arrayBuffer()).then(b => AC.decodeAudioData(b))
+    .then(b => { voiceBuf = b; if (!introDone && voiceDue && !voiceStarted) speak(); })
+    .catch(() => { loadVoice.busy = false; });
 }
-if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => {};
 function speak(){
-  if (!soundOn || !window.speechSynthesis || voiceStarted) return;
-  const u = new SpeechSynthesisUtterance(VOICE_TXT), v = pickVoice();
-  if (v) u.voice = v; u.lang = v ? v.lang : 'es-CO'; u.pitch = .72; u.rate = .9; u.volume = 1;
-  u.onstart = () => { voiceStarted = true; voiceSpeaking = true; };
-  u.onend = u.onerror = () => { voiceSpeaking = false; if (endPending) endIntro(); };
-  speechSynthesis.cancel(); speechSynthesis.speak(u);
+  if (!soundOn || voiceStarted || !AC || AC.state !== 'running') return;
+  if (!voiceBuf){ loadVoice(); return; }
+  const t = AC.currentTime, src = AC.createBufferSource(); src.buffer = voiceBuf;
+  // cadena: limpieza → cuerpo → presencia → brillo → nivel, + ecos cortos y reverberación de "espacio"
+  const hp = AC.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 70;
+  const body = AC.createBiquadFilter(); body.type = 'peaking'; body.frequency.value = 180; body.gain.value = 2;
+  const pres = AC.createBiquadFilter(); pres.type = 'peaking'; pres.frequency.value = 3200; pres.Q.value = 1.2; pres.gain.value = 3;
+  const lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 11000;
+  const lvl = AC.createGain(); lvl.gain.value = 1.9;
+  const vc = AC.createDynamicsCompressor(); vc.threshold.value = -14; vc.ratio.value = 3;
+  src.connect(hp); hp.connect(body); body.connect(pres); pres.connect(lp); lp.connect(lvl); lvl.connect(vc); vc.connect(AC.destination);
+  [[.04, .2], [.095, .12], [.17, .07]].forEach(([d, g]) => { const dl = AC.createDelay(); dl.delayTime.value = d; const eg = AC.createGain(); eg.gain.value = g; vc.connect(dl); dl.connect(eg); eg.connect(AC.destination); });
+  const rs = AC.createGain(); rs.gain.value = .22; vc.connect(rs); rs.connect(VERB);
+  voiceStarted = voiceSpeaking = true; voiceNode = src;
+  src.onended = () => { voiceSpeaking = false; voiceNode = null; setTimeout(() => { if (endPending) endIntro(); }, 450); };
+  src.start(t);
 }
+function stopVoice(){ if (voiceNode){ voiceNode.onended = null; try { voiceNode.stop(); } catch (e) {} voiceNode = null; } voiceSpeaking = false; }
 /* los navegadores solo permiten sonido tras un toque: el primero desbloquea audio y voz */
 function unlock(){
   ['pointerdown','keydown','touchstart'].forEach(t => removeEventListener(t, unlock, true));
@@ -822,7 +834,7 @@ function clearIntro(){ introTimers.forEach(clearTimeout); introTimers = []; canc
 
 function playIntro(){
   clearIntro(); introDone = false; voiceDue = voiceStarted = voiceSpeaking = endPending = false;
-  if (window.speechSynthesis) speechSynthesis.cancel();
+  stopVoice();
   intro.style.display = ''; intro.classList.remove('out', 'run', 'gated');
   $('#stories').classList.remove('on'); stopSlideFx();
   buildHUD(); $('#ask').textContent = ''; $('#pct').textContent = '0%'; setSys('SYSTEM INITIALIZATION');
@@ -844,7 +856,6 @@ function playIntro(){
 function endIntro(){
   if (introDone) return;
   introDone = true; endPending = false; clearIntro();
-  if (voiceSpeaking === false && window.speechSynthesis && !voiceStarted) speechSynthesis.cancel();
   if (intro.classList.contains('run')) SFX.exit(); else SFX.hum(false);
   intro.classList.add('out'); $('#stories').classList.add('on');
   setTimeout(() => { if (introDone){ intro.style.display = 'none'; intro.classList.remove('run'); } }, 850);   // detiene las animaciones infinitas
