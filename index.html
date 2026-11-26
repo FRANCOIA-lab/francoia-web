@@ -156,9 +156,35 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .run .ictl{animation:fade .4s ease forwards .6s}
 .ictl:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 #skip{right:18px}
-#snd{left:18px}
-#snd svg{width:14px;height:14px}
-#snd.on{color:var(--g);border-color:rgba(37,211,102,.5)}
+#snd{left:18px;width:34px;height:34px;padding:0;justify-content:center;border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.3)}
+#snd svg{width:15px;height:15px}
+#snd.on{color:rgba(37,211,102,.65)}
+#snd .x{display:none}#snd:not(.on) .x{display:block}#snd:not(.on) .w{display:none}
+.gated .ictl{opacity:1}
+
+/* pantalla de espera (antes de la activación) */
+.gate{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:26px;text-align:center;padding:24px}
+.gated .gate{display:flex}
+.gated .stage,.gated .sys{display:none}
+.gcore{position:relative;width:130px;height:130px;margin-bottom:6px}
+.gcore i{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(37,211,102,.55);animation:gring 2.4s ease-out infinite;opacity:0}
+.gcore i:nth-child(2){animation-delay:.8s}.gcore i:nth-child(3){animation-delay:1.6s}
+.gcore b{position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--g);box-shadow:0 0 22px 7px rgba(37,211,102,.55);animation:gbeat 1.6s ease-in-out infinite}
+@keyframes gring{0%{transform:scale(.15);opacity:1}100%{transform:scale(1.5);opacity:0}}
+@keyframes gbeat{50%{transform:scale(1.45)}}
+.gk{font-family:var(--mono);font-size:11px;letter-spacing:.32em;color:rgba(232,255,239,.55)}
+.gbtn{position:relative;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:clamp(14px,1.7vw,17px);font-weight:600;letter-spacing:.2em;color:#03140a;background:var(--g);padding:20px 34px;border-radius:99px;box-shadow:0 0 0 1px rgba(37,211,102,.6),0 0 40px rgba(37,211,102,.55),0 0 90px rgba(37,211,102,.25);animation:gglow 2s ease-in-out infinite;transition:transform .2s}
+.gbtn:hover{transform:scale(1.04)}
+.gbtn:before{content:"";position:absolute;inset:-9px;border-radius:99px;border:1px solid rgba(37,211,102,.5);animation:gring2 2s ease-out infinite}
+.gbtn svg{width:20px;height:20px;flex:none}
+@keyframes gglow{50%{box-shadow:0 0 0 1px rgba(37,211,102,.85),0 0 60px rgba(37,211,102,.8),0 0 130px rgba(37,211,102,.35)}}
+@keyframes gring2{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.12,1.45);opacity:0}}
+.gnote{font-size:13px;color:rgba(232,255,239,.5);max-width:340px;line-height:1.5}
+.gskip{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:rgba(255,255,255,.35);text-decoration:underline;text-underline-offset:4px;margin-top:4px}
+.gskip:hover{color:rgba(255,255,255,.7)}
+.gated #skip{display:none}
+.gbtn{white-space:nowrap}
+@media (max-width:420px){.gbtn{font-size:13px;letter-spacing:.12em;padding:18px 24px;gap:10px}}
 
 @media (max-width:1023px){
   .hudwrap{width:min(74vw,44vh,400px)}
@@ -417,8 +443,15 @@ html:not(.js) .slide{min-height:100vh}
 
 <!-- ================= INTRO · ACTIVACIÓN DEL SISTEMA ================= -->
 <div id="intro" aria-label="Activación de FRANCO IA">
-  <button id="snd" class="ictl" type="button" aria-pressed="false" aria-label="Activar sonido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><span id="sndt">SONIDO OFF</span></button>
+  <button id="snd" class="ictl" type="button" aria-pressed="true" aria-label="Silenciar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/><path class="x" d="M16 9l6 6M22 9l-6 6"/></svg></button>
   <button id="skip" class="ictl" type="button">SALTAR ›</button>
+  <div class="gate">
+    <div class="gcore" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+    <div class="gk">FRANCO IA · SISTEMA EN ESPERA</div>
+    <button id="gbtn" class="gbtn" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 3v8"/><path d="M6.3 7.3a8 8 0 1 0 11.4 0"/></svg>INICIALIZAR FRANCO IA</button>
+    <div class="gnote">Tu empleado digital está listo para despertar · Sube el volumen 🔊</div>
+    <button id="gskip" class="gskip" type="button">Entrar sin intro</button>
+  </div>
   <div class="stage">
     <div class="hudwrap">
       <svg id="hud" viewBox="-230 -230 460 460" aria-hidden="true">
@@ -518,7 +551,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 3 PROBLEMA -->
-    <section class="slide" data-dur="6500" aria-label="El problema">
+    <section class="slide" data-dur="4000" aria-label="El problema">
       <div class="in">
         <div class="kick rv">El problema</div>
         <h2 class="rv" style="--d:.1s">Cada WhatsApp sin responder <br>es una <span style="color:#ff6b6b">cita perdida.</span></h2>
@@ -534,7 +567,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 4 QUE HACE -->
-    <section class="slide" data-dur="6000" aria-label="Qué hace">
+    <section class="slide" data-dur="3800" aria-label="Qué hace">
       <div class="in">
         <div class="kick rv">Tu empleado digital</div>
         <h2 class="rv" style="--d:.1s">Un empleado que <span class="gtxt">nunca se desconecta.</span></h2>
@@ -550,7 +583,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 5 INTEGRACION -->
-    <section class="slide" data-dur="7000" aria-label="Integración con Google Calendar">
+    <section class="slide" data-dur="5200" aria-label="Integración con Google Calendar">
       <div class="in">
         <div class="kick rv">Integración</div>
         <h2 class="rv" style="--d:.1s">Tu calendario y FRANCO <br><span class="gtxt">trabajan juntos.</span></h2>
@@ -566,7 +599,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 6 PARA QUIEN -->
-    <section class="slide" data-dur="4500" aria-label="Para quién es">
+    <section class="slide" data-dur="3000" aria-label="Para quién es">
       <div class="in">
         <div class="kick rv">Para quién es</div>
         <h2 class="rv" style="--d:.1s">Para negocios que viven <br>de <span class="gtxt">atender clientes.</span></h2>
@@ -582,7 +615,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 7 COMO FUNCIONA -->
-    <section class="slide" data-dur="6000" aria-label="Cómo funciona">
+    <section class="slide" data-dur="3800" aria-label="Cómo funciona">
       <div class="in">
         <div class="kick rv">Cómo funciona</div>
         <h2 class="rv" style="--d:.1s">De cero a atendiendo <br>en <span class="gtxt">tres pasos.</span></h2>
@@ -595,7 +628,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 8 PRECIO -->
-    <section class="slide" data-dur="7500" aria-label="Precio">
+    <section class="slide" data-dur="4500" aria-label="Precio">
       <div class="in pricegrid">
         <div>
           <div class="kick rv">Precio</div>
@@ -616,7 +649,7 @@ html:not(.js) .slide{min-height:100vh}
     </section>
 
     <!-- 9 FAQ -->
-    <section class="slide" data-dur="8500" aria-label="Preguntas frecuentes">
+    <section class="slide" data-dur="5000" aria-label="Preguntas frecuentes">
       <div class="in">
         <div class="kick rv">Preguntas frecuentes</div>
         <h2 class="rv" style="--d:.1s">Lo que todos <span class="gtxt">preguntan.</span></h2>
@@ -681,29 +714,95 @@ const intro = $('#intro');
 const INTRO_MS = 7600, ASK = '¿EN QUÉ PUEDO AYUDARTE?';
 let introTimers = [], introRAF, introDone = true;
 
-/* sonido opcional (Web Audio sintetizado, sin archivos). Apagado por defecto; respeta el bloqueo de reproducción automática. */
-let AC = null, soundOn = false;
-try { soundOn = localStorage.getItem('fia_snd') === '1'; } catch (e) {}
-function audio(){ if (!AC){ const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; AC = new C(); } return AC; }
-function tone(freqs, dur, type, gain, glide){
-  if (!soundOn) return; const c = audio(); if (!c || c.state !== 'running') return;
-  const t = c.currentTime, g = c.createGain();
-  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(gain, t + .05); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
-  g.connect(c.destination);
-  freqs.forEach(f => { const o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); if (glide) o.frequency.exponentialRampToValueAtTime(f*glide, t + dur*.8); o.connect(g); o.start(t); o.stop(t + dur + .05); });
+/* ---------- MOTOR DE SONIDO (Web Audio sintetizado: sin archivos, ligero) ----------
+   Cadena: fuentes → bus → compresor → salida, con un envío a reverberación para dar sensación de espacio "holográfico". */
+let AC = null, BUS = null, VERB = null, HUM = null, soundOn = true;
+try { soundOn = localStorage.getItem('fia_snd') !== '0'; } catch (e) {}
+function audio(){
+  if (AC) return AC;
+  const C = window.AudioContext || window.webkitAudioContext; if (!C) return null;
+  AC = new C();
+  const comp = AC.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 4; comp.connect(AC.destination);
+  BUS = AC.createGain(); BUS.gain.value = .9; BUS.connect(comp);
+  // reverberación generada (impulso de ruido con caída exponencial)
+  const len = AC.sampleRate*2.4, ir = AC.createBuffer(2, len, AC.sampleRate);
+  for (let ch = 0; ch < 2; ch++){ const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1)*Math.pow(1 - i/len, 2.8); }
+  VERB = AC.createConvolver(); VERB.buffer = ir; const wet = AC.createGain(); wet.gain.value = .32; VERB.connect(wet); wet.connect(comp);
+  return AC;
+}
+const ready = () => soundOn && AC && AC.state === 'running';
+function out(node, rev){ node.connect(BUS); if (rev) { const s = AC.createGain(); s.gain.value = rev; node.connect(s); s.connect(VERB); } }
+function env(g, t, a, peak, d){ g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(.0001, t + a + d); }
+function osc(f, type, t, a, peak, d, f2, rev = .5){
+  const o = AC.createOscillator(), g = AC.createGain(); o.type = type; o.frequency.setValueAtTime(f, t);
+  if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + a + d*.8);
+  env(g, t, a, peak, d); o.connect(g); out(g, rev); o.start(t); o.stop(t + a + d + .1);
+}
+let NOISE = null;
+function noise(t, a, d, peak, f1, f2, q = 2, rev = .4){
+  if (!NOISE){ NOISE = AC.createBuffer(1, AC.sampleRate*2, AC.sampleRate); const n = NOISE.getChannelData(0); for (let i = 0; i < n.length; i++) n[i] = Math.random()*2-1; }
+  const s = AC.createBufferSource(), bp = AC.createBiquadFilter(), g = AC.createGain();
+  s.buffer = NOISE; bp.type = 'bandpass'; bp.Q.value = q; bp.frequency.setValueAtTime(f1, t); bp.frequency.exponentialRampToValueAtTime(f2, t + a + d);
+  env(g, t, a, peak, d); s.connect(bp); bp.connect(g); out(g, rev); s.start(t); s.stop(t + a + d + .1);
 }
 const SFX = {
-  wake:  () => tone([110, 165], 1.2, 'sine', .045, 2),   // activación suave
-  hud:   () => tone([660, 990], .5, 'triangle', .025),     // HUD completo
-  brand: () => tone([220, 330, 440], 1.6, 'sine', .03),    // identidad
+  power(){ if (!ready()) return; const t = AC.currentTime;                       // botón: encendido del sistema
+    osc(70, 'sine', t, .05, .22, 1.4, 220, .3); noise(t, .35, .9, .08, 200, 2400, 1.2); osc(880, 'sine', t + .35, .01, .05, .9, null, .9);
+    SFX.hum(true); },
+  hum(on){ if (!AC) return; const t = AC.currentTime;                             // zumbido de fondo muy bajo mientras dura la intro
+    if (on && !HUM && ready()){ const o1 = AC.createOscillator(), o2 = AC.createOscillator(), lp = AC.createBiquadFilter(), g = AC.createGain();
+      o1.type = 'sawtooth'; o1.frequency.value = 55; o2.type = 'sine'; o2.frequency.value = 110.4; lp.type = 'lowpass'; lp.frequency.value = 260;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.035, t + 1.5); o1.connect(lp); o2.connect(lp); lp.connect(g); g.connect(BUS); o1.start(); o2.start(); HUM = {o1, o2, g}; }
+    if (!on && HUM){ const h = HUM; HUM = null; h.g.gain.cancelScheduledValues(t); h.g.gain.setTargetAtTime(0, t, .25); setTimeout(() => { try { h.o1.stop(); h.o2.stop(); } catch (e) {} }, 1500); } },
+  core(){ if (!ready()) return; const t = AC.currentTime; osc(1320, 'sine', t, .005, .05, .6, null, .8); osc(1980, 'sine', t + .06, .005, .025, .5, null, .8); },
+  build(){ if (!ready()) return; const t = AC.currentTime;                        // trazo de anillos + marcas radiales
+    noise(t, .25, .7, .06, 500, 5000, 3, .5);
+    for (let i = 0; i < 10; i++) osc(2400 + i*90, 'square', t + .25 + i*.07, .002, .008, .05, null, .2); },
+  hud(){ if (!ready()) return; const t = AC.currentTime;                          // HUD completo
+    osc(659.3, 'triangle', t, .01, .05, 1.1, null, .9); osc(987.8, 'triangle', t + .09, .01, .04, 1.2, null, .9); osc(1318.5, 'sine', t + .18, .01, .025, 1.3, null, 1); },
+  mod(i){ if (!ready()) return; const t = AC.currentTime, f = [1046.5, 1174.7, 1318.5, 1568][i] || 1200;   // lectura de cada módulo
+    osc(f, 'sine', t, .004, .05, .18, null, .6); osc(f*2, 'sine', t + .05, .004, .02, .12, null, .6); },
+  ok(){ if (!ready()) return; const t = AC.currentTime;                           // sistema operativo
+    [523.3, 659.3, 784, 1046.5].forEach((f,i) => osc(f, 'sine', t + i*.05, .02, .03, 1.6, null, 1)); },
+  pulse(){ if (!ready()) return; const t = AC.currentTime;                        // pulso del núcleo + identidad
+    osc(120, 'sine', t, .01, .28, 1.2, 38, .4); noise(t, .02, 1, .07, 3000, 300, .8, .8);
+    [1760, 2217, 2637].forEach((f,i) => osc(f, 'sine', t + .25 + i*.08, .05, .012, 1.6, null, 1)); },
+  exit(){ if (!ready()) return; const t = AC.currentTime;                         // salida hacia la web
+    noise(t, .15, .8, .07, 4000, 250, 1.5, .5); osc(392, 'sine', t + .1, .02, .02, .9, 196, .8); SFX.hum(false); },
+  slide(){ if (!ready()) return; const t = AC.currentTime; noise(t, .02, .22, .025, 2600, 900, 2, .2); },   // cambio de historia (muy sutil)
 };
 function setSound(v){
   soundOn = v; try { localStorage.setItem('fia_snd', v ? '1' : '0'); } catch (e) {}
-  const b = $('#snd'); b.classList.toggle('on', v); b.setAttribute('aria-pressed', v);
-  b.setAttribute('aria-label', v ? 'Desactivar sonido' : 'Activar sonido'); $('#sndt').textContent = v ? 'SONIDO ON' : 'SONIDO OFF';
-  if (v){ const c = audio(); if (c && c.resume) c.resume().then(() => tone([880], .18, 'sine', .03)); }
+  const b = $('#snd'); b.classList.toggle('on', v); b.setAttribute('aria-pressed', v); b.setAttribute('aria-label', v ? 'Silenciar' : 'Activar sonido');
+  if (v){ const c = audio(); if (c && c.resume) c.resume().then(() => { if (!introDone && intro.classList.contains('run')) SFX.hum(true); }); }
+  else { SFX.hum(false); if (window.speechSynthesis) speechSynthesis.cancel(); }
 }
-$('#snd').onclick = e => { e.stopPropagation(); setSound(!soundOn); };
+$('#snd').onclick = e => { e.stopPropagation(); setSound(!soundOn); if (soundOn && !introDone && voiceDue && !voiceStarted) speak(); };
+
+/* voz del sistema (síntesis de voz del dispositivo, en español; tono grave y pausado) */
+const VOICE_TXT = 'Franco I A está operativo. Todos los sistemas disponibles funcionan correctamente. ¿En qué puedo ayudarte?';
+let voiceDue = false, voiceStarted = false, voiceSpeaking = false, endPending = false;
+function pickVoice(){
+  const vs = (window.speechSynthesis && speechSynthesis.getVoices()) || [], es = vs.filter(v => /^es/i.test(v.lang));
+  const male = /jorge|pablo|diego|ra[uú]l|alvaro|enrique|carlos|juan|andr[eé]s|gonzalo|jos[eé]|male|hombre/i;
+  return es.find(v => male.test(v.name)) || es.find(v => /es[-_](CO|MX|US)/i.test(v.lang)) || es[0] || null;
+}
+if (window.speechSynthesis) speechSynthesis.onvoiceschanged = () => {};
+function speak(){
+  if (!soundOn || !window.speechSynthesis || voiceStarted) return;
+  const u = new SpeechSynthesisUtterance(VOICE_TXT), v = pickVoice();
+  if (v) u.voice = v; u.lang = v ? v.lang : 'es-CO'; u.pitch = .72; u.rate = .9; u.volume = 1;
+  u.onstart = () => { voiceStarted = true; voiceSpeaking = true; };
+  u.onend = u.onerror = () => { voiceSpeaking = false; if (endPending) endIntro(); };
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+/* los navegadores solo permiten sonido tras un toque: el primero desbloquea audio y voz */
+function unlock(){
+  ['pointerdown','keydown','touchstart'].forEach(t => removeEventListener(t, unlock, true));
+  if (!soundOn) return; const c = audio(); if (c && c.resume) c.resume();
+  if (!introDone && voiceDue && !voiceStarted) speak();
+}
+['pointerdown','keydown','touchstart'].forEach(t => addEventListener(t, unlock, true));
 setSound(soundOn);
 
 function buildHUD(){
@@ -722,29 +821,48 @@ function typeAsk(){ const el = $('#ask'); [...ASK].forEach((ch,i) => introTimers
 function clearIntro(){ introTimers.forEach(clearTimeout); introTimers = []; cancelAnimationFrame(introRAF); }
 
 function playIntro(){
-  clearIntro(); introDone = false;
-  intro.style.display = ''; intro.classList.remove('out', 'run');
+  clearIntro(); introDone = false; voiceDue = voiceStarted = voiceSpeaking = endPending = false;
+  if (window.speechSynthesis) speechSynthesis.cancel();
+  intro.style.display = ''; intro.classList.remove('out', 'run', 'gated');
   $('#stories').classList.remove('on'); stopSlideFx();
   buildHUD(); $('#ask').textContent = ''; $('#pct').textContent = '0%'; setSys('SYSTEM INITIALIZATION');
   void intro.offsetWidth; intro.classList.add('run');          // reinicia todas las animaciones CSS
-  [[200, SFX.wake],
-   [1200, () => setSys('BUILDING INTERFACE')],
+  SFX.hum(true);
+  [[200, SFX.core],
+   [1200, () => { setSys('BUILDING INTERFACE'); SFX.build(); }],
    [3000, () => { setSys('LOADING MODULES'); SFX.hud(); }],
-   [4500, () => setSys('SYSTEM STATUS: OPERATIONAL', true)],
-   [4800, SFX.brand],
+   [3100, () => SFX.mod(0)], [3500, () => SFX.mod(1)], [3900, () => SFX.mod(2)], [4300, () => SFX.mod(3)],
+   [4500, () => { setSys('SYSTEM STATUS: OPERATIONAL', true); SFX.ok(); }],
+   [4800, SFX.pulse],
+   [5900, () => { voiceDue = true; speak(); }],
    [6300, typeAsk],
-   [INTRO_MS, endIntro]].forEach(([ms, fn]) => introTimers.push(setTimeout(fn, ms)));
+   [INTRO_MS, () => { if (voiceSpeaking){ endPending = true; introTimers.push(setTimeout(endIntro, 8000)); } else endIntro(); }]].forEach(([ms, fn]) => introTimers.push(setTimeout(fn, ms)));
   const t0 = performance.now(), pct = $('#pct');
   const tick = now => { const p = Math.min(100, Math.round((now - t0)/45)); pct.textContent = p + '%'; if (p < 100 && !introDone) introRAF = requestAnimationFrame(tick); };
   introRAF = requestAnimationFrame(tick);
 }
 function endIntro(){
   if (introDone) return;
-  introDone = true; clearIntro();
+  introDone = true; endPending = false; clearIntro();
+  if (voiceSpeaking === false && window.speechSynthesis && !voiceStarted) speechSynthesis.cancel();
+  if (intro.classList.contains('run')) SFX.exit(); else SFX.hum(false);
   intro.classList.add('out'); $('#stories').classList.add('on');
   setTimeout(() => { if (introDone){ intro.style.display = 'none'; intro.classList.remove('run'); } }, 850);   // detiene las animaciones infinitas
   go(0, true);
 }
+/* pantalla de espera: el toque del visitante habilita audio y voz (requisito de los navegadores) */
+function showGate(){
+  clearIntro(); introDone = false;
+  intro.style.display = ''; intro.classList.remove('out', 'run'); intro.classList.add('gated');
+  $('#stories').classList.remove('on');
+  setTimeout(() => $('#gbtn').focus({preventScroll:true}), 50);
+}
+function startFromGate(){
+  if (soundOn){ const c = audio(); if (c && c.resume) c.resume().then(SFX.power); }
+  playIntro();
+}
+$('#gbtn').onclick = e => { e.stopPropagation(); startFromGate(); };
+$('#gskip').onclick = e => { e.stopPropagation(); endIntro(); };
 
 /* ---------- HISTORIAS ---------- */
 const slides = [...document.querySelectorAll('.slide')], N = slides.length, bars = $('#bars');
@@ -763,7 +881,7 @@ function go(i, force){
   fills.forEach((f,k) => f.style.transform = `scaleX(${k < cur || (k === cur && cur === N-1) ? 1 : 0})`);
   $('#count').innerHTML = `<b>${String(cur+1).padStart(2,'0')}</b> / ${String(N).padStart(2,'0')}`;
   $('#prev').disabled = cur === 0; $('#next').disabled = cur === N-1;
-  stopSlideFx();
+  stopSlideFx(); if (introDone && !force) SFX.slide();
   if (s.id === 'chatSlide') runChat();
   if (s.querySelector('.flow')) runFlow(s.querySelector('.flow'));
 }
@@ -828,11 +946,14 @@ function setPause(v){
 $('#next').onclick = e => { e.stopPropagation(); next(); };
 $('#prev').onclick = e => { e.stopPropagation(); prev(); };
 $('#pause').onclick = e => { e.stopPropagation(); setPause(!userPaused); };
-$('#replay').onclick = e => { e.stopPropagation(); playIntro(); };
+$('#replay').onclick = e => { e.stopPropagation(); if (soundOn){ const c = audio(); if (c && c.resume) c.resume().then(SFX.power); } playIntro(); };
 $('#skip').onclick = e => { e.stopPropagation(); endIntro(); };
 
 addEventListener('keydown', e => {
-  if (!introDone){ if ([' ','Enter','Escape'].includes(e.key)){ e.preventDefault(); endIntro(); } return; }
+  if (!introDone){
+    if (intro.classList.contains('gated')){ if (e.key === 'Escape') endIntro(); return; }   // Enter/Espacio activan el botón enfocado
+    if ([' ','Enter','Escape'].includes(e.key)){ e.preventDefault(); endIntro(); } return;
+  }
   if (e.key === 'ArrowRight' || e.key === 'PageDown') next();
   else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prev();
   else if (e.key === ' ' && !e.target.closest('a,button')){ e.preventDefault(); setPause(!userPaused); }
@@ -863,7 +984,7 @@ requestAnimationFrame(tick);
 let seen = false;
 try { seen = Date.now() - (+localStorage.getItem('fia_intro') || 0) < 432e5; localStorage.setItem('fia_intro', Date.now()); } catch (e) {}
 if (reduce || seen){ intro.style.display = 'none'; st.classList.add('on'); go(0, true); }
-else playIntro();
+else showGate();
 })();
 </script>
 </body>
