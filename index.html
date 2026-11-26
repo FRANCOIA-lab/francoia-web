@@ -69,39 +69,110 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--g);outline-offset:3px;border-radius:8px}
 .gtxt{color:var(--g)}
 
-/* ================= INTRO ================= */
+/* ================= INTRO · ACTIVACIÓN DEL SISTEMA (≈7,6 s) ================= */
 #intro{display:none}
-.js #intro{position:fixed;inset:0;z-index:50;background:#000;display:grid;place-items:center;cursor:pointer;transition:opacity .7s ease,transform .7s cubic-bezier(.7,0,.3,1)}
-#intro.out{opacity:0;transform:scale(1.5);pointer-events:none}
-#fx{position:absolute;inset:0;width:100%;height:100%}
-.hudwrap{position:relative;width:min(72vmin,440px);aspect-ratio:1;margin-top:-9vh}
+.js #intro{position:fixed;inset:0;z-index:50;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .8s ease,transform .9s cubic-bezier(.6,0,.2,1),filter .8s ease}
+#intro.out{opacity:0;transform:scale(1.08);filter:blur(4px);pointer-events:none}
+.stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2.4vh,24px);margin-top:-3vh}
+.hudwrap{position:relative;width:min(50vmin,430px);aspect-ratio:1}
 #hud{width:100%;height:100%;overflow:visible}
-#hud .st{fill:none;stroke:#e8ffef;stroke-width:1;stroke-linecap:round}
-#hud .dim{stroke:rgba(232,255,239,.35)}
-#hud .gr{stroke:var(--g)}
-.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw var(--dur,1.2s) cubic-bezier(.6,0,.2,1) forwards var(--d,0s)}
-.fadein{opacity:0;animation:fade .5s ease forwards var(--d,0s)}
-.spin,.spinr{transform-origin:200px 200px;animation:spin var(--s,20s) linear infinite}
-.spinr{animation-direction:reverse}
-#logoGlow{opacity:0;animation:glow 1.4s ease forwards 2.4s}
+.h-st{fill:none;stroke:rgba(232,255,239,.5);stroke-width:1}
+.h-dim{stroke:rgba(232,255,239,.2)}
+.h-g{stroke:var(--g)}
+.spin,.spinr,.core,.glow,.hp{transform-origin:0 0}
+/* todo se anima solo mientras #intro tiene .run (permite repetir y detener limpiamente) */
+.dr{stroke-dasharray:1;stroke-dashoffset:1}
+.fi{opacity:0}
+.arc{stroke-dasharray:0 1}
+.gauge{stroke-dasharray:0 1}
+.core,.glow,.hp{opacity:0}
+.run .dr{animation:draw var(--dur,.8s) cubic-bezier(.65,0,.25,1) forwards var(--d,0s)}
+.run .fi{animation:fade var(--dur,.5s) ease forwards var(--d,0s)}
+.run .spin{animation:spin var(--s,30s) linear infinite}
+.run .spinr{animation:spin var(--s,30s) linear infinite reverse}
+.run .arc{animation:arcIn .6s ease forwards var(--d), fadeOut .4s ease forwards 4.75s}
+.run .gauge{animation:gauge 1s cubic-bezier(.65,0,.25,1) forwards 2.2s}
+.run .core{animation:coreOn .6s cubic-bezier(.2,.9,.3,1.4) forwards .2s, coreOff .35s ease forwards 4.8s}
+.run .glow{animation:glowSeq 7.6s ease forwards}
+.run .hp{animation:pulse 1.2s cubic-bezier(.2,.7,.3,1) forwards 4.8s}
 @keyframes draw{to{stroke-dashoffset:0}}
 @keyframes fade{to{opacity:1}}
+@keyframes fadeOut{to{opacity:0}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes glow{40%{opacity:.9}100%{opacity:.35}}
-.brand{position:absolute;left:50%;top:calc(100% + 18px);transform:translateX(-50%);display:flex;gap:.08em;font-weight:700;font-size:clamp(28px,6vmin,46px);letter-spacing:.22em;white-space:nowrap}
-.brand span{opacity:0;transform:translateY(10px);animation:letter .45s ease forwards}
+@keyframes arcIn{to{stroke-dasharray:.3 .2}}
+@keyframes gauge{to{stroke-dasharray:.68 1}}
+@keyframes coreOn{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+@keyframes coreOff{to{opacity:0;transform:scale(.3)}}
+@keyframes glowSeq{0%{opacity:0;transform:scale(.25)}5%{opacity:.16;transform:scale(.45)}38%{opacity:.22;transform:scale(.6)}60%{opacity:.75;transform:scale(1)}63%{opacity:1;transform:scale(1.2)}72%{opacity:.4;transform:scale(1)}100%{opacity:.45;transform:scale(1)}}
+@keyframes pulse{0%{opacity:.9;transform:scale(.4)}100%{opacity:0;transform:scale(3.4)}}
+
+/* módulos de estado (indicadores visuales de la presentación) */
+.mods{position:absolute;inset:0;pointer-events:none}
+.mod{position:absolute;display:flex;flex-direction:column;gap:5px;min-width:262px;padding:10px 14px;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;border:1px solid rgba(37,211,102,.22);background:rgba(37,211,102,.035);opacity:0}
+.mod b{font-weight:400;color:#e8ffef}
+.mod span{color:var(--g);display:flex;align-items:center;gap:7px}
+.mod span:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--g);box-shadow:0 0 6px var(--g);flex:none}
+.mod:after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--g)}
+.mod:before{content:"";position:absolute;top:50%;width:44px;height:1px}
+.mod.l{right:calc(100% + 30px);align-items:flex-end;text-align:right;--x:-10px}
+.mod.l span{flex-direction:row-reverse}
+.mod.l:before{left:100%;background:linear-gradient(90deg,rgba(37,211,102,.6),rgba(37,211,102,.05))}
+.mod.r{left:calc(100% + 30px);--x:10px}
+.mod.r:before{right:100%;background:linear-gradient(270deg,rgba(37,211,102,.6),rgba(37,211,102,.05))}
+.m1,.m3{top:24%}.m2,.m4{top:60%}
+.run .mod{animation:modIn .45s cubic-bezier(.2,.8,.2,1) forwards var(--t), modDim .6s ease forwards 4.9s}
+.run .mod:after{animation:barw .5s ease forwards calc(var(--t) + .15s)}
+@keyframes modIn{from{opacity:0;transform:translateX(var(--x))}to{opacity:1;transform:none}}
+@keyframes modDim{to{opacity:.35}}
+@keyframes modOut{to{opacity:0;transform:translateY(-6px)}}
+@keyframes barw{to{width:100%}}
+
+/* identidad */
+.idb{min-height:150px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.brand{display:flex;gap:.06em;font-weight:700;font-size:clamp(30px,5.2vmin,50px);letter-spacing:.24em;padding-left:.24em;white-space:nowrap;line-height:1}
+.brand span{opacity:0;transform:translateY(8px);filter:blur(6px)}
+.run .brand span{animation:letter .5s ease forwards}
 .brand .g{color:var(--g)}
-.tagl{position:absolute;left:50%;top:calc(100% + 30px + clamp(28px,6vmin,46px));transform:translateX(-50%);white-space:nowrap;font-family:var(--mono);font-size:clamp(8.5px,2.3vw,12px);letter-spacing:.24em;text-transform:uppercase;color:#e8ffef;opacity:0;animation:fade .6s ease forwards 3.3s}
-.tagl b{color:var(--g);font-weight:600}
-@keyframes letter{to{opacity:1;transform:none}}
-.sys{position:absolute;bottom:max(34px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);text-transform:uppercase;white-space:nowrap}
-.sys .sl{font-size:clamp(11px,1.3vw,14px);letter-spacing:.3em;color:#e8ffef}
+@keyframes letter{to{opacity:1;transform:none;filter:none}}
+.sub{margin-top:12px;font-family:var(--mono);font-size:clamp(9px,1.15vw,12px);letter-spacing:.42em;padding-left:.42em;color:rgba(232,255,239,.6)}
+.osl{margin-top:24px;font-family:var(--mono);font-size:clamp(10px,1.15vw,12px);letter-spacing:.3em;color:var(--g)}
+.ask{margin-top:8px;font-size:clamp(19px,2.6vw,26px);font-weight:500;letter-spacing:.04em;min-height:1.3em;white-space:nowrap}
+.cur{display:inline-block;width:.5em;height:2px;background:var(--g);margin-left:4px;opacity:0}
+.run .cur{animation:fade .1s forwards 6.2s, blink 1s steps(1) infinite 6.3s}
+@keyframes blink{50%{opacity:0}}
+
+/* barra de estado inferior */
+.sys{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;font-family:var(--mono);white-space:nowrap;opacity:0}
+.run .sys{animation:fade .5s ease forwards .4s}
+.sys .sl{font-size:10.5px;letter-spacing:.28em;color:rgba(232,255,239,.55)}
 .sys.done .sl{color:var(--g)}
-.sys .sbar{width:min(300px,66vw);height:3px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
-.sys .sbar i{display:block;height:100%;width:0;background:var(--g);box-shadow:0 0 12px var(--g)}
-.sys b{font-size:clamp(32px,4.4vw,48px);font-weight:600;color:var(--g);text-shadow:0 0 24px rgba(37,211,102,.6);letter-spacing:.04em;line-height:1}
-#skip{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:2;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.6);padding:8px 14px;border:1px solid rgba(255,255,255,.15);border-radius:99px;background:#000}
-#skip:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+.sbar{width:min(160px,30vw);height:1px;background:rgba(255,255,255,.15);overflow:hidden}
+.sbar i{display:block;height:100%;width:0;background:var(--g);box-shadow:0 0 8px var(--g)}
+.run .sbar i{animation:barw 4.5s linear forwards}
+#pct{font-size:15px;font-weight:600;color:var(--g);min-width:4ch;text-align:right;text-shadow:0 0 14px rgba(37,211,102,.5)}
+
+/* controles: sonido y omitir */
+.ictl{position:absolute;top:max(18px,env(safe-area-inset-top));z-index:2;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:rgba(255,255,255,.55);padding:8px 14px;border:1px solid rgba(255,255,255,.14);border-radius:99px;background:#000;opacity:0}
+.run .ictl{animation:fade .4s ease forwards .6s}
+.ictl:hover{color:#fff;border-color:rgba(255,255,255,.4)}
+#skip{right:18px}
+#snd{left:18px}
+#snd svg{width:14px;height:14px}
+#snd.on{color:var(--g);border-color:rgba(37,211,102,.5)}
+
+@media (max-width:1023px){
+  .hudwrap{width:min(74vw,44vh,400px)}
+  .mods{inset:auto;top:calc(100% + 16px);left:50%;transform:translateX(-50%);width:min(92vw,440px);display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .mod,.mod.l,.mod.r{position:relative;left:auto;right:auto;top:auto;min-width:0;padding:8px 10px;font-size:9px;letter-spacing:.12em;align-items:flex-start;text-align:left;--x:0px}
+  .mod.l span{flex-direction:row}
+  .mod:before{display:none}
+  .run .mod{animation:modIn .4s ease forwards var(--t), modOut .35s ease forwards 4.75s}
+}
+@media (max-width:600px){
+  .sys{flex-direction:column;gap:8px}
+  .sub{letter-spacing:.3em;padding-left:.3em}
+  .osl{letter-spacing:.2em;margin-top:18px}
+}
 
 /* ================= HISTORIAS ================= */
 .js #stories{position:fixed;inset:0;opacity:0;transition:opacity .7s ease;user-select:none;-webkit-user-select:none;touch-action:pan-y}
@@ -265,7 +336,6 @@ html:not(.js) .slide{min-height:100vh}
   .count,.hint .pc-t{display:none}
   .hint .mob{display:inline}
   .hint{bottom:96px}
-  #skip{top:18px}
   .slide{padding:112px 22px 92px}
   h2{font-size:clamp(29px,8.4vw,40px);line-height:1.02}
   h2 br{display:none}
@@ -345,42 +415,58 @@ html:not(.js) .slide{min-height:100vh}
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="fiaG" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#12b24f"/><stop offset=".55" stop-color="#25d366"/><stop offset="1" stop-color="#a6ff3d"/></linearGradient><symbol id="fia-logo" viewBox="11 6 82 82"><path d="M31.1 72.8A34 34 0 1 0 24.1 65.5L17 79Z" fill="none" stroke="url(#fiaG)" stroke-width="5.5" stroke-linejoin="round"/><circle cx="52" cy="28" r="4.3" fill="#fff"/><path d="M52 32v6" stroke="#fff" stroke-width="3"/><rect x="30" y="38" width="44" height="24" rx="12" fill="none" stroke="#fff" stroke-width="3.8"/><circle cx="44.4" cy="50" r="3.6" fill="#25d366"/><circle cx="59.7" cy="50" r="3.6" fill="#25d366"/></symbol></defs></svg>
 
-<!-- ================= INTRO ================= -->
-<div id="intro">
-  <canvas id="fx" aria-hidden="true"></canvas>
-  <button id="skip" type="button">SALTAR ›</button>
-  <div class="hudwrap" aria-hidden="true">
-    <svg id="hud" viewBox="0 0 400 400">
-      <defs><radialGradient id="glowg"><stop offset="0" stop-color="#25d366" stop-opacity=".55"/><stop offset="1" stop-color="#25d366" stop-opacity="0"/></radialGradient></defs>
-      <circle id="logoGlow" cx="200" cy="200" r="120" fill="url(#glowg)"/>
-      <g id="ticks" class="fadein" style="--d:.7s"></g>
-      <circle class="st draw" pathLength="1" cx="200" cy="200" r="182" style="--d:.4s;--dur:1.3s"/>
-      <g class="spin" style="--s:24s"><circle class="st dim fadein" cx="200" cy="200" r="164" stroke-dasharray="2 7" style="--d:.9s"/></g>
-      <g class="spinr" style="--s:9s"><circle class="st gr draw" pathLength="1" cx="200" cy="200" r="146" style="--d:1s;--dur:.9s;stroke-width:2;stroke-dasharray:.18 .07 .1 .65"/></g>
-      <g class="spin" style="--s:6s">
-        <circle class="st dim draw" pathLength="1" cx="200" cy="200" r="128" style="--d:1.1s;--dur:.9s;stroke-dasharray:.3 .7"/>
-        <circle cx="328" cy="200" r="3" fill="#e8ffef" class="fadein" style="--d:1.5s"/>
-      </g>
-      <g class="spinr" style="--s:16s">
-        <circle cx="200" cy="54" r="2.5" fill="#25d366" class="fadein" style="--d:1.3s"/>
-        <circle cx="200" cy="346" r="2.5" fill="#25d366" class="fadein" style="--d:1.3s"/>
-      </g>
-      <circle class="st dim draw" pathLength="1" cx="200" cy="200" r="98" style="--d:1.3s;--dur:.9s"/>
-      <g class="fadein" style="--d:1.5s">
-        <line class="st dim" x1="200" y1="88" x2="200" y2="104"/><line class="st dim" x1="200" y1="296" x2="200" y2="312"/>
-        <line class="st dim" x1="88" y1="200" x2="104" y2="200"/><line class="st dim" x1="296" y1="200" x2="312" y2="200"/>
-      </g>
-      <g transform="translate(200 200) scale(1.75) translate(-52 -47)">
-        <path class="draw" pathLength="1" d="M31.1 72.8A34 34 0 1 0 24.1 65.5L17 79Z" fill="none" stroke="url(#fiaG)" stroke-width="5.5" stroke-linejoin="round" style="--d:1.5s;--dur:.9s"/>
-        <rect class="draw" pathLength="1" x="30" y="38" width="44" height="24" rx="12" fill="none" stroke="#fff" stroke-width="3.8" style="--d:1.9s;--dur:.7s"/>
-        <path class="draw" pathLength="1" d="M52 32v6" stroke="#fff" stroke-width="3" style="--d:2.2s;--dur:.3s"/>
-        <g class="fadein" style="--d:2.4s"><circle cx="52" cy="28" r="4.3" fill="#fff"/><circle cx="44.4" cy="50" r="3.6" fill="#25d366"/><circle cx="59.7" cy="50" r="3.6" fill="#25d366"/></g>
-      </g>
-    </svg>
-    <div class="brand" id="brand"></div>
-    <div class="tagl">Soluciones de IA que <b>conectan</b> tu negocio</div>
+<!-- ================= INTRO · ACTIVACIÓN DEL SISTEMA ================= -->
+<div id="intro" aria-label="Activación de FRANCO IA">
+  <button id="snd" class="ictl" type="button" aria-pressed="false" aria-label="Activar sonido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg><span id="sndt">SONIDO OFF</span></button>
+  <button id="skip" class="ictl" type="button">SALTAR ›</button>
+  <div class="stage">
+    <div class="hudwrap">
+      <svg id="hud" viewBox="-230 -230 460 460" aria-hidden="true">
+        <defs><radialGradient id="hg"><stop offset="0" stop-color="#25d366" stop-opacity=".9"/><stop offset=".35" stop-color="#25d366" stop-opacity=".22"/><stop offset="1" stop-color="#25d366" stop-opacity="0"/></radialGradient></defs>
+        <circle class="glow" r="135" fill="url(#hg)"/>
+        <!-- fase 2: construcción del HUD -->
+        <g id="ticks"></g>
+        <circle class="h-st dr" pathLength="1" r="190" transform="rotate(-90)" style="--d:1.2s;--dur:.8s"/>
+        <circle class="h-st h-g gauge" pathLength="1" r="178" transform="rotate(-90)" style="stroke-width:2;opacity:.85"/>
+        <g class="spin" style="--s:60s"><circle class="h-st h-g fi" r="162" style="--d:1.8s;--dur:.8s;stroke-width:1.4;stroke-dasharray:70 16 8 16;opacity:.75"/></g>
+        <g class="spinr" style="--s:30s"><circle class="h-st h-dim fi" r="148" style="--d:2s;stroke-dasharray:1.5 6"/></g>
+        <circle class="h-st h-g dr" pathLength="1" r="122" transform="rotate(90)" style="--d:1.4s;--dur:.7s;opacity:.6"/>
+        <g class="spin" style="--s:20s"><circle class="h-st fi" r="104" style="--d:2.3s;stroke-dasharray:110 40 16 40;opacity:.35"/></g>
+        <g class="fi" style="--d:2.4s">
+          <path class="h-st h-dim" d="M0-136v-10M0 136v10M-136 0h-10M136 0h10"/>
+        </g>
+        <g class="spin" style="--s:9s"><circle class="fi" cx="148" cy="0" r="2.4" fill="#e8ffef" style="--d:2.6s"/></g>
+        <g class="spinr" style="--s:14s"><circle class="fi" cx="0" cy="-178" r="2.6" fill="#25d366" style="--d:2.7s"/></g>
+        <g class="spin" style="--s:24s"><circle class="fi" cx="-122" cy="0" r="2" fill="#25d366" style="--d:2.8s"/></g>
+        <!-- fase 1: núcleo -->
+        <g class="spin" style="--s:7s"><circle class="h-st h-g arc" pathLength="1" r="22" style="--d:.5s;stroke-width:1.5"/></g>
+        <g class="spinr" style="--s:10s"><circle class="h-st arc" pathLength="1" r="32" style="--d:.75s;opacity:.6"/></g>
+        <g class="core"><circle r="5" fill="#25d366"/><circle r="10" fill="none" stroke="#25d366" stroke-opacity=".45"/></g>
+        <!-- fase 4: pulso e identidad (logo oficial) -->
+        <circle class="hp" r="40" fill="none" stroke="#25d366" stroke-width="1.5"/>
+        <g transform="scale(2.2) translate(-52 -47)">
+          <path class="dr" pathLength="1" d="M31.1 72.8A34 34 0 1 0 24.1 65.5L17 79Z" fill="none" stroke="url(#fiaG)" stroke-width="3" stroke-linejoin="round" style="--d:4.95s;--dur:.8s"/>
+          <rect class="dr" pathLength="1" x="30" y="38" width="44" height="24" rx="12" fill="none" stroke="#fff" stroke-width="2.3" style="--d:5.3s;--dur:.55s"/>
+          <path class="dr" pathLength="1" d="M52 32v6" stroke="#fff" stroke-width="2" style="--d:5.6s;--dur:.2s"/>
+          <g class="fi" style="--d:5.7s"><circle cx="52" cy="28" r="4" fill="#fff"/><circle cx="44.4" cy="50" r="3.6" fill="#25d366"/><circle cx="59.7" cy="50" r="3.6" fill="#25d366"/></g>
+        </g>
+      </svg>
+      <!-- fase 3: módulos (indicadores visuales de la presentación) -->
+      <div class="mods" aria-hidden="true">
+        <div class="mod l m1" style="--t:3.1s"><b>NEURAL CORE</b><span>ONLINE</span></div>
+        <div class="mod l m2" style="--t:3.5s"><b>KNOWLEDGE BASE</b><span>READY</span></div>
+        <div class="mod r m3" style="--t:3.9s"><b>COMMUNICATION MODULE</b><span>READY</span></div>
+        <div class="mod r m4" style="--t:4.3s"><b>CALENDAR SYNCHRONIZATION</b><span>READY</span></div>
+      </div>
+    </div>
+    <div class="idb">
+      <div class="brand" id="brand" aria-label="FRANCO IA"></div>
+      <div class="sub fi" style="--d:5.6s;--dur:.6s">INTELLIGENT ASSISTANT SYSTEM</div>
+      <div class="osl fi" style="--d:6s;--dur:.5s">FRANCO IA — SISTEMA OPERATIVO</div>
+      <div class="ask"><span id="ask"></span><i class="cur"></i></div>
+    </div>
   </div>
-  <div class="sys" aria-hidden="true"><div class="sl" id="sysl">Conectando tu canal de ventas</div><div class="sbar"><i id="sbar"></i></div><b id="pct">0%</b></div>
+  <div class="sys" aria-hidden="true"><div class="sl" id="sysl">SYSTEM INITIALIZATION</div><div class="sbar"><i></i></div><b id="pct">0%</b></div>
 </div>
 
 <!-- ================= HISTORIAS ================= -->
@@ -588,68 +674,77 @@ document.querySelectorAll('.wa-link').forEach(a => {
   });
 });
 
-/* ---------- INTRO ---------- */
-const intro = $('#intro'), cv = $('#fx'), ctx = cv.getContext('2d');
-const SNIPS = ['init neural_core()','whatsapp.connect(business_id)','calendar.sync("google")','load knowledge_base(negocio)','agent.mode = "24/7"','> escuchando mensajes...','agenda.disponibilidad()','nlp.intent("agendar_cita")','respuesta_ms = 812','await cliente.mensaje','cita.confirmar(✓)','status: ONLINE','webhook /meta/cloud-api','for (msg of inbox) responder(msg)','reagendar() · cancelar()','memory.load(servicios, precios)'];
-const INTRO_MS = 4600;
-let W, H, parts = [], codes = [], t0, introRAF, introTimer, introDone = true;
+/* ---------- INTRO · ACTIVACIÓN DEL SISTEMA ---------- */
+/* Secuencia: 0–1,2 s despertar · 1,2–3 s HUD · 3–4,8 s módulos · 4,8–6 s identidad · 6–7,6 s sistema listo · salida.
+   Las animaciones visuales son CSS (se activan con #intro.run); JS solo marca los hitos, el texto y el sonido opcional. */
+const intro = $('#intro');
+const INTRO_MS = 7600, ASK = '¿EN QUÉ PUEDO AYUDARTE?';
+let introTimers = [], introRAF, introDone = true;
 
-function size(){ const d = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = W*d; cv.height = H*d; ctx.setTransform(d,0,0,d,0,0); }
-function frame(now){
-  const t = now - t0, cx = W/2, cy = H/2 - H*.09, R = Math.min(W*.72, H*.72, 440)/2;
-  const fade = t > 3800 ? Math.max(0, 1 - (t-3800)/600) : 1;
-  ctx.clearRect(0,0,W,H);
-  if (t < 3300 && Math.random() < (W < 700 ? .12 : .35))
-    codes.push({x: Math.random() < .5 ? 20 + Math.random()*W*.28 : W*.7 + Math.random()*W*.26, y: 60 + Math.random()*(H-120), s: SNIPS[Math.random()*SNIPS.length|0], b: t});
-  ctx.font = '11px "JetBrains Mono", monospace';
-  codes = codes.filter(c => t - c.b < 1500);
-  for (const c of codes){
-    const age = t - c.b, n = Math.min(c.s.length, age/20|0), al = (age < 1000 ? 1 : 1 - (age-1000)/500) * .55 * fade;
-    ctx.fillStyle = `rgba(37,211,102,${al})`; ctx.fillText(c.s.slice(0,n) + (n < c.s.length ? '▌' : ''), c.x, c.y);
-  }
-  const pull = t > 1100 ? Math.min(1, (t-1100)/1500) : 0;
-  for (const p of parts){
-    if (pull){ p.a += .004; const rr = R*(1.05 + ((p.a*7)%1)*.25); p.x += (cx + Math.cos(p.a)*rr - p.x)*.03*pull; p.y += (cy + Math.sin(p.a)*rr - p.y)*.03*pull; }
-    p.x += p.vx*(1-pull); p.y += p.vy*(1-pull);
-    if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
-  }
-  ctx.lineWidth = .6;
-  for (let i = 0; i < parts.length; i++){ const a = parts[i];
-    for (let j = i+1; j < parts.length; j++){ const b = parts[j], d = Math.hypot(a.x-b.x, a.y-b.y);
-      if (d < 120){ ctx.strokeStyle = `rgba(232,255,239,${(1-d/120)*.22*fade})`; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); } }
-    ctx.fillStyle = `rgba(37,211,102,${.85*fade})`; ctx.beginPath(); ctx.arc(a.x,a.y,1.6,0,7); ctx.fill();
-  }
-  const p = Math.min(100, Math.round(t/34));
-  $('#pct').textContent = p + '%'; $('#sbar').style.width = p + '%';
-  if (p >= 100 && !$('.sys').classList.contains('done')){ $('.sys').classList.add('done'); $('#sysl').textContent = 'Canal de ventas conectado ✓'; }
-  if (!introDone) introRAF = requestAnimationFrame(frame);
+/* sonido opcional (Web Audio sintetizado, sin archivos). Apagado por defecto; respeta el bloqueo de reproducción automática. */
+let AC = null, soundOn = false;
+try { soundOn = localStorage.getItem('fia_snd') === '1'; } catch (e) {}
+function audio(){ if (!AC){ const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; AC = new C(); } return AC; }
+function tone(freqs, dur, type, gain, glide){
+  if (!soundOn) return; const c = audio(); if (!c || c.state !== 'running') return;
+  const t = c.currentTime, g = c.createGain();
+  g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(gain, t + .05); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  g.connect(c.destination);
+  freqs.forEach(f => { const o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); if (glide) o.frequency.exponentialRampToValueAtTime(f*glide, t + dur*.8); o.connect(g); o.start(t); o.stop(t + dur + .05); });
 }
+const SFX = {
+  wake:  () => tone([110, 165], 1.2, 'sine', .045, 2),   // activación suave
+  hud:   () => tone([660, 990], .5, 'triangle', .025),     // HUD completo
+  brand: () => tone([220, 330, 440], 1.6, 'sine', .03),    // identidad
+};
+function setSound(v){
+  soundOn = v; try { localStorage.setItem('fia_snd', v ? '1' : '0'); } catch (e) {}
+  const b = $('#snd'); b.classList.toggle('on', v); b.setAttribute('aria-pressed', v);
+  b.setAttribute('aria-label', v ? 'Desactivar sonido' : 'Activar sonido'); $('#sndt').textContent = v ? 'SONIDO ON' : 'SONIDO OFF';
+  if (v){ const c = audio(); if (c && c.resume) c.resume().then(() => tone([880], .18, 'sine', .03)); }
+}
+$('#snd').onclick = e => { e.stopPropagation(); setSound(!soundOn); };
+setSound(soundOn);
+
 function buildHUD(){
   const g = $('#ticks'); g.innerHTML = '';
-  for (let i = 0; i < 90; i++){ const a = i/90*Math.PI*2, r2 = i%5 === 0 ? 198 : 194, l = document.createElementNS('http://www.w3.org/2000/svg','line');
-    l.setAttribute('x1', 200+Math.cos(a)*190); l.setAttribute('y1', 200+Math.sin(a)*190); l.setAttribute('x2', 200+Math.cos(a)*r2); l.setAttribute('y2', 200+Math.sin(a)*r2);
-    l.setAttribute('class','st dim'); g.appendChild(l); }
+  for (let i = 0; i < 120; i++){
+    const a = i/120*Math.PI*2, r2 = i % 10 === 0 ? 210 : 203, l = document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1', Math.cos(a)*198); l.setAttribute('y1', Math.sin(a)*198); l.setAttribute('x2', Math.cos(a)*r2); l.setAttribute('y2', Math.sin(a)*r2);
+    l.setAttribute('class', 'h-st h-dim fi'); l.style.setProperty('--d', (1.5 + i*.006).toFixed(3) + 's'); l.style.setProperty('--dur', '.25s');
+    g.appendChild(l);
+  }
   const b = $('#brand'); b.innerHTML = '';
-  'FRANCO IA'.split('').forEach((ch,i) => { const s = document.createElement('span'); s.textContent = ch === ' ' ? ' ' : ch; if (i > 6) s.className = 'g'; s.style.animationDelay = (2.6 + i*.07) + 's'; b.appendChild(s); });
+  'FRANCO IA'.split('').forEach((ch,i) => { const s = document.createElement('span'); s.setAttribute('aria-hidden','true'); s.textContent = ch === ' ' ? ' ' : ch; if (i > 6) s.className = 'g'; s.style.animationDelay = (5 + i*.06) + 's'; b.appendChild(s); });
 }
+function setSys(txt, done){ $('#sysl').textContent = txt; $('.sys').classList.toggle('done', !!done); }
+function typeAsk(){ const el = $('#ask'); [...ASK].forEach((ch,i) => introTimers.push(setTimeout(() => el.textContent += ch, i*42))); }
+function clearIntro(){ introTimers.forEach(clearTimeout); introTimers = []; cancelAnimationFrame(introRAF); }
+
 function playIntro(){
-  introDone = false; intro.style.display = ''; intro.classList.remove('out'); $('#stories').classList.remove('on'); stopSlideFx();
-  const hw = intro.querySelector('.hudwrap'); hw.replaceWith(hw.cloneNode(true)); // reinicia animaciones CSS
-  $('.sys').classList.remove('done'); $('#sysl').textContent = 'Conectando tu canal de ventas';
-  buildHUD(); size(); codes = [];
-  parts = Array.from({length: Math.min(90, Math.floor(W*H/14000))}, () => ({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6, a:Math.random()*Math.PI*2}));
-  t0 = performance.now(); cancelAnimationFrame(introRAF); introRAF = requestAnimationFrame(frame);
-  clearTimeout(introTimer); introTimer = setTimeout(endIntro, INTRO_MS);
+  clearIntro(); introDone = false;
+  intro.style.display = ''; intro.classList.remove('out', 'run');
+  $('#stories').classList.remove('on'); stopSlideFx();
+  buildHUD(); $('#ask').textContent = ''; $('#pct').textContent = '0%'; setSys('SYSTEM INITIALIZATION');
+  void intro.offsetWidth; intro.classList.add('run');          // reinicia todas las animaciones CSS
+  [[200, SFX.wake],
+   [1200, () => setSys('BUILDING INTERFACE')],
+   [3000, () => { setSys('LOADING MODULES'); SFX.hud(); }],
+   [4500, () => setSys('SYSTEM STATUS: OPERATIONAL', true)],
+   [4800, SFX.brand],
+   [6300, typeAsk],
+   [INTRO_MS, endIntro]].forEach(([ms, fn]) => introTimers.push(setTimeout(fn, ms)));
+  const t0 = performance.now(), pct = $('#pct');
+  const tick = now => { const p = Math.min(100, Math.round((now - t0)/45)); pct.textContent = p + '%'; if (p < 100 && !introDone) introRAF = requestAnimationFrame(tick); };
+  introRAF = requestAnimationFrame(tick);
 }
 function endIntro(){
-  if (introDone && intro.style.display === 'none') return;
-  introDone = true; clearTimeout(introTimer);
+  if (introDone) return;
+  introDone = true; clearIntro();
   intro.classList.add('out'); $('#stories').classList.add('on');
-  setTimeout(() => { intro.style.display = 'none'; cancelAnimationFrame(introRAF); }, 700);
+  setTimeout(() => { if (introDone){ intro.style.display = 'none'; intro.classList.remove('run'); } }, 850);   // detiene las animaciones infinitas
   go(0, true);
 }
-intro.addEventListener('click', endIntro);
-addEventListener('resize', () => { if (!introDone) size(); });
 
 /* ---------- HISTORIAS ---------- */
 const slides = [...document.querySelectorAll('.slide')], N = slides.length, bars = $('#bars');
