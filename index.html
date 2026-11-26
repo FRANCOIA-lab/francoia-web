@@ -776,9 +776,17 @@ function audio(){
   const len = AC.sampleRate*2.4, ir = AC.createBuffer(2, len, AC.sampleRate);
   for (let ch = 0; ch < 2; ch++){ const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1)*Math.pow(1 - i/len, 2.8); }
   VERB = AC.createConvolver(); VERB.buffer = ir; const wet = AC.createGain(); wet.gain.value = .32; VERB.connect(wet); wet.connect(comp);
-  setTimeout(loadVoice, 0);
+  setTimeout(loadVoice, 0); setTimeout(loadRecv, 0);
   return AC;
 }
+/* sonidos del chat (Pixabay, licencia de uso libre): se descargan y decodifican una vez */
+const CLIP = {};
+function loadClip(k, url){ if (CLIP[k] || !AC) return; CLIP[k] = 'loading';
+  fetch(url).then(r => r.ok ? r.arrayBuffer() : null).then(ab => ab && new Promise((ok, ko) => AC.decodeAudioData(ab, ok, ko)))
+    .then(b => { CLIP[k] = b || null; }).catch(() => { CLIP[k] = null; }); }
+function loadRecv(){ loadClip('recv', 'sfx-recibido.wav'); loadClip('sent', 'sfx-enviado.wav'); }
+function playClip(k, vol){ const b = CLIP[k]; if (!(b instanceof AudioBuffer)) return false;
+  const s = AC.createBufferSource(), g = AC.createGain(); s.buffer = b; g.gain.value = vol; s.connect(g); g.connect(BUS); track(s); s.start(AC.currentTime); return true; }
 const ready = () => soundOn && AC && AC.state === 'running';
 const LIVE = new Set();                                   // fuentes de sonido activas (para poder detenerlas todas)
 function track(n){ LIVE.add(n); n.onended = () => LIVE.delete(n); return n; }
@@ -827,9 +835,11 @@ const SFX = {
     noise(t, .15, .8, .07, 4000, 250, 1.5, .5); osc(392, 'sine', t + .1, .02, .02, .9, 196, .8); SFX.hum(false); },
   slide(){ if (!ready()) return; const t = AC.currentTime; noise(t, .02, .22, .025, 2600, 900, 2, .2); },   // cambio de historia (muy sutil)
   // demo de chat: sonidos originales de mensajería (inspirados en apps de chat, sintetizados aquí)
-  sent(){ if (!ready()) return; const t = AC.currentTime;                         // enviado: "pop" seco y corto (~850 Hz, 40 ms)
+  sent(){ if (!ready()) return; const t = AC.currentTime;                         // enviado: un solo efecto por mensaje
+    if (playClip('sent', .9)) return;
     osc(700, 'sine', t, .002, .16, .045, 900, 0); osc(1700, 'triangle', t, .001, .025, .015, null, 0); },
-  received(){ if (!ready()) return; const t = AC.currentTime;                     // recibido: "tic" brillante doble (~3 kHz)
+  received(){ if (!ready()) return; const t = AC.currentTime;                     // recibido: un solo efecto por mensaje
+    if (playClip('recv', .9)) return;
     osc(3000, 'sine', t, .002, .08, .07, null, .05); osc(3000, 'sine', t + .095, .002, .035, .05, null, .05); },
   typing(ms){ if (!ready()) return; const t = AC.currentTime;                      // escribiendo: clics suaves de teclado
     for (let k = 0, x = 0; x < ms/1000 - .1; k++, x += .09 + Math.random()*.08) noise(t + x, .002, .035, .02 + Math.random()*.01, 3200 + Math.random()*1500, 2500, 4, 0); },
